@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.adminbackend.dao.RolePermissionDao">
+
+    <insert id="insertOne" parameterType="map">
+        INSERT INTO `role_permission` VALUES (#{role},#{permission})
+    </insert>
+
+    <delete id="deleteOne" parameterType="map">
+        DELETE FROM `role_permission` WHERE `rp_role`=#{role} AND `rp_permission`=#{permission}
+    </delete>
+
+    <select id="selectPermByRole" parameterType="int" resultType="int">
+        SELECT `rp_permission` FROM `role_permission` WHERE `rp_role`=#{role}
+    </select>
+
+</mapper>

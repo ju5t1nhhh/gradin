@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.adminbackend.dao.PermissionDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.Permission">
+        <result column="pmsn_id" property="id" />
+        <result column="pmsn_name" property="name" />
+        <result column="pmsn_url" property="url" />
+        <result column="pmsn_type" property="type" />
+        <result column="pmsn_parent" property="parent" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Permission" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `permission` VALUES (#{id},#{name},#{url},#{type},#{parent})
+    </insert>
+
+    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Permission">
+        UPDATE `permission`
+        <set>
+            <if test="name != null and name.length() > 0">
+                `pmsn_name`=#{name},
+            </if>
+            <if test="url != null and url.length() > 0">
+                `pmsn_url`=#{url},
+            </if>
+            <if test="type != null and type > 0">
+                `pmsn_type`=#{type},
+            </if>
+            <if test="parent != null and parent > 0">
+                `pmsn_parent`=#{parent},
+            </if>
+        </set>
+        WHERE `pmsn_id`=#{id}
+    </update>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Permission">
+        DELETE FROM `permission` WHERE `pmsn_id`=#{id}
+    </delete>
+
+    <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM `permission`
+        <if test="domain != null">
+            <trim prefix="WHERE" prefixOverrides="AND">
+                <if test="domain.id != null and domain.id > 0">
+                    AND `pmsn_id`=#{domain.id}
+                </if>
+                <if test="domain.type != null and domain.type > 0">
+                    AND `pmsn_type`=#{domain.type}
+                </if>
+                <if test="domain.parent != null and domain.parent > 0">
+                    AND `pmsn_parent`=#{domain.parent}
+                </if>
+            </trim>
+        </if>
+        ORDER BY `pmsn_id`
+        <if test="offset != 0 and length != -1">
+            LIMIT #{offset},#{length}
+        </if>
+    </select>
+
+</mapper>
