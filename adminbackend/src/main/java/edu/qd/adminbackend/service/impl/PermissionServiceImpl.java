@@ -76,9 +76,12 @@ public class PermissionServiceImpl implements PermissionService {
                     redisTemplate.opsForList().rightPush("perms",JSON.toJSONString(perm));
             });
             thread.start();
-            restResponse = RestResponse.successWithData("查看权限列表成功",JSON.toJSONString(perms));
+            restResponse = RestResponse.successWithData("查看权限列表成功", perms);
         } else {
-            restResponse = RestResponse.successWithData("查看权限列表成功",JSON.toJSONString(permStrings));
+            List<Permission> permissionList = new LinkedList<>();
+            for ( String str : permStrings )
+                permissionList.add(JSON.parseObject(str,Permission.class));
+            restResponse = RestResponse.successWithData("查看权限列表成功", permissionList.toArray());
         }
         return restResponse;
     }
@@ -92,6 +95,6 @@ public class PermissionServiceImpl implements PermissionService {
             pi.setId(perm);
             permissionList.add( permissionDao.selectByDTO(pi,0,1)[0] );
         }
-        return RestResponse.successWithData("查看角色的权限列表成功", JSON.toJSONString(permissionList));
+        return RestResponse.successWithData("查看角色的权限列表成功", permissionList.toArray());
     }
 }

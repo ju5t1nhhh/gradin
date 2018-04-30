@@ -44,7 +44,7 @@ public class AdminController {
     @PostMapping("/list")
     @RequiresPermissions("admin:list")
     @ApiOperation("查看管理员列表")
-    public RestResponse listAdmin(@Valid Admin admin) {
+    public RestResponse listAdmin(Admin admin) {
         return adminService.listAdmin(admin);
     }
 

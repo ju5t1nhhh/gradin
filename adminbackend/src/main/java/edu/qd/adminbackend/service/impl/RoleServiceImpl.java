@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -65,9 +66,12 @@ public class RoleServiceImpl implements RoleService {
                     redisTemplate.opsForList().rightPush("roles",JSON.toJSONString(role));
             });
             thread.start();
-            restResponse = RestResponse.successWithData("查看角色成功", JSON.toJSONString(roles));
+            restResponse = RestResponse.successWithData("查看角色成功", roles);
         } else {
-            restResponse = RestResponse.successWithData("查看角色成功", JSON.toJSONString(roleStrings));
+            List<Role> roleList = new LinkedList<>();
+            for ( String str : roleStrings )
+                roleList.add(JSON.parseObject(str,Role.class));
+            restResponse = RestResponse.successWithData("查看角色成功", roleList.toArray());
         }
         return restResponse;
     }
