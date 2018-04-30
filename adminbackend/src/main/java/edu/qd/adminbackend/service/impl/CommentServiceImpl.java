@@ -14,7 +14,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public RestResponse listComment(Comment comment) {
+    public RestResponse listComment(Comment comment, int page) {
         return null;
     }
+
 }

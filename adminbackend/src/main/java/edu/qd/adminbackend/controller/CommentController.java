@@ -8,6 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -29,8 +30,8 @@ public class CommentController {
     @PostMapping("/list")
     @RequiresPermissions("comment:list")
     @ApiOperation("查看评论")
-    public RestResponse listComment(Comment comment) {
-        return commentService.listComment(comment);
+    public RestResponse listComment(Comment comment,@RequestParam(defaultValue = "1") int page) {
+        return commentService.listComment(comment, page);
     }
 
 }
