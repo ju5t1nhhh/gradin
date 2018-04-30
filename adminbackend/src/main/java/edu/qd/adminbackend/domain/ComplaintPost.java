@@ -1,13 +1,16 @@
 package edu.qd.adminbackend.domain;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class ComplaintPost implements Serializable {
 
     private static final long serialVersionUID = 3940041506870860671L;
 
+    @NotBlank
     private long post;
 
+    @NotBlank
     private int cmtid;
 
     private int times;

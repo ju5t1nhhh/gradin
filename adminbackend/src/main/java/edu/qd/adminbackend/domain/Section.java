@@ -1,15 +1,19 @@
 package edu.qd.adminbackend.domain;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class Section implements Serializable {
 
     private static final long serialVersionUID = 5402940209101541393L;
 
+    @NotBlank
     private int id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String intro;
 
     private String url;

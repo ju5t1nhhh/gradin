@@ -7,6 +7,6 @@ public interface CommentService {
 
     RestResponse delComment(Comment comment);
 
-    RestResponse listComment(Comment comment);
+    RestResponse listComment(Comment comment, int page);
 
 }
