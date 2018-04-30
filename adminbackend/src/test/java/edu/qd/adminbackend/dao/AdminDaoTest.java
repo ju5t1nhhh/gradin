@@ -14,7 +14,7 @@ public class AdminDaoTest {
     @Autowired
     private AdminDao adminDao;
 
-//    @Test
+    @Test
     public void insertOne() throws Exception {
         Admin admin = new Admin("jijiji","asdasd",2);
         adminDao.insertOne(admin);
