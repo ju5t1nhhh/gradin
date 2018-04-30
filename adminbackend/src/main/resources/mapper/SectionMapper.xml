@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.qd.adminbackend.dao.LogRecordDao">
+<mapper namespace="edu.qd.adminbackend.dao.SectionDao">
 
-    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.LogRecord">
-        <result column="lr_admin" property="admin" />
-        <result column="lr_text" property="text" />
-        <result column="lr_creatime" property="creatime" />
+    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.Section">
+        <result column="section_id" property="id" />
+        <result column="section_name" property="name" />
+        <result column="section_intro" property="intro" />
+        <result column="section_url" property="url" />
     </resultMap>
 
-    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.LogRecord">
-        INSERT INTO `log_record` VALUES (#{admin},#{text},#{creatime})
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Section">
+        INSERT INTO `section` VALUES (#{id},#{name},#{intro},#{url})
     </insert>
 
     <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">

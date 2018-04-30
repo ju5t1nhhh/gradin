@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.qd.adminbackend.dao.LogRecordDao">
+<mapper namespace="edu.qd.adminbackend.dao.PaymentDao">
 
-    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.LogRecord">
-        <result column="lr_admin" property="admin" />
-        <result column="lr_text" property="text" />
-        <result column="lr_creatime" property="creatime" />
+    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.Payment">
+        <result column="pay_code" property="code" />
+        <result column="pay_user" property="user" />
+        <result column="pay_creatime" property="creatime" />
+        <result column="pay_status" property="status" />
+        <result column="pay_wechat" property="wechat" />
     </resultMap>
 
-    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.LogRecord">
-        INSERT INTO `log_record` VALUES (#{admin},#{text},#{creatime})
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Payment">
+        INSERT INTO `payment` VALUES (#{code},#{user},#{creatime},#{status},#{wechat})
     </insert>
 
     <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.qd.adminbackend.dao.LogRecordDao">
+<mapper namespace="edu.qd.adminbackend.dao.SensitiveWordDao">
 
-    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.LogRecord">
-        <result column="lr_admin" property="admin" />
-        <result column="lr_text" property="text" />
-        <result column="lr_creatime" property="creatime" />
+    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.SensitiveWord">
+        <result column="sw_section" property="section" />
+        <result column="sw_word" property="word" />
+        <result column="sw_replace" property="replace" />
     </resultMap>
 
-    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.LogRecord">
-        INSERT INTO `log_record` VALUES (#{admin},#{text},#{creatime})
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.SensitiveWord">
+        INSERT INTO `sensitive_word` VALUES (#{section},#{word},#{replace})
     </insert>
 
     <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">
