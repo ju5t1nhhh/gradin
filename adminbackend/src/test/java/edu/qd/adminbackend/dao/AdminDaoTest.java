@@ -34,7 +34,7 @@ public class AdminDaoTest {
 
     @Test
     public void selectByDTO() throws Exception {
-        Admin admin = new Admin("justin",null,0);
+        Admin admin = new Admin("",null,3);
         Admin[] admins = adminDao.selectByDTO(admin,0,1);
         for ( Admin adm : admins )
             System.out.println(adm);

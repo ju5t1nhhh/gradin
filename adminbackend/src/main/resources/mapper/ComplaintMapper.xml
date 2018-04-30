@@ -19,22 +19,24 @@
         SELECT * FROM `complaint`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">
-                <if test="domain.loginId != null and domain.loginId.length() > 0">
-                    AND `admin_loginid`=#{domain.loginId}
+                <if test="domain.user != null and domain.user > 0">
+                    AND `com_user`=#{domain.user}
                 </if>
-                <if test="domain.role != null and domain.role > 0">
-                    AND `admin_role`=#{domain.role}
+                <if test="domain.post != null and domain.post > 0">
+                    AND `com_post`=#{domain.post}
+                </if>
+                <if test="domain.cmtid != null and domain.cmtid > 0">
+                    AND `com_cmtid`=#{domain.cmtid}
+                </if>
+                <if test="domain.creatime != null">
+                    AND `com_creatime` > #{domain.creatime}
                 </if>
             </trim>
         </if>
-        ORDER BY `admin_role`
+        ORDER BY `com_creatime`
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>
-    </select>
-
-    <select id="getPassword" parameterType="string" resultType="string">
-        SELECT `admin_pwd` FROM `admin` WHERE `admin_loginid`=#{loginId}
     </select>
 
 </mapper>

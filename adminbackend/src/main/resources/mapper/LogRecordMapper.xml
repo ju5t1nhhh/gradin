@@ -47,8 +47,4 @@
         </if>
     </select>
 
-    <select id="getPassword" parameterType="string" resultType="string">
-        SELECT `admin_pwd` FROM `admin` WHERE `admin_loginid`=#{loginId}
-    </select>
-
 </mapper>

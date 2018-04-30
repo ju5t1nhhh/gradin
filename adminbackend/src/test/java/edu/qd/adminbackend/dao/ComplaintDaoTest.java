@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 @SpringBootTest
@@ -19,8 +19,17 @@ public class ComplaintDaoTest {
 
     @Test
     public void insertOne() throws Exception {
-        Complaint complaint = new Complaint(1L,1L,1,"dfgdfg",new Timestamp(345234523));
+        Complaint complaint = new Complaint(1L,1L,1,"dfgdfg",new Timestamp(new Date().getTime()));
         complaintDao.insertOne(complaint);
+    }
+
+    @Test
+    public void selectByDTO() throws Exception {
+        Complaint complaint = new Complaint(0,0,0,null,null);
+        Complaint[] complaints = complaintDao.selectByDTO(complaint,0,-1);
+        for ( Complaint com : complaints )
+            System.out.println(com);
+
     }
 
 }

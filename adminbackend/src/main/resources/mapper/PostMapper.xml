@@ -28,8 +28,8 @@
         WHERE `admin_loginid`=#{loginId}
     </update>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Admin">
-        DELETE FROM `admin` WHERE `admin_loginid`=#{loginId}
+    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Post">
+        DELETE FROM `post` WHERE `post_id`=#{id}
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
@@ -48,10 +48,6 @@
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>
-    </select>
-
-    <select id="getPassword" parameterType="string" resultType="string">
-        SELECT `admin_pwd` FROM `admin` WHERE `admin_loginid`=#{loginId}
     </select>
 
 </mapper>

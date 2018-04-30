@@ -15,21 +15,26 @@
         INSERT INTO `user` VALUES (#{autoid},#{id},#{email},#{status},#{pwd},#{gins})
     </insert>
 
-    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">
-        UPDATE `admin`
+    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.User">
+        UPDATE `user`
         <set>
+            <if test="id != null and id.length() > 0">
+                `user_id`=#{id},
+            </if>
+            <if test="email != null and email.length() > 0">
+                `user_email`=#{email},
+            </if>
             <if test="pwd != null and pwd.length() > 0">
-                `admin_pwd`=#{pwd},
+                `user_pwd`=#{pwd},
             </if>
-            <if test="role != null and role > 0">
-                `admin_role`=#{role},
-            </if>
+            `user_status`=#{status},
+            `user_gins`=#{gins}
         </set>
-        WHERE `admin_loginid`=#{loginId}
+        WHERE `user_autoid`=#{autoid}
     </update>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Admin">
-        DELETE FROM `admin` WHERE `admin_loginid`=#{loginId}
+    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.User">
+        DELETE FROM `user` WHERE `user_autoid`=#{autoid}
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
@@ -48,10 +53,6 @@
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>
-    </select>
-
-    <select id="getPassword" parameterType="string" resultType="string">
-        SELECT `admin_pwd` FROM `admin` WHERE `admin_loginid`=#{loginId}
     </select>
 
 </mapper>
