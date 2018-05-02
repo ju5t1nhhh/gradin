@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.adminbackend.dao.CommentDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.Comment">
+        <result column="cmt_post" property="post" />
+        <result column="cmt_cmtid" property="cmtid" />
+        <result column="cmt_cmtor" property="cmtor" />
+        <result column="cmt_cmtorid" property="cmtorid" />
+        <result column="cmt_text" property="text" />
+        <result column="cmt_creatime" property="creatime" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Comment">
+        INSERT INTO
+            `comment`
+        VALUES
+            (#{post},#{cmtid},#{cmtor},#{cmtorid},#{text},#{creatime})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Comment">
+        DELETE FROM
+            `comment`
+        WHERE
+            `cmt_post`=#{cmtid}
+            AND
+            `cmt_cmtid`=#{cmtid}
+    </delete>
+
+    <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM `comment`
+        <if test="domain != null">
+            <trim prefix="WHERE" prefixOverrides="AND">
+                <if test="domain.post != null and domain.post > 0">
+                    AND `cmt_post`=#{domain.post}
+                </if>
+                <if test="domain.cmtid != null and domain.cmtid > 0">
+                    AND `cmt_cmtid`=#{domain.cmtid}
+                </if>
+                <if test="domain.cmtorid != null and domain.cmtorid.length() > 0">
+                    AND `cmt_comtorid`=#{domain.cmtorid}
+                </if>
+                <if test="domain.creatime != null">
+                    AND `cmt_creatime` > #{domain.creatime}
+                </if>
+            </trim>
+        </if>
+        ORDER BY `cmt_creatime`
+        <if test="offset != 0 and length != -1">
+            LIMIT #{offset},#{length}
+        </if>
+    </select>
+</mapper>

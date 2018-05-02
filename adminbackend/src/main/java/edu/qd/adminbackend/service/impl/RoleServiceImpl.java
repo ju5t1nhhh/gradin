@@ -6,6 +6,7 @@ import edu.qd.adminbackend.dao.RolePermissionDao;
 import edu.qd.adminbackend.domain.Role;
 import edu.qd.adminbackend.service.RoleService;
 import edu.qd.adminbackend.util.ArrayToListUtil;
+import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -34,6 +35,7 @@ public class RoleServiceImpl implements RoleService {
         instants.setName(role);
         int rows = roleDao.insertOne(instants);
         if ( rows > 0 ) {
+            LogRecordDaoUtil.insertLogRecord("新增角色:"+role);
             redisTemplate.opsForList().rightPush("roles", JSON.toJSONString(instants));
             return RestResponse.successWithMsg("添加角色成功");
         } else {
@@ -48,6 +50,7 @@ public class RoleServiceImpl implements RoleService {
         Role rm = roleDao.selectByDTO(instants,0,1)[0];
         int rows = roleDao.deleteByDTO(instants);
         if ( rows > 0 ) {
+            LogRecordDaoUtil.insertLogRecord("删除角色:"+rm.getName());
             redisTemplate.opsForList().remove("roles",1, JSON.toJSONString(rm));
             return RestResponse.successWithMsg("删除角色" + role + "成功");
         } else {
@@ -87,7 +90,9 @@ public class RoleServiceImpl implements RoleService {
             delNum += rolePermissionDao.deleteOne(role, perm);
         for ( int perm : addList )
             addNum += rolePermissionDao.insertOne(role, perm);
-        return RestResponse.successWithMsg("成功给角色添加" + addNum + "项权限，移除" + delNum + "项权限" );
+        String msg = "成功给角色" + role + "添加" + addNum + "项权限，移除" + delNum + "项权限";
+        LogRecordDaoUtil.insertLogRecord(msg);
+        return RestResponse.successWithMsg(msg);
     }
 
 }

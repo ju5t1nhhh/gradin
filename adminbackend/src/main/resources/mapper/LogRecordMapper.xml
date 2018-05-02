@@ -12,36 +12,19 @@
         INSERT INTO `log_record` VALUES (#{admin},#{text},#{creatime})
     </insert>
 
-    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">
-        UPDATE `admin`
-        <set>
-            <if test="pwd != null and pwd.length() > 0">
-                `admin_pwd`=#{pwd},
-            </if>
-            <if test="role != null and role > 0">
-                `admin_role`=#{role},
-            </if>
-        </set>
-        WHERE `admin_loginid`=#{loginId}
-    </update>
-
-    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Admin">
-        DELETE FROM `admin` WHERE `admin_loginid`=#{loginId}
-    </delete>
-
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
-        SELECT `admin_loginid`,`admin_role` FROM `admin`
+        SELECT * FROM `log_record`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">
-                <if test="domain.loginId != null and domain.loginId.length() > 0">
-                    AND `admin_loginid`=#{domain.loginId}
+                <if test="domain.admin != null and domain.admin.length() > 0">
+                    AND `lr_admin`=#{domain.admin}
                 </if>
-                <if test="domain.role != null and domain.role > 0">
-                    AND `admin_role`=#{domain.role}
+                <if test="domain.creatime != null">
+                    AND `lr_creatime` > #{creatime}
                 </if>
             </trim>
         </if>
-        ORDER BY `admin_role`
+        ORDER BY `lr_creatime`
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>

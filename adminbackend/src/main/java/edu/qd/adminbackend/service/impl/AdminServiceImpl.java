@@ -3,14 +3,21 @@ package edu.qd.adminbackend.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import edu.qd.adminbackend.dao.AdminDao;
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.domain.Admin;
+import edu.qd.adminbackend.domain.LogRecord;
 import edu.qd.adminbackend.service.AdminService;
+import edu.qd.adminbackend.shiro.UserInfo;
+import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.util.PasswordUtil;
 import edu.qd.adminbackend.vo.RestResponse;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,8 +35,12 @@ public class AdminServiceImpl implements AdminService {
         admin.setPwd(PasswordUtil.encryptPassword(admin.getLoginId(),admin.getPwd()));
         int rows = adminDao.insertOne(admin);
         if ( rows > 0 ) {
-            admin.setPwd(null);
-            redisTemplate.opsForList().rightPush("admins", JSON.toJSONString(admin));
+            Thread thread = new Thread(() ->{
+                admin.setPwd(null);
+                LogRecordDaoUtil.insertLogRecord("新增管理员"+admin.getLoginId());
+                redisTemplate.opsForList().rightPush("admins", JSON.toJSONString(admin));
+            });
+            thread.start();
             return RestResponse.successWithMsg("新增管理员成功");
         } else {
             return RestResponse.errorWithMsg(1001, "新增管理员失败，检查用户名");
@@ -43,6 +54,7 @@ public class AdminServiceImpl implements AdminService {
         admin = adminDao.selectByDTO(admin,0,1)[0];
         int rows = adminDao.deleteByDTO(admin);
         if ( rows > 0 ) {
+            LogRecordDaoUtil.insertLogRecord("删除管理员"+admin.getLoginId());
             redisTemplate.opsForList().remove("admins",1, JSON.toJSONString(admin));
             return RestResponse.successWithMsg("删除管理员成功");
         } else {

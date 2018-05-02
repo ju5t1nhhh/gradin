@@ -4,6 +4,7 @@ import edu.qd.adminbackend.service.ShiroService;
 import edu.qd.adminbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class ShiroController {
         return shiroService.login(id, password);
     }
 
-    @PostMapping({"/unauth","/302"})
+    @GetMapping({"/unauth","/302"})
     @ApiOperation("返回未授权信息")
     public RestResponse unauth() {
         return RestResponse.errorWithMsg(1002, "请登录");

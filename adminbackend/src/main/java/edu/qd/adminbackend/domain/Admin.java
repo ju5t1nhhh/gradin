@@ -1,6 +1,7 @@
 package edu.qd.adminbackend.domain;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 public class Admin implements Serializable {
@@ -13,7 +14,7 @@ public class Admin implements Serializable {
     @NotBlank(message = "密码不能空")
     private String pwd;
 
-    @NotBlank(message = "角色不能空")
+    @Positive
     private int role;
 
     public Admin(){}

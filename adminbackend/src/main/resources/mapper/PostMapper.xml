@@ -15,36 +15,29 @@
         INSERT INTO `post` VALUES (#{id},#{author},#{multmedia},#{text},#{creatime},#{section})
     </insert>
 
-    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">
-        UPDATE `admin`
-        <set>
-            <if test="pwd != null and pwd.length() > 0">
-                `admin_pwd`=#{pwd},
-            </if>
-            <if test="role != null and role > 0">
-                `admin_role`=#{role},
-            </if>
-        </set>
-        WHERE `admin_loginid`=#{loginId}
-    </update>
-
     <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Post">
         DELETE FROM `post` WHERE `post_id`=#{id}
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
-        SELECT `admin_loginid`,`admin_role` FROM `admin`
+        SELECT * FROM `post`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">
-                <if test="domain.loginId != null and domain.loginId.length() > 0">
-                    AND `admin_loginid`=#{domain.loginId}
+                <if test="domain.id != null and domain.id > 0">
+                    AND `post_id`=#{domain.id}
                 </if>
-                <if test="domain.role != null and domain.role > 0">
-                    AND `admin_role`=#{domain.role}
+                <if test="domain.author != null and domain.author > 0">
+                    AND `post_author`=#{domain.author}
+                </if>
+                <if test="domain.section != null and domain.section > 0">
+                    AND `post_section`=#{domain.section}
+                </if>
+                <if test="domain.creatime != null">
+                    AND `post_creatime`=#{domain.creatime}
                 </if>
             </trim>
         </if>
-        ORDER BY `admin_role`
+        ORDER BY `post_creatime`
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>

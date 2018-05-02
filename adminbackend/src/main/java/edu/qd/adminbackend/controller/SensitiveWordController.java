@@ -29,7 +29,7 @@ public class SensitiveWordController {
     @PostMapping("/del")
     @RequiresPermissions("sw:del")
     @ApiOperation("删除敏感词")
-    public RestResponse delSensitiveWord(SensitiveWord sensitiveWord) {
+    public RestResponse delSensitiveWord(@Valid SensitiveWord sensitiveWord) {
         return sensitiveWordService.delSensitiveWord(sensitiveWord);
     }
 

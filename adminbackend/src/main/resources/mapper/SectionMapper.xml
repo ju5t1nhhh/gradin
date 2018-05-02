@@ -13,17 +13,20 @@
         INSERT INTO `section` VALUES (#{id},#{name},#{intro},#{url})
     </insert>
 
-    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">
-        UPDATE `admin`
+    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Section">
+        UPDATE `section`
         <set>
-            <if test="pwd != null and pwd.length() > 0">
-                `admin_pwd`=#{pwd},
+            <if test="name != null and name.length() > 0">
+                `sec_name`=#{name},
             </if>
-            <if test="role != null and role > 0">
-                `admin_role`=#{role},
+            <if test="intro != null and intro.length() > 0">
+                `sec_intro`=#{intro},
+            </if>
+            <if test="url != null and url.length() > 0">
+                `sec_url`=#{url},
             </if>
         </set>
-        WHERE `admin_loginid`=#{loginId}
+        WHERE `sec_id`=#{id}
     </update>
 
     <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Section">
@@ -31,18 +34,17 @@
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
-        SELECT `admin_loginid`,`admin_role` FROM `admin`
+        SELECT * FROM `section`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">
-                <if test="domain.loginId != null and domain.loginId.length() > 0">
-                    AND `admin_loginid`=#{domain.loginId}
+                <if test="domain.id != null and domain.id > 0">
+                    AND `sec_id`=#{domain.id}
                 </if>
-                <if test="domain.role != null and domain.role > 0">
-                    AND `admin_role`=#{domain.role}
+                <if test="domain.name != null and domain.name.length() > 0">
+                    AND `sec_name`=#{domain.name}
                 </if>
             </trim>
         </if>
-        ORDER BY `admin_role`
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>

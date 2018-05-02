@@ -3,6 +3,7 @@ package edu.qd.adminbackend.service.impl;
 import edu.qd.adminbackend.dao.UserDao;
 import edu.qd.adminbackend.domain.User;
 import edu.qd.adminbackend.service.UserService;
+import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.util.PasswordUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,10 @@ public class UserServiceImpl implements UserService {
     public RestResponse addUser(User user) {
         user.setPwd(PasswordUtil.encryptPassword("salt",user.getPwd()));
         int rows = userDao.insertOne(user);
-        if ( rows > 0 )
+        if ( rows > 0 ) {
+            LogRecordDaoUtil.insertLogRecord("新增用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("新增用户成功");
-        else
+        } else
             return RestResponse.errorWithMsg(1100,"新增用户失败");
     }
 
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             for ( User u : users )
                 sb.append(u.getId() + ' ');
+            LogRecordDaoUtil.insertLogRecord("删除用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("删除用户"+sb);
         } else {
             return RestResponse.errorWithMsg(1101,"删除用户失败");
@@ -44,9 +47,10 @@ public class UserServiceImpl implements UserService {
         if ( user.getPwd() != null && !user.getPwd().trim().equals("") )
             user.setPwd(PasswordUtil.encryptPassword("salt",user.getPwd()));
         int rows = userDao.updateOne(user);
-        if ( rows > 0 )
+        if ( rows > 0 ) {
+            LogRecordDaoUtil.insertLogRecord("修改用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("修改用户" + user.getAutoid() + "成功");
-        else
+        } else
             return RestResponse.errorWithMsg(1102, "修改用户" + user.getAutoid() + "失败");
     }
 

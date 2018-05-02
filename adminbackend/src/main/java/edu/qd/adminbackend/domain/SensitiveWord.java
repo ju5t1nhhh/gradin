@@ -1,13 +1,14 @@
 package edu.qd.adminbackend.domain;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 public class SensitiveWord implements Serializable {
 
     private static final long serialVersionUID = -6807248198104676859L;
 
-    @NotBlank
+    @Positive
     private int section;
 
     @NotBlank

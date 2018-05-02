@@ -14,36 +14,28 @@
         INSERT INTO `payment` VALUES (#{code},#{user},#{creatime},#{status},#{wechat})
     </insert>
 
-    <update id="updateOne" parameterType="edu.qd.adminbackend.domain.Admin">
-        UPDATE `admin`
-        <set>
-            <if test="pwd != null and pwd.length() > 0">
-                `admin_pwd`=#{pwd},
-            </if>
-            <if test="role != null and role > 0">
-                `admin_role`=#{role},
-            </if>
-        </set>
-        WHERE `admin_loginid`=#{loginId}
-    </update>
-
-    <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Admin">
-        DELETE FROM `admin` WHERE `admin_loginid`=#{loginId}
-    </delete>
-
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
-        SELECT `admin_loginid`,`admin_role` FROM `admin`
+        SELECT * FROM `payment`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">
-                <if test="domain.loginId != null and domain.loginId.length() > 0">
-                    AND `admin_loginid`=#{domain.loginId}
+                <if test="domain.code != null and domain.code.length() > 0">
+                    AND `pay_code`=#{domain.code}
                 </if>
-                <if test="domain.role != null and domain.role > 0">
-                    AND `admin_role`=#{domain.role}
+                <if test="domain.user != null and domain.user > 0">
+                    AND `pay_user`=#{domain.user}
+                </if>
+                <if test="domain.status != null and domain.status > 0">
+                    AND `pay_status`=#{domain.status}
+                </if>
+                <if test="domain.wechat != null and domain.wechat.length() > 0">
+                    AND `pay_wechat`=#{domain.wechat}
+                </if>
+                <if test="domain.creatime != null">
+                    AND `pay_creatime` > #{domain.creatime}
                 </if>
             </trim>
         </if>
-        ORDER BY `admin_role`
+        ORDER BY `pay_creatime`
         <if test="offset != 0 and length != -1">
             LIMIT #{offset},#{length}
         </if>

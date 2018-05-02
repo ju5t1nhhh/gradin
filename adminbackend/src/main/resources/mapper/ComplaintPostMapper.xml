@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.adminbackend.dao.ComplaintPostDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.ComplaintPost">
+        <result column="cp_post" property="post" />
+        <result column="cp_cmtid" property="cmtid" />
+        <result column="cp_times" property="times" />
+        <result column="cp_status" property="status" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.ComplaintPost">
+        INSERT INTO `complaint_post` VALUES (#{post},#{cmtid},#{times},#{status})
+    </insert>
+
+    <update id="dealComplaintStatus" parameterType="map">
+        UPDATE `complaint_post`
+        SET `cp_status`=1
+        WHERE `cp_post`=#{post} AND `cp_cmtid`=#{cmtid}
+    </update>
+
+    <select id="selectByDTO" parameterType="edu.qd.adminbackend.domain.ComplaintPost">
+        SELECT * FROM `complaint_post`
+        <if test="domain != null">
+            <trim prefix="WHERE" prefixOverrides="AND">
+                <if test="domain.post != null and domain.post > 0">
+                    AND `cp_post`=#{domain.post}
+                </if>
+                <if test="domain.cmtid != null and domain.cmtid > 0">
+                    AND `cp_cmtid`=#{domain.cmtid}
+                </if>
+                <if test="domain.times != null and domain.times > 0">
+                    AND `cp_times`=#{domain.times}
+                </if>
+                <if test="domain.status != null and domain.status > 0">
+                    AND `cp_status`=#{domain.status}
+                </if>
+            </trim>
+        </if>
+        ORDER BY `cp_times`
+        <if test="offset != 0 and length != -1">
+            LIMIT #{offset},#{length}
+        </if>
+    </select>
+
+</mapper>

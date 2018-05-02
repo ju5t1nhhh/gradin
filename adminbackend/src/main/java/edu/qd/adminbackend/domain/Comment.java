@@ -1,5 +1,6 @@
 package edu.qd.adminbackend.domain;
 
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -7,8 +8,10 @@ public class Comment implements Serializable {
 
     private static final long serialVersionUID = -1322103434512088194L;
 
+    @Positive
     private long post;
 
+    @Positive
     private int cmtid;
 
     private long cmtor;
