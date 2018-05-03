@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.User">
+        <result column="user_autoid" property="autoId" />
+        <result column="user_id" property="id" />
+        <result column="user_email" property="email" />
+        <result column="user_status" property="status" />
+        <result column="user_pwd" property="pwd" />
+        <result column="user_gins" property="gins" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.User">
+        INSERT INTO
+            `user`
+        VALUES
+            (#{autoId},#{id},#{email},#{status},#{pwd},#{gins})
+    </insert>
+
+    <select id="selectById" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM
+            `user`
+        WHERE
+            `user_id`=#{id}
+    </select>
+
+    <select id="selectByEmail" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM
+        `user`
+        WHERE
+        `user_email`=#{email}
+    </select>
+
+</mapper>

@@ -26,9 +26,4 @@ public class ShiroController {
         return RestResponse.errorWithMsg(1002, "请登录");
     }
 
-    @GetMapping({"/test"})
-    public RestResponse test() {
-        return RestResponse.successWithMsg("fuck you");
-    }
-
 }

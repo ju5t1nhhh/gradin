@@ -7,7 +7,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -34,7 +33,7 @@ public class ShiroRealm extends AuthorizingRealm {
         if ( user.getStatus() == 0 )
             throw new LockedAccountException();
         SimpleAuthenticationInfo simpleAuthenticationInfo =
-                new SimpleAuthenticationInfo(user, user.getPwd(), ByteSource.Util.bytes(user.getAutoid()), getName());
+                new SimpleAuthenticationInfo(user, user.getPwd(), getName());
         return simpleAuthenticationInfo;
     }
 }

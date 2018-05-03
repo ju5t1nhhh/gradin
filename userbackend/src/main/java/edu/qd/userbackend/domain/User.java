@@ -8,7 +8,7 @@ public class User implements Serializable, AuthCachePrincipal {
 
     private static final long serialVersionUID = 6348655815966846914L;
 
-    private long autoid;
+    private long autoId;
 
     private String id;
 
@@ -23,8 +23,7 @@ public class User implements Serializable, AuthCachePrincipal {
     public User() {
     }
 
-    public User(long autoid, String id, String email, int status, String pwd, int gins) {
-        this.autoid = autoid;
+    public User(String id, String email, int status, String pwd, int gins) {
         this.id = id;
         this.email = email;
         this.status = status;
@@ -35,7 +34,7 @@ public class User implements Serializable, AuthCachePrincipal {
     @Override
     public String toString() {
         return "User{" +
-                "autoid=" + autoid +
+                "autoId=" + autoId +
                 ", id='" + id + '\'' +
                 ", email='" + email + '\'' +
                 ", status=" + status +
@@ -48,12 +47,12 @@ public class User implements Serializable, AuthCachePrincipal {
         return serialVersionUID;
     }
 
-    public long getAutoid() {
-        return autoid;
+    public long getAutoId() {
+        return autoId;
     }
 
-    public void setAutoid(long autoid) {
-        this.autoid = autoid;
+    public void setAutoId(long autoId) {
+        this.autoId = autoId;
     }
 
     public String getId() {
@@ -98,6 +97,6 @@ public class User implements Serializable, AuthCachePrincipal {
 
     @Override
     public String getAuthCacheKey() {
-        return String.valueOf(getAutoid());
+        return String.valueOf(getAutoId());
     }
 }
