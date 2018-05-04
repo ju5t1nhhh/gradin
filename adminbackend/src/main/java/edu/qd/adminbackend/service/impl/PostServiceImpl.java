@@ -6,6 +6,7 @@ import edu.qd.adminbackend.service.PostService;
 import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostDao postDao;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public RestResponse listPost(Post post, int page) {
@@ -27,6 +31,7 @@ public class PostServiceImpl implements PostService {
         post.setId(id);
         int rows = postDao.deleteByDTO(post);
         if ( rows > 0 ) {
+            redisTemplate.opsForHash().delete("post:"+id);
             LogRecordDaoUtil.insertLogRecord("删除作品:"+post.getId());
             return RestResponse.successWithMsg("删除作品成功");
         } else

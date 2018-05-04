@@ -22,10 +22,7 @@ public class LogRecordDaoUtil {
     public static int insertLogRecord(String msg) {
         UserInfo userInfo = (UserInfo) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
         LogRecord logRecord = new LogRecord(userInfo.getUsername(),msg,new Timestamp(new Date().getTime()));
-        int rows = logRecordDao.insertOne(logRecord);
-        if ( rows > 0 )
-            redisTemplate.opsForList().leftPush("logrecords", JSON.toJSONString(logRecord));
-        return rows;
+        return logRecordDao.insertOne(logRecord);
     }
 
 }

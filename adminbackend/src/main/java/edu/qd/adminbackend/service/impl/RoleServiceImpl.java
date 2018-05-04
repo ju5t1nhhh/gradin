@@ -36,7 +36,6 @@ public class RoleServiceImpl implements RoleService {
         int rows = roleDao.insertOne(instants);
         if ( rows > 0 ) {
             LogRecordDaoUtil.insertLogRecord("新增角色:"+role);
-            redisTemplate.opsForList().rightPush("roles", JSON.toJSONString(instants));
             return RestResponse.successWithMsg("添加角色成功");
         } else {
             return RestResponse.errorWithMsg(1006, "添加角色失败");
@@ -51,7 +50,6 @@ public class RoleServiceImpl implements RoleService {
         int rows = roleDao.deleteByDTO(instants);
         if ( rows > 0 ) {
             LogRecordDaoUtil.insertLogRecord("删除角色:"+rm.getName());
-            redisTemplate.opsForList().remove("roles",1, JSON.toJSONString(rm));
             return RestResponse.successWithMsg("删除角色" + role + "成功");
         } else {
             return RestResponse.errorWithMsg(1007, "删除角色" + role + "失败");
@@ -60,23 +58,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RestResponse listRoles() {
-        RestResponse restResponse = null;
-        List<String> roleStrings = redisTemplate.opsForList().range("roles",0,-1);
-        if ( roleStrings.size() == 0 ) {
-            Role[] roles = roleDao.selectByDTO(null, 0, -1);
-            Thread thread = new Thread(() -> {
-                for ( Role role: roles )
-                    redisTemplate.opsForList().rightPush("roles",JSON.toJSONString(role));
-            });
-            thread.start();
-            restResponse = RestResponse.successWithData("查看角色成功", roles);
-        } else {
-            List<Role> roleList = new LinkedList<>();
-            for ( String str : roleStrings )
-                roleList.add(JSON.parseObject(str,Role.class));
-            restResponse = RestResponse.successWithData("查看角色成功", roleList.toArray());
-        }
-        return restResponse;
+        Role[] roles = roleDao.selectByDTO(null, 0, -1);
+        return RestResponse.successWithData("查看角色成功", roles);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package edu.qd.userbackend.service.impl;
 
+import edu.qd.userbackend.dao.UserDao;
+import edu.qd.userbackend.domain.User;
 import edu.qd.userbackend.service.MailService;
 import edu.qd.userbackend.service.ValidateCodeService;
 import edu.qd.userbackend.vo.RestResponse;
@@ -18,10 +20,16 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
     private MailService mailService;
 
     @Autowired
+    private UserDao userDao;
+
+    @Autowired
     private StringRedisTemplate redisTemplate;
 
     @Override
     public RestResponse getEmailCode(String email) {
+        User user = userDao.selectByEmail(email);
+        if ( user != null )
+            return RestResponse.errorWithMsg(1400, "邮箱已被注册");
         Subject subject = SecurityUtils.getSubject();
         String ecode = String.valueOf((int)((Math.random()*9+1)*1000));
         Thread thread = new Thread(() -> {
@@ -36,6 +44,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
     public boolean checkEmailCode(String code) {
         Subject subject = SecurityUtils.getSubject();
         String vcode = redisTemplate.opsForValue().get("ecode:"+subject.getSession().getId());
-        return code == vcode;
+        System.out.println(" code  - "+"ecode:"+subject.getSession().getId());
+        return code.equals(vcode);
     }
 }

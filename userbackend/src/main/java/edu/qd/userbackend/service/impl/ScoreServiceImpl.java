@@ -15,4 +15,9 @@ public class ScoreServiceImpl implements ScoreService {
     public RestResponse delScore(long post) {
         return null;
     }
+
+    @Override
+    public RestResponse listScore(int page) {
+        return null;
+    }
 }

@@ -27,4 +27,10 @@ public class ScoreController {
         return scoreService.delScore(post);
     }
 
+    @PostMapping("/myadd")
+    @ApiOperation("个人参与的评分")
+    public RestResponse listScore(int page) {
+        return scoreService.listScore(page);
+    }
+
 }

@@ -45,10 +45,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RestResponse modifyId(String id) {
-        User user = new User();
-        user.setId(id);
-        User[] users = userDao.selectByDTO(user,0,-1);
-        if ( users.length != 0 )
+        User user = userDao.selectById(id);
+        if ( user != null )
             return RestResponse.errorWithMsg(1303, "已存在该id");
         Subject subject = SecurityUtils.getSubject();
         User u = (User) subject.getPrincipals().getPrimaryPrincipal();

@@ -130,8 +130,9 @@ CREATE TABLE `user`(
 
 # Message
 CREATE TABLE `message`(
-	`msg_rcvder` BIGINT,
+	`msg_rcvder` VARCHAR(20),
 	`msg_senderid` VARCHAR(20),
+	`msg_from` BIGINT,
 	`msg_text` VARCHAR(100),
 	`msg_status` INT,
 	`msg_creatime` DATETIME,

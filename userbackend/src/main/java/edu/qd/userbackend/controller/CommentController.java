@@ -5,9 +5,7 @@ import edu.qd.userbackend.service.CommentService;
 import edu.qd.userbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/comment")
@@ -19,7 +17,19 @@ public class CommentController {
     @PostMapping("/add")
     @ApiOperation("添加评论")
     public RestResponse addComment(Comment comment) {
-        return null;
+        return commentService.addComment(comment);
+    }
+
+    @PostMapping("/del")
+    @ApiOperation("删除评论")
+    public RestResponse delComment(long post, int cmtid) {
+        return commentService.delComment(post,cmtid);
+    }
+
+    @GetMapping("/post/{id}")
+    @ApiOperation("查看评论")
+    public RestResponse postComments(@PathVariable long id) {
+        return commentService.postComments(id);
     }
 
 }

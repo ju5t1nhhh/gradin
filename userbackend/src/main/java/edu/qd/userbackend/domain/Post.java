@@ -13,6 +13,8 @@ public class Post implements Serializable {
 
     private String multmedia;
 
+    private String[] medias;
+
     private String text;
 
     private int section;
@@ -28,6 +30,10 @@ public class Post implements Serializable {
         this.text = text;
         this.section = section;
         this.creatime = creatime;
+    }
+
+    public void multToArrays() {
+        this.medias=multmedia.split(",");
     }
 
     @Override

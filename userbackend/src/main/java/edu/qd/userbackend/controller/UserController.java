@@ -53,4 +53,10 @@ public class UserController {
         return userService.showPerson(id);
     }
 
+    @PostMapping("/detail/{id}")
+    @ApiOperation("查看个人详页")
+    public RestResponse detailPerson(@PathVariable long id) {
+        return null;
+    }
+
 }

@@ -25,7 +25,8 @@ public class SensitiveWordServiceImpl implements SensitiveWordService {
     public RestResponse addSensitiveWord(SensitiveWord sensitiveWord) {
         int rows = sensitiveWordDao.insertOne(sensitiveWord);
         if ( rows > 0 ) {
-            redisTemplate.opsForList().rightPush("sw:"+sensitiveWord.getSection(), JSON.toJSONString(sensitiveWord));
+            redisTemplate.opsForHash().put("sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord(),"word",sensitiveWord.getWord());
+            redisTemplate.opsForHash().put("sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord(),"replace",sensitiveWord.getReplace());
             return RestResponse.successWithMsg("新增敏感词成功");
         } else
             return RestResponse.errorWithMsg(1112, "新增敏感词失败");
@@ -38,7 +39,7 @@ public class SensitiveWordServiceImpl implements SensitiveWordService {
         for ( SensitiveWord sw : sensitiveWords ) {
             int row = sensitiveWordDao.deleteByDTO(sw);
             if ( row > 0 )
-                redisTemplate.opsForList().remove("sw"+sw.getSection(), 1, JSON.toJSONString(sw));
+                redisTemplate.opsForHash().delete("sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord());
             rows += row;
         }
         return RestResponse.successWithMsg("删除" + rows + "敏感词成功");
@@ -46,22 +47,7 @@ public class SensitiveWordServiceImpl implements SensitiveWordService {
 
     @Override
     public RestResponse listSensitiveWord(SensitiveWord sensitiveWord) {
-        RestResponse restResponse = null;
-        List<String> swStrings = redisTemplate.opsForList().range("sw:"+sensitiveWord.getSection(),0,-1);
-        if ( swStrings.size() == 0 ) {
-            SensitiveWord[] sensitiveWords = sensitiveWordDao.selectByDTO(sensitiveWord, 0,-1);
-            Thread thread = new Thread(() -> {
-                for ( SensitiveWord sw : sensitiveWords )
-                    redisTemplate.opsForList().rightPush("sw:"+sw.getSection(),JSON.toJSONString(sw));
-            });
-            thread.start();
-            restResponse = RestResponse.successWithData("查看敏感词成功", sensitiveWords);
-        } else {
-            List<SensitiveWord> sensitiveWordList = new LinkedList<>();
-            for ( String str : swStrings )
-                sensitiveWordList.add(JSON.parseObject(str,SensitiveWord.class));
-            restResponse = RestResponse.successWithData("查看敏感词成功", sensitiveWordList.toArray());
-        }
-        return restResponse;
+        SensitiveWord[] sensitiveWords = sensitiveWordDao.selectByDTO(sensitiveWord, 0,-1);
+        return RestResponse.successWithData("查看敏感词成功", sensitiveWords);
     }
 }

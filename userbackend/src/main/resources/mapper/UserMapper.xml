@@ -38,4 +38,28 @@
         `user_email`=#{email}
     </select>
 
+    <update id="updateOne" parameterType="edu.qd.userbackend.domain.User">
+        UPDATE
+            `user`
+        <set>
+            <if test="id != null and id.length() > 0">
+                `user_id`=#{id},
+            </if>
+            <if test="email != null and email.length() > 0">
+                `user_email`=#{email},
+            </if>
+            <if test="status != null and status > 0">
+                `user_status`=#{status},
+            </if>
+            <if test="pwd != null and pwd.length() > 0">
+                `user_pwd`=#{pwd},
+            </if>
+            <if test="gins != null and gins > 0">
+                `user_gins`=#{gins},
+            </if>
+        </set>
+        WHERE
+            `user_autoid`=#{autoId}
+    </update>
+
 </mapper>

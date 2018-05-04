@@ -1,0 +1,10 @@
+List:
+
+Follows-
+	key: follows:[user_id]
+	value: //关注用户id
+
+Fans-
+	key: fans:[user_id]
+	value: //粉丝id
+

@@ -1,0 +1,21 @@
+Hash:
+
+Comment-
+	key: comment:[post_id]:[cmtid]
+	field: post, cmtid, cmtor, cmtorid, text, creatime
+
+Gain-
+	key: gain:[post_id]
+	field: gains//总数 , gainers//总人数
+
+Message-
+	key: mymsg:[user_id]
+	field: 
+	Likes
+	Message
+	Post
+	Score
+	Section
+	SensitiveWord
+	Tag
+	User

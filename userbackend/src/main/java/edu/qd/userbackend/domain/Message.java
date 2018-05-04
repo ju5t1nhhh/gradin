@@ -7,9 +7,11 @@ public class Message implements Serializable {
 
     private static final long serialVersionUID = -8663881235855536016L;
 
-    private long rcvder;
+    private String rcvder;
 
     private String senderId;
+
+    private long from;
 
     private String text;
 
@@ -20,9 +22,10 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(long rcvder, String senderId, String text, int status, Timestamp creatime) {
+    public Message(String rcvder, String senderId, long from, String text, int status, Timestamp creatime) {
         this.rcvder = rcvder;
         this.senderId = senderId;
+        this.from = from;
         this.text = text;
         this.status = status;
         this.creatime = creatime;
@@ -31,8 +34,9 @@ public class Message implements Serializable {
     @Override
     public String toString() {
         return "Message{" +
-                "rcvder=" + rcvder +
+                "rcvder='" + rcvder + '\'' +
                 ", senderId='" + senderId + '\'' +
+                ", from=" + from +
                 ", text='" + text + '\'' +
                 ", status=" + status +
                 ", creatime=" + creatime +
@@ -43,11 +47,11 @@ public class Message implements Serializable {
         return serialVersionUID;
     }
 
-    public long getRcvder() {
+    public String getRcvder() {
         return rcvder;
     }
 
-    public void setRcvder(long rcvder) {
+    public void setRcvder(String rcvder) {
         this.rcvder = rcvder;
     }
 
@@ -57,6 +61,14 @@ public class Message implements Serializable {
 
     public void setSenderId(String senderId) {
         this.senderId = senderId;
+    }
+
+    public long getFrom() {
+        return from;
+    }
+
+    public void setFrom(long from) {
+        this.from = from;
     }
 
     public String getText() {
