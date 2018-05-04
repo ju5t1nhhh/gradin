@@ -1,7 +1,6 @@
 package edu.qd.userbackend.controller;
 
-import edu.qd.userbackend.domain.Comment;
-import edu.qd.userbackend.service.CommentService;
+import edu.qd.userbackend.service.ValidateCodeService;
 import edu.qd.userbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/comment")
-public class CommentController {
+@RequestMapping("/code")
+public class ValidateCodeController {
 
     @Autowired
-    private CommentService commentService;
+    private ValidateCodeService validateCodeService;
 
-    @PostMapping("/add")
-    @ApiOperation("添加评论")
-    public RestResponse addComment(Comment comment) {
-        return null;
+    @PostMapping("/email")
+    @ApiOperation("邮箱验证码")
+    public RestResponse getEmailCode(String email) {
+        return validateCodeService.getEmailCode(email);
     }
 
 }
