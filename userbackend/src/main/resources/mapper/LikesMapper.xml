@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.LikesDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Likes">
+        <result column="like_post" property="post" />
+        <result column="like_cmtId" property="cmtId" />
+        <result column="like_liker" property="liker" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Likes">
+        INSERT INTO
+            `likes`
+        VALUES
+            (#{post},#{cmtId},#{liker})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Likes">
+        DELETE FROM
+            `likes`
+        WHERE
+    </delete>
+
+</mapper>

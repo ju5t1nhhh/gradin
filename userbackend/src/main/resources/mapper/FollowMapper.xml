@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.FollowDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Follow">
+        <result column="flw_user" property="user" />
+        <result column="flw_4user" property="forUser" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Follow">
+        INSERT INTO
+            `follow`
+        VALUES
+            (#{user},#{forUser})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Follow">
+        DELETE FROM
+            `follow`
+        WHERE
+    </delete>
+
+</mapper>

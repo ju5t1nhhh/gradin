@@ -10,17 +10,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserDaoTest {
 
+public class FavoriteDaoTest {
     @Autowired
     private FavoriteDao favoriteDao;
 
     @Test
     public void selectById() throws Exception {
-        Favorite favorite = new Favorite(12,1L);
+        Favorite favorite = new Favorite(1L,1L);
         favoriteDao.insertOne(favorite);
     }
 

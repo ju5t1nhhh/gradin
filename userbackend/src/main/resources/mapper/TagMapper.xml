@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.TagDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Tag">
+        <result column="tag_name" property="name" />
+        <result column="tag_post" property="post" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Tag">
+        INSERT INTO
+            `tag`
+        VALUES
+            (#{name},#{post})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Tag">
+        DELETE FROM
+            `tag`
+        WHERE
+    </delete>
+
+</mapper>

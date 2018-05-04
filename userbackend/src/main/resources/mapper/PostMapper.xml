@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.PostDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Post">
+        <result column="post_id" property="id" />
+        <result column="post_author" property="author" />
+        <result column="post_multmedia" property="multmedia" />
+        <result column="post_text" property="text" />
+        <result column="post_creatime" property="creatime" />
+        <result column="post_section" property="section" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Post">
+        INSERT INTO
+            `post`
+        VALUES
+            (#{id},#{author},#{multmedia},#{text},#{creatime},#{section})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Post">
+        DELETE FROM
+            `post`
+        WHERE
+    </delete>
+
+</mapper>

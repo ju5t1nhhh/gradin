@@ -1,31 +1,32 @@
 package edu.qd.userbackend.dao;
 
 import edu.qd.userbackend.domain.Favorite;
-import edu.qd.userbackend.domain.User;
-import edu.qd.userbackend.util.PasswordUtil;
+import edu.qd.userbackend.domain.Message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import java.sql.Timestamp;
 
+import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserDaoTest {
 
+public class MessageDaoTest {
     @Autowired
-    private FavoriteDao favoriteDao;
+    private MessageDao messageDao;
 
     @Test
     public void selectById() throws Exception {
-        Favorite favorite = new Favorite(12,1L);
-        favoriteDao.insertOne(favorite);
+        Message message = new Message(1L,"sadasd","asdaws",112,new Timestamp(23123133));
+        messageDao.insertOne(message);
     }
 
     @Test
     public void selectByEmail() throws Exception {
     }
+
 
 }

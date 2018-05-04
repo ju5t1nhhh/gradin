@@ -1,8 +1,7 @@
 package edu.qd.userbackend.dao;
 
 import edu.qd.userbackend.domain.Favorite;
-import edu.qd.userbackend.domain.User;
-import edu.qd.userbackend.util.PasswordUtil;
+import edu.qd.userbackend.domain.Follow;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +9,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserDaoTest {
-
+public class FollowDaoTest {
     @Autowired
-    private FavoriteDao favoriteDao;
+    private FollowDao followDao;
 
     @Test
     public void selectById() throws Exception {
-        Favorite favorite = new Favorite(12,1L);
-        favoriteDao.insertOne(favorite);
+        Follow follow = new Follow(1L,1L);
+        followDao.insertOne(follow);
     }
 
     @Test

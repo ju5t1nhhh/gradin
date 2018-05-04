@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.CommentDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Comment">
+        <result column="cmt_post" property="post" />
+        <result column="cmt_cmtid" property="cmtid" />
+        <result column="cmt_cmtor" property="cmtor" />
+        <result column="cmt_cmtorid" property="cmtorid" />
+        <result column="cmt_text" property="text" />
+        <result column="cmt_creatime" property="creatime" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Comment">
+        INSERT INTO
+            `comment`
+        VALUES
+            (#{post},#{cmtid},#{cmtor},#{cmtorid},#{text},#{creatime})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Comment">
+        DELETE FROM
+            `comment`
+        WHERE
+    </delete>
+
+</mapper>

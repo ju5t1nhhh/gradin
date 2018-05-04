@@ -18,6 +18,12 @@
             (#{autoId},#{id},#{email},#{status},#{pwd},#{gins})
     </insert>
 
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.User">
+        DELETE FROM
+            `user`
+        WHERE
+    </delete>
+
     <select id="selectById" parameterType="string" resultMap="BaseResultMap">
         SELECT * FROM
             `user`

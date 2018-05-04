@@ -1,6 +1,6 @@
 package edu.qd.userbackend.dao;
 
-import edu.qd.userbackend.domain.Favorite;
+import edu.qd.userbackend.domain.Complaint;
 import edu.qd.userbackend.domain.User;
 import edu.qd.userbackend.util.PasswordUtil;
 import org.junit.Test;
@@ -9,19 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import java.sql.Timestamp;
 
+import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserDaoTest {
 
+public class ComplaintDaoTest {
     @Autowired
-    private FavoriteDao favoriteDao;
+    private ComplaintDao complaintDao;
 
     @Test
     public void selectById() throws Exception {
-        Favorite favorite = new Favorite(12,1L);
-        favoriteDao.insertOne(favorite);
+        Complaint complaint = new Complaint(1L,1L,112,"dasdasda",new Timestamp(1213123313));
+        complaintDao.insertOne(complaint);
     }
 
     @Test

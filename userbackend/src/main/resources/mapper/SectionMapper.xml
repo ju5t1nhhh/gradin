@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.SectionDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Section">
+        <result column="sec_id" property="id" />
+        <result column="sec_name" property="name" />
+        <result column="sec_intro" property="intro" />
+        <result column="sec_url" property="url" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Section">
+        INSERT INTO
+            `section`
+        VALUES
+            (#{id},#{name},#{intro},#{url})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Section">
+        DELETE FROM
+            `section`
+        WHERE
+    </delete>
+
+</mapper>

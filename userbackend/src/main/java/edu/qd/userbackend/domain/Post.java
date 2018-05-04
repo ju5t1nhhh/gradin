@@ -22,8 +22,7 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(long id, long author, String multmedia, String text, int section, Timestamp creatime) {
-        this.id = id;
+    public Post(long author, String multmedia, String text, int section, Timestamp creatime) {
         this.author = author;
         this.multmedia = multmedia;
         this.text = text;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.FavoriteDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Favorite">
+        <result column="fav_user" property="user" />
+        <result column="fav_post" property="post" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Favorite">
+        INSERT INTO
+            `favorite`
+        VALUES
+            (#{user},#{post})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Favorite">
+        DELETE FROM
+            `favorite`
+        WHERE
+    </delete>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.UserDetailDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.UserDetail">
+        <result column="ud_user" property="user" />
+        <result column="ud_avatar" property="avatar" />
+        <result column="ud_brief" property="brief" />
+        <result column="ud_website" property="website" />
+        <result column="ud_phone" property="phone" />
+        <result column="ud_gender" property="gender" />
+        <result column="ud_wechat" property="wechat" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.UserDetail">
+        INSERT INTO
+            `user_detail`
+        VALUES
+            (#{user},#{avatar},#{brief},#{website},#{phone},#{gender},#{wechat})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.UserDetail">
+        DELETE FROM
+            `user_detail`
+        WHERE
+    </delete>
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.MessageDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Message">
+        <result column="msg_rcvder" property="rcvder" />
+        <result column="msg_senderId" property="senderId" />
+        <result column="msg_text" property="text" />
+        <result column="msg_status" property="status" />
+        <result column="msg_creatime" property="creatime" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Message">
+        INSERT INTO
+            `message`
+        VALUES
+            (#{rcvder},#{senderId},#{text},#{status},#{creatime})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Message">
+        DELETE FROM
+            `message`
+        WHERE
+    </delete>
+
+</mapper>

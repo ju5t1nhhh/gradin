@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.SensitiveWordDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.SensitiveWord">
+        <result column="sw_section" property="section" />
+        <result column="sw_word" property="word" />
+        <result column="sw_replace" property="replace" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.SensitiveWord">
+        INSERT INTO
+            `sensitive_word`
+        VALUES
+            (#{section},#{word},#{replace})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.SensitiveWord">
+        DELETE FROM
+            `sensitive_word`
+        WHERE
+    </delete>
+
+</mapper>

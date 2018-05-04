@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.qd.userbackend.dao.GainDao">
+
+    <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Gain">
+        <result column="gain_post" property="post" />
+        <result column="gain_giver" property="giver" />
+        <result column="gain_gins" property="gins" />
+    </resultMap>
+
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Gain">
+        INSERT INTO
+            `gain`
+        VALUES
+            (#{post},#{giver},#{gins})
+    </insert>
+
+    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Gain">
+        DELETE FROM
+            `gain`
+        WHERE
+    </delete>
+
+</mapper>
