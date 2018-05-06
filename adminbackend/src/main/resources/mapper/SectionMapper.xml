@@ -3,10 +3,10 @@
 <mapper namespace="edu.qd.adminbackend.dao.SectionDao">
 
     <resultMap id="BaseResultMap" type="edu.qd.adminbackend.domain.Section">
-        <result column="section_id" property="id" />
-        <result column="section_name" property="name" />
-        <result column="section_intro" property="intro" />
-        <result column="section_url" property="url" />
+        <result column="sec_id" property="id" />
+        <result column="sec_name" property="name" />
+        <result column="sec_intro" property="intro" />
+        <result column="sec_url" property="url" />
     </resultMap>
 
     <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Section">

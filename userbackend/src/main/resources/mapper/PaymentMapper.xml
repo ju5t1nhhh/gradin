@@ -16,10 +16,15 @@
             (#{code},#{user},#{creatime},#{status})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Payment">
-        DELETE FROM
-            `payment`
-        WHERE
-    </delete>
+    <select id="selectByDTO" parameterType="edu.qd.userbackend.domain.Payment" resultMap="BaseResultMap">
+        SELECT * FROM `payment`
+        WHERE `pay_code`=#{domain.code}
+    </select>
+
+    <update id="updateOne" parameterType="edu.qd.userbackend.domain.Payment">
+        UPDATE `payment`
+        SET `pay_status`=1, `pay_user`=#{user}
+        WHERE `pay_code`=#{code}
+    </update>
 
 </mapper>

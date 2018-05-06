@@ -1,6 +1,7 @@
 package edu.qd.adminbackend.service.impl;
 
 import edu.qd.adminbackend.dao.AdminDao;
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.domain.Admin;
 import edu.qd.adminbackend.service.AdminService;
 import edu.qd.adminbackend.util.LogRecordDaoUtil;
@@ -15,12 +16,15 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminDao adminDao;
 
+    @Autowired
+    private LogRecordDao logRecordDao;
+
     @Override
     public RestResponse addAdmin(Admin admin) {
         admin.setPwd(PasswordUtil.encryptPassword(admin.getLoginId(),admin.getPwd()));
         int rows = adminDao.insertOne(admin);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("新增管理员"+admin.getLoginId());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao,"新增管理员"+admin.getLoginId());
             return RestResponse.successWithMsg("新增管理员成功");
         } else {
             return RestResponse.errorWithMsg(1001, "新增管理员失败，检查用户名");
@@ -33,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
         admin.setLoginId(id);
         int rows = adminDao.deleteByDTO(admin);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("删除管理员"+admin.getLoginId());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao,"删除管理员"+admin.getLoginId());
             return RestResponse.successWithMsg("删除管理员成功");
         } else {
             return RestResponse.errorWithMsg(1004, "删除管理员失败");

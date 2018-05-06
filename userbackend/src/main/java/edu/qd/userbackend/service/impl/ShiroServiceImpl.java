@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ShiroServiceImpl implements ShiroService {
 
     @Override
-    public RestResponse login(String id, String password, String valiCode) {
+    public RestResponse login(String id, String password) {
         RestResponse restResponse = null;
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(id, password);

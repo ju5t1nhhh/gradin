@@ -15,9 +15,8 @@ public class SectionDaoTest {
 
     @Test
     public void insertOne() throws Exception {
-        Section section = new Section(1,"jijiji","asdasd","dsdasd");
-        sectionDao.insertOne(section);
-
+        Section section = new Section(1,"jijissi","asdaaaaaaaaaaasd","dsdasd");
+        sectionDao.updateOne(section);
     }
 
 

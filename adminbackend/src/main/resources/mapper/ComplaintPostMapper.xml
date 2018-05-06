@@ -19,7 +19,7 @@
         WHERE `cp_post`=#{post} AND `cp_cmtid`=#{cmtid}
     </update>
 
-    <select id="selectByDTO" parameterType="edu.qd.adminbackend.domain.ComplaintPost">
+    <select id="selectByDTO" parameterType="edu.qd.adminbackend.domain.ComplaintPost" resultMap="BaseResultMap">
         SELECT * FROM `complaint_post`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">

@@ -5,4 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDetailDao extends BaseDao<UserDetail> {
+
+    UserDetail selectById(long id);
+
 }

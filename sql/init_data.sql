@@ -23,7 +23,7 @@ INSERT INTO `permission` VALUES
 (17,'删除评论','comment:del',2,16),
 (18,'查看评论','comment:list',2,16),
 (19,'举报管理',NULL,1,0),
-(20,'处理举报','complaint:del',2,19),
+(20,'处理举报','complaint:mod',2,19),
 (21,'查看举报','complaint:list',2,19),
 (22,'日志管理',NULL,1,0),
 (23,'查看日志','logrecord:list',2,22),

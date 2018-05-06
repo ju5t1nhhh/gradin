@@ -30,8 +30,8 @@ public class CommentController {
     @PostMapping("/list")
     @RequiresPermissions("comment:list")
     @ApiOperation("查看评论")
-    public RestResponse listComment(Comment comment,@RequestParam(defaultValue = "1") int page) {
-        return commentService.listComment(comment, page);
+    public RestResponse listComment(Comment comment, String date, @RequestParam(defaultValue = "1") int page) {
+        return commentService.listComment(comment, date, page);
     }
 
 }

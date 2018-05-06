@@ -1,5 +1,6 @@
 package edu.qd.adminbackend.service.impl;
 
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.SectionDao;
 import edu.qd.adminbackend.domain.Section;
 import edu.qd.adminbackend.service.SectionService;
@@ -16,6 +17,9 @@ public class SectionServiceImpl implements SectionService {
     private SectionDao sectionDao;
 
     @Autowired
+    private LogRecordDao logRecordDao;
+
+    @Autowired
     private StringRedisTemplate redisTemplate;
 
     @Override
@@ -23,12 +27,12 @@ public class SectionServiceImpl implements SectionService {
         int rows = sectionDao.insertOne(section);
         if ( rows > 0 ) {
             Thread thread = new Thread( () -> {
-                redisTemplate.opsForHash().put("section:"+section.getId(),"id", section.getId());
+                redisTemplate.opsForHash().put("section:"+section.getId(),"id", String.valueOf(section.getId()));
                 redisTemplate.opsForHash().put("section:"+section.getId(),"name", section.getName());
                 redisTemplate.opsForHash().put("section:"+section.getId(),"intro", section.getIntro());
             });
             thread.start();
-            LogRecordDaoUtil.insertLogRecord("新增版区"+section.getName());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "新增版区"+section.getName());
             return RestResponse.successWithMsg("新增版区成功");
         } else
             return RestResponse.errorWithMsg(1114, "新增版区失败");
@@ -37,11 +41,10 @@ public class SectionServiceImpl implements SectionService {
     @Override
     public RestResponse delSection(int id) {
         Section section = new Section(id,null,null,null);
-        section = sectionDao.selectByDTO(section,0,1)[0];
         int rows = sectionDao.deleteByDTO(section);
         if ( rows > 0 ) {
-            redisTemplate.opsForHash().delete("section:"+section.getId());
-            LogRecordDaoUtil.insertLogRecord("删除版区"+section.getName());
+            redisTemplate.opsForHash().delete("section:"+section.getId(),"id", "name", "intro");
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "删除版区"+section.getName());
             return RestResponse.successWithMsg("删除版区成功");
         } else
             return RestResponse.errorWithMsg(1115,"删除版区失败");
@@ -56,7 +59,7 @@ public class SectionServiceImpl implements SectionService {
                 redisTemplate.opsForHash().put("section:"+section.getId(),"intro", section.getIntro());
             });
             thread.start();
-            LogRecordDaoUtil.insertLogRecord("修改版区"+section.getName());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "修改版区"+section.getName());
             return RestResponse.successWithMsg("修改版区成功");
         } else
             return RestResponse.errorWithMsg(1116, "修改版区失败");

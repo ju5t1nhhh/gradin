@@ -13,16 +13,10 @@ public class FollowController {
     @Autowired
     private FollowService followService;
 
-    @PostMapping("/add/{user}")
-    @ApiOperation("关注用户")
+    @PostMapping("/mod/{user}")
+    @ApiOperation("关注或取关用户")
     public RestResponse addFollow(@PathVariable long user) {
-        return followService.addFollow(user);
-    }
-
-    @PostMapping("/del/{user}")
-    @ApiOperation("取消用户")
-    public RestResponse delFollow(@PathVariable long user) {
-        return followService.delFollow(user);
+        return followService.modFollow(user);
     }
 
     @GetMapping("/flw/{user}")

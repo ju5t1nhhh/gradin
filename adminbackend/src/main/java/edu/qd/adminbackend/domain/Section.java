@@ -7,7 +7,6 @@ public class Section implements Serializable {
 
     private static final long serialVersionUID = 5402940209101541393L;
 
-    @NotBlank
     private int id;
 
     @NotBlank

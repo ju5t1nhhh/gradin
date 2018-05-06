@@ -1,10 +1,31 @@
-List:
+Set:
 
 Follows-
-	key: follows:[user_id]
+	key: follows:[user_id]	
 	value: //关注用户id
 
 Fans-
 	key: fans:[user_id]
 	value: //粉丝id
 
+List:
+
+LogRecord-
+	key: logrecords
+	value: //消息
+
+Likes-	//我点赞的评论
+	key: likes:[user_id]
+	value: [post_id]:[cmtid]
+
+Tag-
+	key: tag:[tag_name]
+	value: post:[post_id]
+
+Section-
+	key: section
+	value: [section_id]
+
+SensitiveWord-
+	key: senword:[section_id]
+	value: sw:[section_id]:[word]

@@ -23,12 +23,6 @@ public class UserController {
         return userService.register(id, pwd, email, ecode);
     }
 
-    @PostMapping("/modid")
-    @ApiOperation("修改id")
-    public RestResponse modId(String newId) {
-        return userService.modifyId(newId);
-    }
-
     @PostMapping("/modemail")
     @ApiOperation("修改Email")
     public RestResponse modEmail(String newEmail, String emailCode) {
@@ -49,14 +43,14 @@ public class UserController {
 
     @PostMapping("/show/{id}")
     @ApiOperation("查看个人页面")
-    public RestResponse showPerson(@PathVariable long id) {
+    public RestResponse showPerson(@PathVariable String id) {
         return userService.showPerson(id);
     }
 
     @PostMapping("/detail/{id}")
     @ApiOperation("查看个人详页")
     public RestResponse detailPerson(@PathVariable long id) {
-        return null;
+        return userService.detailPerson(id);
     }
 
 }

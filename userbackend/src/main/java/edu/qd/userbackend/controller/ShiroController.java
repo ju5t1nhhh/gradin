@@ -16,8 +16,8 @@ public class ShiroController {
 
     @PostMapping("/login")
     @ApiOperation("登录")
-    public RestResponse login(String id, String password, String valiCode) {
-        return shiroService.login(id, password, valiCode);
+    public RestResponse login(String id, String password) {
+        return shiroService.login(id, password);
     }
 
     @GetMapping({"/unauth","/302"})

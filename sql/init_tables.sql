@@ -59,8 +59,7 @@ CREATE TABLE `complaint_post`(
   `cp_cmtid` INT,
   `cp_times` INT,
   `cp_status` INT,
-  PRIMARY KEY(`cp_post`),
-  INDEX (`cp_post`,`cp_cmtid`)
+  PRIMARY KEY(`cp_post`,`cp_cmtid`)
 )ENGINE=INNODB CHARSET utf8;
 
 # Comment

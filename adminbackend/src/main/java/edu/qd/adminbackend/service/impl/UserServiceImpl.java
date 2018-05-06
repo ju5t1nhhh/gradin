@@ -1,5 +1,6 @@
 package edu.qd.adminbackend.service.impl;
 
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.UserDao;
 import edu.qd.adminbackend.domain.User;
 import edu.qd.adminbackend.service.UserService;
@@ -16,12 +17,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private LogRecordDao logRecordDao;
+
     @Override
     public RestResponse addUser(User user) {
         user.setPwd(PasswordUtil.encryptPassword("salt",user.getPwd()));
         int rows = userDao.insertOne(user);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("新增用户:"+user.getAutoid()+":"+user.getId());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao,"新增用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("新增用户成功");
         } else
             return RestResponse.errorWithMsg(1100,"新增用户失败");
@@ -35,7 +39,7 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             for ( User u : users )
                 sb.append(u.getId() + ' ');
-            LogRecordDaoUtil.insertLogRecord("删除用户:"+user.getAutoid()+":"+user.getId());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "删除用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("删除用户"+sb);
         } else {
             return RestResponse.errorWithMsg(1101,"删除用户失败");
@@ -48,7 +52,7 @@ public class UserServiceImpl implements UserService {
             user.setPwd(PasswordUtil.encryptPassword("salt",user.getPwd()));
         int rows = userDao.updateOne(user);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("修改用户:"+user.getAutoid()+":"+user.getId());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "修改用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("修改用户" + user.getAutoid() + "成功");
         } else
             return RestResponse.errorWithMsg(1102, "修改用户" + user.getAutoid() + "失败");

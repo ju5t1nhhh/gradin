@@ -7,6 +7,11 @@
         <result column="tag_post" property="post" />
     </resultMap>
 
+    <resultMap id="BaseResultMap2" type="edu.qd.userbackend.vo.TagResponse">
+        <result column="tag_name" property="name" />
+        <result column="times" property="times" />
+    </resultMap>
+
     <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Tag">
         INSERT INTO
             `tag`
@@ -17,7 +22,16 @@
     <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Tag">
         DELETE FROM
             `tag`
-        WHERE
+        WHERE `tag_name`=#{name} AND `tag_post`=#{post}
     </delete>
+
+    <select id="selectLikeWord" resultMap="BaseResultMap2">
+        SELECT `tag_name`, COUNT(`tag_post`) as `times` FROM `tag`
+        WHERE `tag_name` LIKE CONCAT(#{word},'%') GROUP BY `tag_name`
+    </select>
+
+    <select id="selectByDTO" resultMap="BaseResultMap">
+        SELECT * FROM `tag` WHERE `tag_name`=#{domain.name}
+    </select>
 
 </mapper>

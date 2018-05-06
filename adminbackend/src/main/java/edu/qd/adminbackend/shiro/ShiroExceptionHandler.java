@@ -34,6 +34,7 @@ public class ShiroExceptionHandler implements HandlerExceptionResolver {
         } else {
             map.put("code", "1999");
             map.put("msg", e.getMessage());
+            e.printStackTrace();
         }
         view.setAttributesMap(map);
         mv.setView(view);

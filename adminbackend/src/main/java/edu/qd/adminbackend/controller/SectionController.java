@@ -24,28 +24,28 @@ public class SectionController {
     @RequiresPermissions("section:add")
     @ApiOperation("新增版区")
     public RestResponse addSection(@Valid Section section) {
-        return null;
+        return sectionService.addSection(section);
     }
 
     @PostMapping("/del/{id}")
     @RequiresPermissions("section:del")
     @ApiOperation("删除版区")
     public RestResponse delSection(@PathVariable int id) {
-        return null;
+        return sectionService.delSection(id);
     }
 
     @PostMapping("/mod")
     @RequiresPermissions("section:mod")
     @ApiOperation("修改版区")
     public RestResponse modSection(@Valid Section section) {
-        return null;
+        return sectionService.modSection(section);
     }
 
     @PostMapping("/list")
     @RequiresPermissions("section:list")
     @ApiOperation("查看版区列表")
     public RestResponse listSection() {
-        return null;
+        return sectionService.listSection();
     }
 
 }

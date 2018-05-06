@@ -15,10 +15,26 @@
             (#{user},#{post},#{score})
     </insert>
 
+    <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM `score` WHERE `sco_user`=#{domain.user}
+    </select>
+
+    <select id="getScoreSum" parameterType="long" resultType="int">
+        SELECT SUM(`sco_score`) FROM `score`
+        WHERE `sco_post`=#{post}
+    </select>
+
+    <select id="getScorers" parameterType="long" resultType="int">
+        SELECT COUNT(`sco_user`) FROM `score`
+        WHERE `sco_post`=#{post}
+    </select>
+
+    <select id="select" parameterType="map" resultMap="BaseResultMap">
+        SELECT * from `score` WHERE `sco_user`=#{user} AND `sco_post`=#{post}
+    </select>
+
     <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Score">
-        DELETE FROM
-            `score`
-        WHERE
+        DELETE FROM `score` WHERE `sco_user`=#{user} AND `sco_post`=#{post}
     </delete>
 
 </mapper>

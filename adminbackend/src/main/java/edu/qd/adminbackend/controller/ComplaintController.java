@@ -31,8 +31,8 @@ public class ComplaintController {
     @PostMapping("/list/post")
     @RequiresPermissions("complaint:list")
     @ApiOperation("查看举作具体内容")
-    public RestResponse listComplaint(Complaint complaint, @RequestParam(defaultValue = "1") int page) {
-        return complaintService.listComplaint(complaint, page);
+    public RestResponse listComplaint(Complaint complaint, String date, @RequestParam(defaultValue = "1") int page) {
+        return complaintService.listComplaint(complaint, date, page);
     }
 
     @PostMapping("/deal")

@@ -19,7 +19,7 @@ public class LogRecordDaoTest {
 
     @Test
     public void insertOne() throws Exception {
-        LogRecord logRecord = new LogRecord("gjhgj","ththyt", new Timestamp(54646466 ));
+        LogRecord logRecord = new LogRecord("gjhgj","wdwdwddwdwd", new Timestamp(54646466 ));
         logRecordDao.insertOne(logRecord);
     }
 }

@@ -6,12 +6,12 @@ import java.util.List;
 
 public class GetUserInTextUtil {
 
-    public static List<String> getAtedUsers(String text) {
+    public static List<String> getAtedUsers(String text, char c) {
         char[] str = text.toCharArray();
         List<String> strings = new LinkedList<>();
         int i = 0;
         while ( i < str.length ) {
-            if ( str[i] != '@' ) {
+            if ( str[i] != c ) {
                 i++;
                 continue;
             } else {

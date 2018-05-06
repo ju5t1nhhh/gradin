@@ -17,7 +17,31 @@
     <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Follow">
         DELETE FROM
             `follow`
-        WHERE
+        WHERE `flw_user`=#{user} AND `flw_4user`=#{forUser}
     </delete>
+
+    <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM
+            `follow`
+        WHERE `flw_user`=#{domain.user} AND `flw_4user`=#{domain.forUser}
+    </select>
+
+    <select id="getFollowsNum" resultType="int">
+        SELECT COUNT(*) FROM `follow`
+        WHERE `flw_user`=#{id}
+    </select>
+
+    <select id="getFansNum" resultType="int">
+        SELECT COUNT(*) FROM `follow`
+        WHERE `flw_4user`=#{id}
+    </select>
+
+    <select id="getFollows" resultType="long">
+        SELECT `flw_4user` FROM `follow` WHERE `flw_user`=#{id}
+    </select>
+
+    <select id="getFans" resultType="long">
+        SELECT `flw_user` FROM `follow` WHERE `flw_4user`=#{id}
+    </select>
 
 </mapper>

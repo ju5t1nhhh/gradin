@@ -17,10 +17,18 @@
             (#{rcvder},#{senderId},#{text},#{status},#{creatime})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Message">
-        DELETE FROM
-            `message`
-        WHERE
-    </delete>
+    <select id="getNewMessageNum" resultType="string">
+        SELECT COUNT(*) FROM `message`
+        WHERE `msg_rcvder`=#{id} AND `msg_status`=0
+    </select>
+
+    <select id="selectMyMessage" resultMap="BaseResultMap">
+        SELECT * FROM `message` WHERE `msg_rcvder`=#{id} ORDER BY `msg_status`
+    </select>
+
+    <update id="changeStatusRead" parameterType="string">
+        UPDATE `message`
+        SET `msg_status`=1 WHERE `msg_rcvder`=#{id}
+    </update>
 
 </mapper>

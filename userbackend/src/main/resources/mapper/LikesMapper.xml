@@ -4,7 +4,7 @@
 
     <resultMap id="BaseResultMap" type="edu.qd.userbackend.domain.Likes">
         <result column="like_post" property="post" />
-        <result column="like_cmtId" property="cmtId" />
+        <result column="like_cmtid" property="cmtId" />
         <result column="like_liker" property="liker" />
     </resultMap>
 
@@ -18,7 +18,19 @@
     <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Likes">
         DELETE FROM
             `likes`
-        WHERE
+        WHERE `like_post`=#{post} AND `like_cmtid`=#{cmtId} AND `like_liker`=#{liker}
     </delete>
+
+    <select id="getLikes" resultType="int">
+        SELECT COUNT(`like_liker`) FROM `likes` WHERE `like_post`=#{post} AND `like_cmtid`=#{cmtid}
+    </select>
+
+    <select id="isLikes" parameterType="edu.qd.userbackend.domain.Likes" resultType="int">
+        SELECT COUNT(*) FROM `likes` WHERE `like_post`=#{post} AND `like_cmtid`=#{cmtId} AND `like_liker`=#{liker}
+    </select>
+
+    <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM `likes` WHERE `like_liker`=#{domain.liker}
+    </select>
 
 </mapper>

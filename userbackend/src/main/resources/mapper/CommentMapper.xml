@@ -21,7 +21,18 @@
     <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Comment">
         DELETE FROM
             `comment`
-        WHERE
+        WHERE `cmt_post` = #{post} AND `cmt_cmtid` = #{cmtid}
     </delete>
+
+    <select id="selectByTime" resultMap="BaseResultMap">
+        SELECT *
+        FROM `comment`
+        WHERE `cmt_post`=#{post} ORDER BY `cmt_creatime` DESC
+    </select>
+
+    <select id="selectNewCmtId" resultType="int">
+        SELECT COUNT(`cmt_cmtid`)+1 FROM `comment`
+        WHERE `cmt_post`=#{post}
+    </select>
 
 </mapper>

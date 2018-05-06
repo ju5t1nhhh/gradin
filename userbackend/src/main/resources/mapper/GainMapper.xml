@@ -15,10 +15,12 @@
             (#{post},#{giver},#{gins})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Gain">
-        DELETE FROM
-            `gain`
-        WHERE
-    </delete>
+    <select id="selectByUser" resultMap="BaseResultMap">
+        SELECT * FROM `gain` WHERE `gain_giver`=#{user}
+    </select>
+
+    <select id="selectByPost" resultMap="BaseResultMap">
+        SELECT * FROM `gain` WHERE `gain_post`=#{post}
+    </select>
 
 </mapper>

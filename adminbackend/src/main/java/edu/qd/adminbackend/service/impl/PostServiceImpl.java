@@ -1,5 +1,6 @@
 package edu.qd.adminbackend.service.impl;
 
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.PostDao;
 import edu.qd.adminbackend.domain.Post;
 import edu.qd.adminbackend.service.PostService;
@@ -14,6 +15,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostDao postDao;
+
+    @Autowired
+    private LogRecordDao logRecordDao;
 
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -31,10 +35,10 @@ public class PostServiceImpl implements PostService {
         post.setId(id);
         int rows = postDao.deleteByDTO(post);
         if ( rows > 0 ) {
-            redisTemplate.opsForHash().delete("post:"+id);
-            LogRecordDaoUtil.insertLogRecord("删除作品:"+post.getId());
+            redisTemplate.opsForHash().delete("post:"+id,"author", "multmedia", "text", "creatime", "section", "score", "scorers");
+            LogRecordDaoUtil.insertLogRecord(logRecordDao,"删除作品:"+post.getId());
             return RestResponse.successWithMsg("删除作品成功");
         } else
-            return RestResponse.errorWithMsg(1119,"删除作品失败");
+            return RestResponse.errorWithMsg(1119,"没有作品被删除");
     }
 }

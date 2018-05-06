@@ -17,10 +17,4 @@
             (#{user},#{post},#{cmtid},#{msg},#{creatime})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Complaint">
-        DELETE FROM
-            `complaint`
-        WHERE
-    </delete>
-
 </mapper>

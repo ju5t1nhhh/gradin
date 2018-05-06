@@ -16,10 +16,30 @@
             (#{post},#{cmtid},#{times},#{status})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.ComplaintPost">
-        DELETE FROM
-            `complaint_post`
-        WHERE
-    </delete>
+    <select id="selectByDTO" parameterType="edu.qd.userbackend.domain.ComplaintPost" resultMap="BaseResultMap">
+        SELECT * FROM `complaint_post`
+        <if test="domain != null">
+            <trim prefix="WHERE" prefixOverrides="AND">
+                <if test="domain.post != null">
+                    AND `cp_post`=#{domain.post}
+                </if>
+                <if test="domain.cmtid != null">
+                    AND `cp_cmtid`=#{domain.cmtid}
+                </if>
+                <if test="domain.times != null">
+                    AND `cp_times`=#{domain.times}
+                </if>
+                <if test="domain.status != null">
+                    AND `cp_status`=#{domain.status}
+                </if>
+            </trim>
+        </if>
+    </select>
+
+    <update id="addComplaintTimes" parameterType="map">
+        UPDATE `complaint_post`
+        SET `cp_times`=`cp_times`+1
+        WHERE `cp_post`=#{post} AND `cp_cmtid`=#{cmtid}
+    </update>
 
 </mapper>

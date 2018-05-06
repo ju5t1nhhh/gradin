@@ -19,10 +19,33 @@
             (#{user},#{avatar},#{brief},#{website},#{phone},#{gender},#{wechat})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.UserDetail">
-        DELETE FROM
-            `user_detail`
-        WHERE
-    </delete>
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT * FROM `user_detail`
+        WHERE `ud_user`=#{id}
+    </select>
 
+    <update id="updateOne" parameterType="edu.qd.userbackend.domain.UserDetail">
+        UPDATE `user_detail`
+        <set>
+            <if test="avatar != null and avatar.length() > 0">
+                `ud_avatar`=#{avatar},
+            </if>
+            <if test="brief != null and brief.length() > 0">
+                `ud_brief`=#{brief},
+            </if>
+            <if test="website != null and website.length() > 0">
+                `ud_website`=#{website},
+            </if>
+            <if test="phone != null and phone.length() > 0">
+                `ud_phone`=#{phone},
+            </if>
+            <if test="gender != null">
+                `ud_gender`=#{gender},
+            </if>
+            <if test="wechat != null and wechat.length() > 0">
+                `ud_wechat`=#{wechat},
+            </if>
+        </set>
+        WHERE `ud_user`=#{user}
+    </update>
 </mapper>

@@ -11,7 +11,7 @@
         <result column="post_section" property="section" />
     </resultMap>
 
-    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Post">
+    <insert id="insertOne" parameterType="edu.qd.userbackend.domain.Post" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
             `post`
         VALUES
@@ -22,6 +22,21 @@
         DELETE FROM
             `post`
         WHERE
+    </delete>
+
+    <select id="getPostsNum" resultType="int">
+        SELECT COUNT(*) FROM `post`
+        WHERE `post_author`=#{id}
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="long">
+        SELECT * FROM `post`
+        WHERE `post_id`=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM `post`
+        WHERE `post_id`=#{id}
     </delete>
 
 </mapper>

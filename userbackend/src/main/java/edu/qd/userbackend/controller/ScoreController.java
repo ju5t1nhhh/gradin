@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,7 +30,7 @@ public class ScoreController {
 
     @PostMapping("/myadd")
     @ApiOperation("个人参与的评分")
-    public RestResponse listScore(int page) {
+    public RestResponse listScore(@RequestParam(defaultValue = "1") int page) {
         return scoreService.listScore(page);
     }
 

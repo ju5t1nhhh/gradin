@@ -9,6 +9,8 @@ public interface CommentService {
 
     RestResponse delComment(long post, int cmtid);
 
-    RestResponse postComments(long id);
+    RestResponse postHotComments(long id);
+
+    RestResponse postAllComments(long id);
 
 }

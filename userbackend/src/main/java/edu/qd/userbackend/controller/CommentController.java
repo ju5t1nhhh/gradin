@@ -26,10 +26,16 @@ public class CommentController {
         return commentService.delComment(post,cmtid);
     }
 
-    @GetMapping("/post/{id}")
+    @PostMapping("/post/hot/{id}")
     @ApiOperation("查看评论")
-    public RestResponse postComments(@PathVariable long id) {
-        return commentService.postComments(id);
+    public RestResponse postHotComments(@PathVariable long id) {
+        return commentService.postHotComments(id);
+    }
+
+    @PostMapping("/post/{id}")
+    @ApiOperation("查看评论")
+    public RestResponse postAllComments(@PathVariable long id) {
+        return commentService.postAllComments(id);
     }
 
 }

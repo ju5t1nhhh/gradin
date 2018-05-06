@@ -2,20 +2,24 @@ Hash:
 
 Comment-
 	key: comment:[post_id]:[cmtid]
-	field: post, cmtid, cmtor, cmtorid, text, creatime
+	field: post, cmtid, cmtor, cmtorid, text, likes creatime
 
 Gain-
 	key: gain:[post_id]
 	field: gains//总数 , gainers//总人数
 
-Message-
-	key: mymsg:[user_id]
-	field: 
-	Likes
-	Message
-	Post
-	Score
-	Section
-	SensitiveWord
-	Tag
-	User
+User-
+	key: user:[user_id]
+	field: id, email, gins, avatar, follows, fans, posts, msgstatus//是否有未读消息
+
+Post-
+	key: post:[post_id]
+	field: author, multmedia, text, creatime, section, score, scorers
+
+Section-
+	key: section:[section_id]
+	field: id, name, intro
+
+SensitiveWord-
+	key: sw:[section_id]:[word]
+	field: word, replace

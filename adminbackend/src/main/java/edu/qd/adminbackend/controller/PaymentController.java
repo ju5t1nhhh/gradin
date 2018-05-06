@@ -22,14 +22,14 @@ public class PaymentController {
     @RequiresPermissions("payment:add")
     @ApiOperation("新增支付订单")
     public RestResponse addPayment(Payment payment) {
-        return null;
+        return paymentService.addPayment(payment);
     }
 
     @PostMapping("/list")
     @RequiresPermissions("payment:list")
     @ApiOperation("查看支付订单")
     public RestResponse listPayment(Payment payment, @RequestParam(defaultValue = "1") int page) {
-        return null;
+        return paymentService.listPayment(payment,page);
     }
 
 }

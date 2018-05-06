@@ -1,1 +1,5 @@
 String:
+
+EmailCode-
+	key: ecode:[session_id]
+	value: //验证码

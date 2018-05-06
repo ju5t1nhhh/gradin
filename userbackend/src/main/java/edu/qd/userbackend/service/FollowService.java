@@ -4,9 +4,7 @@ import edu.qd.userbackend.vo.RestResponse;
 
 public interface FollowService {
 
-    RestResponse addFollow(long user);
-
-    RestResponse delFollow(long user);
+    RestResponse modFollow(long user);
 
     RestResponse listFlws(long user);
 

@@ -1,5 +1,6 @@
 package edu.qd.adminbackend.service.impl;
 
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.PaymentDao;
 import edu.qd.adminbackend.dao.UserDao;
 import edu.qd.adminbackend.domain.Payment;
@@ -10,6 +11,9 @@ import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -19,8 +23,12 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private LogRecordDao logRecordDao;
+
     @Override
     public RestResponse addPayment(Payment payment) {
+        payment.setCreatime(new Timestamp(new Date().getTime()));
         User user = new User();
         user.setAutoid(payment.getUser());
         user = userDao.selectByDTO(user,0,1)[0];
@@ -28,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
         int rowsA = paymentDao.insertOne(payment);
         int rowsB = userDao.updateOne(user);
         if ( rowsA > 0 && rowsB > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("新增支付信息:"+payment);
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "新增支付信息:"+payment);
             return RestResponse.successWithMsg("新增支付信息成功");
         } else
             return RestResponse.errorWithMsg(1117,"新增支付信息失败");

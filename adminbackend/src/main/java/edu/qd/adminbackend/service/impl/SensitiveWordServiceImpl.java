@@ -27,6 +27,7 @@ public class SensitiveWordServiceImpl implements SensitiveWordService {
         if ( rows > 0 ) {
             redisTemplate.opsForHash().put("sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord(),"word",sensitiveWord.getWord());
             redisTemplate.opsForHash().put("sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord(),"replace",sensitiveWord.getReplace());
+            redisTemplate.opsForList().leftPush("senword:"+sensitiveWord.getSection(), "sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord());
             return RestResponse.successWithMsg("新增敏感词成功");
         } else
             return RestResponse.errorWithMsg(1112, "新增敏感词失败");
@@ -38,11 +39,13 @@ public class SensitiveWordServiceImpl implements SensitiveWordService {
         int rows = 0;
         for ( SensitiveWord sw : sensitiveWords ) {
             int row = sensitiveWordDao.deleteByDTO(sw);
-            if ( row > 0 )
-                redisTemplate.opsForHash().delete("sw:"+sensitiveWord.getSection()+":"+sensitiveWord.getWord());
+            if ( row > 0 ) {
+                redisTemplate.opsForHash().delete("sw:"+sw.getSection()+":"+sw.getWord(),"word","replace");
+                redisTemplate.opsForList().remove("senword:"+sw.getSection(), "sw:"+sw.getSection()+":"+sw.getWord());
+            }
             rows += row;
         }
-        return RestResponse.successWithMsg("删除" + rows + "敏感词成功");
+        return RestResponse.successWithMsg("删除敏感词成功");
     }
 
     @Override

@@ -17,7 +17,17 @@
     <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.Favorite">
         DELETE FROM
             `favorite`
-        WHERE
+        WHERE `fav_user`=#{user} AND `fav_post`=#{post}
     </delete>
+
+    <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
+        SELECT * FROM
+            `favorite`
+        WHERE `fav_user`=#{domain.user} AND `fav_post`=#{domain.post}
+    </select>
+
+    <select id="getFavorite" resultType="long">
+        SELECT `fav_post` FROM `favorite` WHERE `fav_user`=#{user}
+    </select>
 
 </mapper>

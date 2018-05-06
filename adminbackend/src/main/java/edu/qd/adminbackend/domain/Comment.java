@@ -11,7 +11,6 @@ public class Comment implements Serializable {
     @Positive
     private long post;
 
-    @Positive
     private int cmtid;
 
     private long cmtor;

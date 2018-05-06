@@ -22,9 +22,11 @@
         DELETE FROM
             `comment`
         WHERE
-            `cmt_post`=#{cmtid}
+            `cmt_post`=#{post}
+        <if test="cmtid != null and cmtid > 0">
             AND
             `cmt_cmtid`=#{cmtid}
+        </if>
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">

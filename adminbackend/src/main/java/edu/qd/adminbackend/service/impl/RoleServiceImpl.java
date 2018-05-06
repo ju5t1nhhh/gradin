@@ -1,6 +1,7 @@
 package edu.qd.adminbackend.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.RoleDao;
 import edu.qd.adminbackend.dao.RolePermissionDao;
 import edu.qd.adminbackend.domain.Role;
@@ -27,6 +28,9 @@ public class RoleServiceImpl implements RoleService {
     private RolePermissionDao rolePermissionDao;
 
     @Autowired
+    private LogRecordDao logRecordDao;
+
+    @Autowired
     private StringRedisTemplate redisTemplate;
 
     @Override
@@ -35,7 +39,7 @@ public class RoleServiceImpl implements RoleService {
         instants.setName(role);
         int rows = roleDao.insertOne(instants);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("新增角色:"+role);
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "新增角色:"+role);
             return RestResponse.successWithMsg("添加角色成功");
         } else {
             return RestResponse.errorWithMsg(1006, "添加角色失败");
@@ -49,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
         Role rm = roleDao.selectByDTO(instants,0,1)[0];
         int rows = roleDao.deleteByDTO(instants);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord("删除角色:"+rm.getName());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao,"删除角色:"+rm.getName());
             return RestResponse.successWithMsg("删除角色" + role + "成功");
         } else {
             return RestResponse.errorWithMsg(1007, "删除角色" + role + "失败");
@@ -74,7 +78,7 @@ public class RoleServiceImpl implements RoleService {
         for ( int perm : addList )
             addNum += rolePermissionDao.insertOne(role, perm);
         String msg = "成功给角色" + role + "添加" + addNum + "项权限，移除" + delNum + "项权限";
-        LogRecordDaoUtil.insertLogRecord(msg);
+        LogRecordDaoUtil.insertLogRecord(logRecordDao, msg);
         return RestResponse.successWithMsg(msg);
     }
 

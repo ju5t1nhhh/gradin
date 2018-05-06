@@ -8,7 +8,7 @@ public interface ComplaintService {
 
     RestResponse listComplaintPost(ComplaintPost complaintPost, int page);
 
-    RestResponse listComplaint(Complaint complaint, int page);
+    RestResponse listComplaint(Complaint complaint, String date, int page);
 
     RestResponse dealComplaint(ComplaintPost complaintPost);
 

@@ -62,4 +62,14 @@
             `user_autoid`=#{autoId}
     </update>
 
+    <update id="reduceGins" parameterType="map">
+        UPDATE `user`
+        SET `user_gins`=`user_gins`-#{gins}
+        WHERE `user_autoid`=#{user}
+    </update>
+
+    <select id="selectId" parameterType="long" resultType="string">
+        SELECT `user_id` FROM `user` WHERE `user_autoid`=#{id}
+    </select>
+
 </mapper>
