@@ -15,4 +15,6 @@ public interface PermissionService {
 
     RestResponse listPermByRole(int role);
 
+    RestResponse myPermissions();
+
 }

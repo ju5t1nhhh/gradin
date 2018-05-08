@@ -8,6 +8,10 @@
         <result column="admin_role" property="role" />
     </resultMap>
 
+    <select id="getRole" resultType="int">
+        SELECT `admin_role` FROM `admin` WHERE `admin_loginid`=#{loginId}
+    </select>
+
     <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Admin">
         INSERT INTO `admin` VALUES (#{loginId},#{pwd},#{role})
     </insert>

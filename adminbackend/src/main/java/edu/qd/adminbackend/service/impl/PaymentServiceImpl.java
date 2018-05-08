@@ -5,11 +5,13 @@ import edu.qd.adminbackend.dao.PaymentDao;
 import edu.qd.adminbackend.dao.UserDao;
 import edu.qd.adminbackend.domain.Payment;
 import edu.qd.adminbackend.domain.User;
+import edu.qd.adminbackend.dto.PaymentDTO;
 import edu.qd.adminbackend.service.PaymentService;
 import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -43,8 +45,12 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public RestResponse listPayment(Payment payment, int page) {
+    public RestResponse listPayment(PaymentDTO paymentDTO) {
+        Payment payment = paymentDTO;
+        int page = paymentDTO.getPage();
         int offset = ( page - 1 ) * 15;
+        System.out.println(payment);
+        System.out.println("page:"+page);
         Payment[] payments = paymentDao.selectByDTO(payment, offset, 15);
         return RestResponse.successWithData("查看支付信息列表成功", payments);
     }

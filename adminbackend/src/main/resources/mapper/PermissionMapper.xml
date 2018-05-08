@@ -10,6 +10,10 @@
         <result column="pmsn_parent" property="parent" />
     </resultMap>
 
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT * FROM `permission` WHERE `pmsn_id`=#{id}
+    </select>
+
     <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Permission" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `permission` VALUES (#{id},#{name},#{url},#{type},#{parent})
     </insert>

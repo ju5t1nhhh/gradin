@@ -7,6 +7,10 @@
         <result column="role_name" property="name" />
     </resultMap>
 
+    <select id="getName" resultType="string">
+        SELECT `role_name` FROM `role` WHERE `role_id`=#{role}
+    </select>
+
     <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Role" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `role` VALUES (#{id},#{name})
     </insert>

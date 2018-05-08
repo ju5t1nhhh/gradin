@@ -53,4 +53,10 @@ public class PermissionController {
         return permissionService.listPermByRole(id);
     }
 
+    @PostMapping("/my")
+    @RequiresPermissions("perm:list")
+    @ApiOperation("查看我的权限")
+    public RestResponse listMyPerm() {
+        return permissionService.myPermissions();
+    }
 }

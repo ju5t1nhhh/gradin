@@ -1,6 +1,5 @@
 package edu.qd.adminbackend.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import edu.qd.adminbackend.dao.SensitiveWordDao;
 import edu.qd.adminbackend.domain.SensitiveWord;
 import edu.qd.adminbackend.service.SensitiveWordService;
@@ -8,9 +7,6 @@ import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
-import java.util.List;
 
 @Service
 public class SensitiveWordServiceImpl implements SensitiveWordService {
@@ -41,7 +37,7 @@ public class SensitiveWordServiceImpl implements SensitiveWordService {
             int row = sensitiveWordDao.deleteByDTO(sw);
             if ( row > 0 ) {
                 redisTemplate.opsForHash().delete("sw:"+sw.getSection()+":"+sw.getWord(),"word","replace");
-                redisTemplate.opsForList().remove("senword:"+sw.getSection(), "sw:"+sw.getSection()+":"+sw.getWord());
+                redisTemplate.opsForList().remove("senword:"+sw.getSection(), 1,"sw:"+sw.getSection()+":"+sw.getWord());
             }
             rows += row;
         }

@@ -4,7 +4,6 @@ import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.domain.LogRecord;
 import edu.qd.adminbackend.shiro.UserInfo;
 import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.util.Date;

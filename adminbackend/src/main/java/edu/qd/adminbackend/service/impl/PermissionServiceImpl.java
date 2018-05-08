@@ -1,10 +1,14 @@
 package edu.qd.adminbackend.service.impl;
 
+import edu.qd.adminbackend.dao.AdminDao;
 import edu.qd.adminbackend.dao.PermissionDao;
 import edu.qd.adminbackend.dao.RolePermissionDao;
+import edu.qd.adminbackend.domain.Admin;
 import edu.qd.adminbackend.domain.Permission;
 import edu.qd.adminbackend.service.PermissionService;
+import edu.qd.adminbackend.shiro.UserInfo;
 import edu.qd.adminbackend.vo.RestResponse;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,9 @@ import java.util.List;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
+
+    @Autowired
+    private AdminDao adminDao;
 
     @Autowired
     private PermissionDao permissionDao;
@@ -68,5 +75,18 @@ public class PermissionServiceImpl implements PermissionService {
             permissionList.add( permissionDao.selectByDTO(pi,0,1)[0] );
         }
         return RestResponse.successWithData("查看角色的权限列表成功", permissionList.toArray());
+    }
+
+    @Override
+    public RestResponse myPermissions() {
+        UserInfo userInfo = (UserInfo) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+        int role = adminDao.getRole(userInfo.getUsername());
+        int[] perms = rolePermissionDao.selectPermByRole(role);
+        List<Permission> permissionList = new LinkedList<>();
+        for ( int perm : perms ) {
+            Permission p = permissionDao.selectById(perm);
+            permissionList.add(p);
+        }
+        return RestResponse.successWithData("查看成功", permissionList.toArray());
     }
 }

@@ -8,4 +8,6 @@ public interface AdminDao extends BaseDao<Admin> {
 
     String getPassword(String loginId);
 
+    int getRole(String loginId);
+
 }

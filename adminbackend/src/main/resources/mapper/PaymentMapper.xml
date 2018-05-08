@@ -21,10 +21,10 @@
                 <if test="domain.code != null and domain.code.length() > 0">
                     AND `pay_code`=#{domain.code}
                 </if>
-                <if test="domain.user != null and domain.user > 0">
+                <if test="domain.user != 0">
                     AND `pay_user`=#{domain.user}
                 </if>
-                <if test="domain.status != null">
+                <if test="domain.status != null and domain.status > -1">
                     AND `pay_status`=#{domain.status}
                 </if>
                 <if test="domain.wechat != null and domain.wechat.length() > 0">
