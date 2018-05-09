@@ -76,6 +76,12 @@ export const addSW = data => fetch('/sw/add', data, 'POST');
 
 export const delSW = data => fetch('/sw/del', data, 'POST');
 
+export const addSection = data => fetch('/section/add', data, 'POST');
+
+export const delSection = data => fetch('/section/del/'+data, {}, 'POST');
+
+export const modSection = data => fetch('/section/mod', data, 'POST');
+
 /**
  * api请求量
  */

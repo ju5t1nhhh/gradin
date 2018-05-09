@@ -19,7 +19,7 @@ CREATE TABLE `sensitive_word`(
 # Section
 CREATE TABLE `section`(
 	`sec_id` INT,
-	`sec_name` VARCHAR(10),
+	`sec_name` VARCHAR(100),
 	`sec_intro` VARCHAR(200) COMMENT 'intro words lower than 200',
 	`sec_url` VARCHAR(100),
 	PRIMARY KEY (`sec_id`)

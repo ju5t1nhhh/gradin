@@ -6,7 +6,7 @@
         <div class="table_container" v-if="isShow">
             <el-table
 		      :data="tableData"
-		      style="width: 100%">
+		      style="width: 90%">
 		      <el-table-column
 		        prop="id"
 		        label="板块ID"
@@ -39,7 +39,7 @@
         <div class="table_container" v-else>
             <el-table
 		      :data="tableData"
-		      style="width: 100%">
+		      style="width: 80%">
 		      <el-table-column
 		        prop="section"
 		        label="板块ID"
@@ -52,8 +52,7 @@
 		      </el-table-column>
           <el-table-column
 		        prop="replace"
-		        label="替换词"
-		        width="180">
+		        label="替换词">
 		      </el-table-column>
 		    </el-table>
 		    <div class="Pagination" style="text-align: left;margin-top: 10px;">

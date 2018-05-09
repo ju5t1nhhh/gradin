@@ -20,11 +20,11 @@
         <div class="table_container">
             <el-table
 		      :data="tableData"
-		      style="width: 100%">
+		      style="width: 70%">
 		      <el-table-column
 		        prop="id"
 		        label="板块ID"
-		        width="300">
+		        width="120">
 		      </el-table-column>
 		      <el-table-column
 		        prop="name"
@@ -34,12 +34,7 @@
           <el-table-column
 		        prop="intro"
 		        label="板块介绍"
-		        width="180">
-		      </el-table-column>
-          <el-table-column
-		        prop="url"
-		        label="板块地址"
-		        width="180">
+		        >
 		      </el-table-column>
 		    </el-table>
 		    <div class="Pagination" style="text-align: left;margin-top: 10px;">
@@ -65,7 +60,6 @@
                 id: '',
                 name: '',
                 intro: '',
-                url: '',
                 tableData: [],
                 currentRow: null,
                 currentPage: 1,
@@ -84,7 +78,6 @@
                         id: this.id,
                         name: this.name,
                         intro: this.intro,
-                        url: this.url,
                         page: this.currentPage
 					          }
                     const res = await listSection(params);
@@ -95,7 +88,6 @@
                                 id: item.id,
                                 name: item.name,
                                 intro: item.intro,
-                                url: item.url,
                             }
                     		this.tableData.push(tableItem)
                     	})
@@ -112,7 +104,6 @@
                     id: '',
                     name: '',
                     intro: '',
-                    url: '',
                     page: this.currentPage
                 };
                 listSection(params).then(res=>{
@@ -122,7 +113,6 @@
                             id: item.id,
                             name: item.name,
                             intro: item.intro,
-                            url: item.url,
                             page: item.currentPage
                         }
                         this.tableData.push(tableItem)
@@ -157,7 +147,6 @@
                     id: this.id,
                     name: this.name,
                     intro: this.intro,
-                    url: this.url,
                     page: val
                 };
                 listSection(params).then(res=>{
@@ -167,7 +156,6 @@
                             id: item.id,
                             name: item.name,
                             intro: item.intro,
-                            url: item.url,
                         }
                         this.tableData.push(tableItem)
                     });
