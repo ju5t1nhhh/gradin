@@ -1,38 +1,58 @@
 <template>
     <div class="fillcontain">
         <head-top></head-top>
+        <el-button round @click="flash" style="margin-left: 20px; margin-top: 20px">刷新</el-button>
+        <el-row class="table_container">
+            <el-col :span="5">
+            <el-input placeholder="自增ID" v-model="autoid" clearable width="20"></el-input>
+            </el-col>
+            <el-col :span="3" :offset="1">
+            <el-input placeholder="用户ID" v-model="id" clearable width="20"></el-input>
+            </el-col>
+            <el-col :span="3" :offset="1">
+            <el-input placeholder="用户邮箱" v-model="email" clearable width="20"></el-input>
+            </el-col>
+            <el-col :span="3" :offset="1">
+            <el-input placeholder="用户状态" v-model="status" clearable width="20"></el-input>
+            </el-col>
+            <el-col :span="3" :offset="1">
+                <el-button @click="search(this.currentPage)" type="info">查找</el-button>
+            </el-col>
+
+        </el-row>
         <div class="table_container">
             <el-table
-                :data="tableData"
-                highlight-current-row
-                style="width: 100%">
-                <el-table-column
-                  type="index"
-                  width="100">
-                </el-table-column>
-                <el-table-column
-                  property="registe_time"
-                  label="注册日期"
-                  width="220">
-                </el-table-column>
-                <el-table-column
-                  property="username"
-                  label="用户姓名"
-                  width="220">
-                </el-table-column>
-                <el-table-column
-                  property="city"
-                  label="注册地址">
-                </el-table-column>
-            </el-table>
-            <div class="Pagination" style="text-align: left;margin-top: 10px;">
+		      :data="tableData"
+		      style="width: 100%">
+		      <el-table-column
+		        prop="autoid"
+		        label="自增ID"
+		        width="300">
+		      </el-table-column>
+		      <el-table-column
+		        prop="id"
+		        label="用户ID"
+		        width="180">
+		      </el-table-column>
+              <el-table-column
+		        prop="email"
+		        label="用户邮箱"
+		        width="180">
+		      </el-table-column>
+              <el-table-column
+		        prop="status"
+		        label="用户状态"
+		        >
+		      </el-table-column>
+		    </el-table>
+		    <div class="Pagination" style="text-align: left;margin-top: 10px;">
                 <el-pagination
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"
                   :current-page="currentPage"
                   :page-size="20"
-                  layout="total, prev, pager, next"
-                  :total="count">
+                  layout="prev, pager, next"
+                  >
                 </el-pagination>
             </div>
         </div>
@@ -41,31 +61,16 @@
 
 <script>
     import headTop from '../components/headTop'
-    import {getUserList, getUserCount} from '@/api/getData'
+    import {listUser} from '@/api/getData'
     export default {
         data(){
             return {
-                tableData: [{
-                  registe_time: '2016-05-02',
-                  username: '王小虎',
-                  city: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                  registe_time: '2016-05-04',
-                  username: '王小虎',
-                  city: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                  registe_time: '2016-05-01',
-                  username: '王小虎',
-                  city: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                  registe_time: '2016-05-03',
-                  username: '王小虎',
-                  city: '上海市普陀区金沙江路 1516 弄'
-                }],
+                autoid: '',
+                id: '',
+                email: '',
+                status: '',
+                tableData: [],
                 currentRow: null,
-                offset: 0,
-                limit: 20,
-                count: 0,
                 currentPage: 1,
             }
         },
@@ -78,36 +83,99 @@
         methods: {
             async initData(){
                 try{
-                    const countData = await getUserCount();
-                    if (countData.status == 1) {
-                        this.count = countData.count;
+                    const params = {
+                        autoid: this.autoid,
+                        id: this.id,
+                        email: this.email,
+                        status: this.status,
+                        page: this.currentPage
+					}
+                    const res = await listUser(params);
+                    if (res.code == 200) {
+                        this.tableData = [];
+                    	res.data.forEach(item => {
+                    		const tableItem = {
+                                autoid: item.autoid,
+                                id: item.id,
+                                email: item.email,
+                                status: item.status,
+                            }
+                    		this.tableData.push(tableItem)
+                    	})
                     }else{
-                        throw new Error('获取数据失败');
+                    	throw new Error(res.message)
                     }
-                    this.getUsers();
                 }catch(err){
                     console.log('获取数据失败', err);
                 }
             },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+            flash(){
+                this.currentPage = 1;
+                var params = {
+                    autoid: '',
+                    id: '',
+                    email: '',
+                    status: '',
+                    page: this.currentPage
+                };
+                listUser(params).then(res=>{
+                    this.tableData = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            autoid: item.autoid,
+                            id: item.id,
+                            email: item.email,
+                            status: item.status,
+                            page: item.currentPage
+                        }
+                        this.tableData.push(tableItem)
+                    });
+                });
+            },
+            search() {
+                var params = {
+                    autoid: this.autoid,
+                    id: this.id,
+                    email: this.email,
+                    status: this.status,
+                    page: this.currentPage
+                };
+                listUser(params).then(res=>{
+                    this.tableData = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            autoid: item.autoid,
+                            id: item.id,
+                            email: item.email,
+                            status: item.status,
+                            page: item.currentPage
+                        }
+                        this.tableData.push(tableItem)
+                    });
+                });
             },
             handleCurrentChange(val) {
                 this.currentPage = val;
-                this.offset = (val - 1)*this.limit;
-                this.getUsers()
+                var params = {
+                    autoid: this.autoid,
+                    id: this.id,
+                    email: this.email,
+                    status: this.status,
+                    page: val
+                };
+                listUser(params).then(res=>{
+                    this.tableData = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            autoid: this.autoid,
+                            id: this.id,
+                            email: this.email,
+                            status: this.status,
+                        }
+                        this.tableData.push(tableItem)
+                    });
+                });
             },
-            async getUsers(){
-                const Users = await getUserList({offset: this.offset, limit: this.limit});
-                this.tableData = [];
-                Users.forEach(item => {
-                    const tableData = {};
-                    tableData.username = item.username;
-                    tableData.registe_time = item.registe_time;
-                    tableData.city = item.city;
-                    this.tableData.push(tableData);
-                })
-            }
         },
     }
 </script>
