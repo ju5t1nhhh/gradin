@@ -146,16 +146,6 @@
                   this.tableData.push(ti)
                   }
                 }
-              //   data.forEach(item => {
-                
-              //   })
-              // // getMyPermissions().then(res=>{
-                
-              // })
-              
-              
-              // rows.
-              // rows.splice(index, 1);
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);

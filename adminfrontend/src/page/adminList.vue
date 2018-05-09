@@ -16,22 +16,7 @@
 		        label="角色"
 		        >
 		      </el-table-column>
-              <!-- <el-table-column
-                prop="city"
-                label="地址"
-                width="180">
-              </el-table-column> -->
 		    </el-table>
-		    <!-- <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="20"
-                  layout="prev, pager, next"
-                  >
-                </el-pagination>
-            </div> -->
         </div>
     </div>
 </template>

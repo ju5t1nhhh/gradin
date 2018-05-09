@@ -58,6 +58,18 @@ export const delComment = data => fetch('/comment/del', data, 'POST');
 
 export const listPost = data => fetch('/post/list', data, 'POST');
 
+export const listLogrecord = data => fetch('/logrecord/list/'+data, {}, 'POST');
+
+export const delPost = data => fetch('/post/del/'+data, {}, 'POST');
+
+export const listComplaintPost = data => fetch('/complaint/list', data, 'POST');
+
+export const listComplaint = data => fetch('/complaint/post', data, 'POST');
+
+export const listSection = data => fetch('/section/list', data, 'POST');
+
+export const listSW = data => fetch('/sw/list', data, 'POST');
+
 /**
  * api请求量
  */

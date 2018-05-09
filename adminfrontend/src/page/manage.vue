@@ -39,28 +39,28 @@
 						<el-menu-item index="complaintList">查看举报</el-menu-item>
 						<el-menu-item v-show="perm20" index="complaintMod">处理举报</el-menu-item>
 					</el-submenu>
-					<el-submenu index="8">
+					<!-- <el-submenu index="8">
 						<template slot="title"><i class="el-icon-document"></i>日志管理</template>
 						<el-menu-item index="logrecordList">查看日志</el-menu-item>
-					</el-submenu>
-					<el-submenu index="9">
+					</el-submenu> -->
+					<el-submenu index="8">
 						<template slot="title"><i class="el-icon-document"></i>订单管理</template>
 						<el-menu-item index="paymentList">查看订单</el-menu-item>
 						<el-menu-item v-show="perm25" index="paymentAdd">新增订单</el-menu-item>
 					</el-submenu>
-					<el-submenu index="10">
+					<el-submenu index="9">
 						<template slot="title"><i class="el-icon-document"></i>作品管理</template>
 						<el-menu-item index="postList">查看作品</el-menu-item>
 						<el-menu-item v-show="perm28" index="postDelete">删除作品</el-menu-item>
 					</el-submenu>
-					<el-submenu index="11">
+					<el-submenu index="10">
 						<template slot="title"><i class="el-icon-document"></i>版区管理</template>
 						<el-menu-item index="sectionList">查看版区</el-menu-item>
 						<el-menu-item v-show="perm33" index="sectionMod">更新版区</el-menu-item>
 						<el-menu-item v-show="perm31" index="sectionAdd">新增版区</el-menu-item>
 						<el-menu-item v-show="perm32" index="sectionDelete">删除版区</el-menu-item>
 					</el-submenu>
-					<el-submenu index="12">
+					<el-submenu index="11">
 						<template slot="title"><i class="el-icon-document"></i>敏感词管理</template>
 						<el-menu-item index="swList">查看敏感词</el-menu-item>
 						<el-menu-item v-show="perm36" index="swAdd">新增敏感词</el-menu-item>

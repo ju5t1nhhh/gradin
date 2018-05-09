@@ -1,6 +1,7 @@
 <template>
     <div class="fillcontain">
         <head-top></head-top>
+        <el-button round @click="flash" style="margin-left: 20px; margin-top: 20px">刷新</el-button>
         <el-row class="table_container">
             <el-col :span="5">
             <el-input placeholder="区域" v-model="section" clearable width="20"></el-input>
@@ -26,10 +27,16 @@
             <el-table
 		      :data="tableData"
 		      style="width: 100%">
+              <el-table-column
+		        prop="section"
+		        label="作品区域"
+                width="150"
+		        >
+		      </el-table-column>
 		      <el-table-column
 		        prop="id"
-		        label="ID"
-		        width="300">
+		        label="作品ID"
+		        width="150">
 		      </el-table-column>
 		      <el-table-column
 		        prop="author"
@@ -49,11 +56,6 @@
           <el-table-column
 		        prop="creatime"
 		        label="创建时间"
-		        >
-		      </el-table-column>
-          <el-table-column
-		        prop="section"
-		        label="作品区域"
 		        >
 		      </el-table-column>
 		    </el-table>
@@ -134,6 +136,31 @@
             //         console.log('获取数据失败', err);
             //     }
             // },
+            flash(){
+                var params = {
+                    section: this.section,
+                    id: this.id,
+                    author: this.author,
+                    multmedia: this.multmedia,
+                    text: this.text,
+                    creatime: this.creatime,
+                    page: this.currentPage
+                };
+                listPost(params).then(res=>{
+                    this.tableData = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            id: item.id,
+                            author: item.author,
+                            multmedia: item.multmedia,
+                            text: item.text,
+                            creatime: item.creatime,
+                            section: item.section,
+                        }
+                        this.tableData.push(tableItem)
+                    });
+                });
+            },
             search() {
                 var params = {
                     section: this.section,
@@ -155,16 +182,6 @@
                             creatime: item.creatime,
                             section: item.section,
                         }
-                        // var str = tableItem.multmedia;
-                        // var arr = str.split(',');
-                        // var s = ''
-                        // for (var i = 0; i < arr.length; i++ ) {
-                        //   s = s + arr[i];
-                        //   if (i >= 0 && i < arr.length - 1) {
-                        //     s = s + `<br/>`
-                        //   }
-                        // }
-                        // tableItem.multmedia = s;
                         this.tableData.push(tableItem)
                     });
                 });

@@ -6,13 +6,19 @@
 			<el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-dropdown @command="handleCommand" menu-align='start'>
-			<img :src="baseImgPath + adminInfo.avatar" class="avator">
-			{{adminInfo.loginId}}[{{adminInfo.rolename}}]
+			<!-- <div style="text-align:center;"> -->
+				<img :src="images.sample" class="avator">
+				
+			<!-- </div> -->
 			<el-dropdown-menu slot="dropdown">
 				<el-dropdown-item command="home">首页</el-dropdown-item>
 				<el-dropdown-item command="singout">退出</el-dropdown-item>
 			</el-dropdown-menu>
 		</el-dropdown>
+		<div>
+			<el-tag type="warning">{{adminInfo.loginId}}</el-tag>
+			<el-tag>{{adminInfo.rolename}}</el-tag>
+		</div>
     </div>
 </template>
 
@@ -24,7 +30,10 @@
     export default {
     	data(){
     		return {
-    			baseImgPath,
+				// imgUrl: avatar,  
+				images: {
+					sample: require('../assets/img/avator.png')
+				}  			
     		}
     	},
     	created(){
@@ -100,7 +109,8 @@
 	.avator{
 		.wh(36px, 36px);
 		border-radius: 50%;
-		margin-right: 37px;
+		// margin-right: 15px;
+		// margin-left:32px;
 	}
 	.el-dropdown-menu__item{
         text-align: center;
