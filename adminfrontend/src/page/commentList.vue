@@ -3,7 +3,7 @@
         <head-top></head-top>
         <el-button round @click="flash" style="margin-left: 20px; margin-top: 20px">刷新</el-button>
         <el-row class="table_container">
-            <el-col :span="5">
+            <el-col :span="3">
             <el-input placeholder="作品ID" v-model="post" clearable width="20"></el-input>
             </el-col>
             <el-col :span="2" :offset="1">
@@ -13,7 +13,7 @@
             <el-input placeholder="评论人自增ID" v-model="cmtor" clearable width="20"></el-input>
             </el-col>
             <el-col :span="2" :offset="1">
-            <el-input placeholder="评论人ID" v-model="cmtor" clearable width="20"></el-input>
+            <el-input placeholder="评论人ID" v-model="cmtorid" clearable width="20"></el-input>
             </el-col>
             <el-col :span="3" :offset="1">
                 <el-date-picker v-model="ptime" type="date"
@@ -21,7 +21,7 @@
                 value-format="yyyy-MM-dd">
                 </el-date-picker>
             </el-col>
-            <el-col :span="3" :offset="1">
+            <el-col :span="3" :offset="2">
                 <el-button @click="search(this.currentPage)" type="info">查找</el-button>
             </el-col>
 
@@ -33,22 +33,27 @@
 		      <el-table-column
 		        prop="post"
 		        label="作品ID"
-		        width="300">
+		        width="120">
 		      </el-table-column>
 		      <el-table-column
 		        prop="cmtid"
 		        label="评论ID"
-		        width="180">
+		        width="120">
 		      </el-table-column>
           <el-table-column
 		        prop="cmtor"
 		        label="评论人自增ID"
-		        width="180">
+		        width="140">
 		      </el-table-column>
           <el-table-column
 		        prop="cmtorid"
-		        label="评论人ID"
-		        width="180">
+		        label="评论者ID"
+		        width="120">
+		      </el-table-column>
+              <el-table-column
+		        prop="text"
+		        label="评论内容"
+		        width="200">
 		      </el-table-column>
           <el-table-column
 		        prop="creatime"
@@ -57,14 +62,21 @@
 		      </el-table-column>
 		    </el-table>
 		    <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="20"
-                  layout="prev, pager, next"
-                  >
-                </el-pagination>
+                <el-row>
+                    <el-col span="2">
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="20"
+                        layout="prev, pager, next"
+                        >
+                        </el-pagination>
+                    </el-col>
+                    <el-col span="1">
+                        <el-tag style="margin-top:4px;margin-left:-15px;">{{currentPage}}</el-tag>
+                    </el-col>
+                </el-row>
             </div>
         </div>
     </div>
@@ -80,7 +92,7 @@
                 cmtor: '',
                 cmtid: '',
                 cmtorid: '',
-                creatime: '',
+                ptime: '',
                 tableData: [],
                 currentRow: null,
                 currentPage: 1,
@@ -90,46 +102,46 @@
     		headTop,
     	},
         created(){
-            this.initData();
+            // this.initData();
         },
         methods: {
-            async initData(){
-                try{
-                    const params = {
-                        post: this.post,
-                        cmtid: this.cmtid,
-                        cmtor: this.cmtor,
-                        cmtorid: this.cmtorid,
-                        creatime: this.creatime,
-                        page: this.currentPage
-					}
-                    const res = await listComment(params);
-                    if (res.code == 200) {
-                    	this.tableData = [];
-                    	res.data.forEach(item => {
-                    		const tableItem = {
-                                post: item.post,
-                                cmtid: item.cmtid,
-                                cmtor: item.cmtor,
-                                cmtorid: item.cmtorid,
-                                creatime: item.creatime,
-                    		}
-                    		this.tableData.push(tableItem)
-                    	})
-                    }else{
-                    	throw new Error(res.message)
-                    }
-                }catch(err){
-                    console.log('获取数据失败', err);
-                }
-            },
+            // async initData(){
+            //     try{
+            //         const params = {
+            //             post: this.post,
+            //             cmtid: this.cmtid,
+            //             cmtor: this.cmtor,
+            //             cmtorid: this.cmtorid,
+            //             creatime: this.ptime,
+            //             page: this.currentPage
+			// 		}
+            //         const res = await listComment(params);
+            //         if (res.code == 200) {
+            //         	this.tableData = [];
+            //         	res.data.forEach(item => {
+            //         		const tableItem = {
+            //                     post: item.post,
+            //                     cmtid: item.cmtid,
+            //                     cmtor: item.cmtor,
+            //                     cmtorid: item.cmtorid,
+            //                     creatime: item.creatime,
+            //         		}
+            //         		this.tableData.push(tableItem)
+            //         	})
+            //         }else{
+            //         	throw new Error(res.message)
+            //         }
+            //     }catch(err){
+            //         console.log('获取数据失败', err);
+            //     }
+            // },
             search() {
                 var params = {
                     post: this.post,
                     cmtid: this.cmtid,
                     cmtor: this.cmtor,
                     cmtorid: this.cmtorid,
-                    creatime: this.creatime,
+                    creatime: this.ptime,
                     page: this.currentPage
                 };
                 listComment(params).then(res=>{
@@ -141,6 +153,7 @@
                             cmtor: item.cmtor,
                             cmtorid: item.cmtorid,
                             creatime: item.creatime,
+                            text: item.text,
                         }
                         this.tableData.push(tableItem)
                     });
@@ -153,7 +166,7 @@
                     cmtor: '',
                     cmtid: '',
                     cmtorid: '',
-                    creatime: '',
+                    ptime: '',
                     page: this.currentPage
                 };
                 listComment(params).then(res=>{
@@ -165,6 +178,7 @@
                             cmtor: item.cmtor,
                             cmtorid: item.cmtorid,
                             creatime: item.creatime,
+                            text: item.text,
                         }
                         this.tableData.push(tableItem)
                     });
@@ -177,7 +191,7 @@
                     cmtid: this.cmtid,
                     cmtor: this.cmtor,
                     cmtorid: this.cmtorid,
-                    creatime: this.creatime,
+                    creatime: this.ptime,
                     page: val
                 };
                 listComment(params).then(res=>{
@@ -189,6 +203,7 @@
                             cmtor: item.cmtor,
                             cmtorid: item.cmtorid,
                             creatime: item.creatime,
+                            text: item.text,
                         }
                         this.tableData.push(tableItem)
                     });

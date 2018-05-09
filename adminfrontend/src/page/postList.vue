@@ -58,14 +58,21 @@
 		      </el-table-column>
 		    </el-table>
 		    <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="20"
-                  layout="prev, pager, next"
-                  >
-                </el-pagination>
+                <el-row>
+                    <el-col span="2">
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="20"
+                        layout="prev, pager, next"
+                        >
+                        </el-pagination>
+                    </el-col>
+                    <el-col span="1">
+                        <el-tag style="margin-top:4px;margin-left:-15px;">{{currentPage}}</el-tag>
+                    </el-col>
+                </el-row>
             </div>
         </div>
     </div>

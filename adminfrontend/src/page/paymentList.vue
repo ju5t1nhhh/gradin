@@ -1,6 +1,7 @@
 <template>
     <div class="fillcontain">
         <head-top></head-top>
+        <el-button round @click="flash" style="margin-left: 20px; margin-top: 20px">刷新</el-button>
         <el-row class="table_container">
             <el-col :span="5">
             <el-input placeholder="GINS码" v-model="pcode" clearable width="20"></el-input>
@@ -48,14 +49,21 @@
 		      </el-table-column>
 		    </el-table>
 		    <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="20"
-                  layout="prev, pager, next"
-                  >
-                </el-pagination>
+                <el-row>
+                    <el-col span="2">
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="20"
+                        layout="prev, pager, next"
+                        >
+                        </el-pagination>
+                    </el-col>
+                    <el-col span="1">
+                        <el-tag style="margin-top:4px;margin-left:-15px;">{{currentPage}}</el-tag>
+                    </el-col>
+                </el-row>
             </div>
         </div>
     </div>
@@ -68,8 +76,8 @@
         data(){
             return {
                 pcode: '',
-                pstatus: -1,
-                puser: 0,
+                pstatus: '',
+                puser: '',
                 ptime: '',
                 tableData: [],
                 currentRow: null,
@@ -110,6 +118,28 @@
                 }catch(err){
                     console.log('获取数据失败', err);
                 }
+            },
+            flash(){
+                this.currentPage=1;
+                var params = {
+                    code: '',
+                    user: '',
+                    status: '',
+                    creatime: '',
+                    page: this.currentPage
+                };
+                listPayments(params).then(res=>{
+                    this.tableData = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            code: item.code,
+                            user: item.user,
+                            status: item.status,
+                            creatime: item.creatime
+                        }
+                        this.tableData.push(tableItem)
+                    });
+                });
             },
             search() {
                 var params = {

@@ -30,6 +30,34 @@ export const listPermission = () => fetch('/permission/list', {}, 'POST');
 
 export const addCategory = data => fetch('/shopping/addcategory', data, 'POST');
 
+export const addAdmin = data => fetch('/admin/add', data, 'POST');
+
+export const delAdmin = data => fetch('/admin/del/'+data, {}, 'POST');
+
+export const modAdmin = data => fetch('/admin/mod', data, 'POST');
+
+export const addRole = data => fetch('/role/add/'+data, {}, 'POST');
+
+export const delRole = data => fetch('/role/del/'+data, {}, 'POST');
+
+export const addPayment = data => fetch('/payment/add', data, 'POST');
+
+export const listUser = data => fetch('/user/list', data, 'POST');
+
+export const listComment = data => fetch('/comment/list', data, 'POST');
+
+export const addUser = data => fetch('/user/add', data, 'POST');
+
+export const delUser = data => fetch('/user/del', data, 'POST');
+
+export const getUser = data => fetch('/user/get', data, 'POST');
+
+export const modUser = data => fetch('/user/mod', data ,'POST');
+
+export const delComment = data => fetch('/comment/del', data, 'POST');
+
+export const listPost = data => fetch('/post/list', data, 'POST');
+
 /**
  * api请求量
  */

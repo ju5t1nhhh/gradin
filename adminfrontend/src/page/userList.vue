@@ -44,16 +44,28 @@
 		        label="用户状态"
 		        >
 		      </el-table-column>
+              <el-table-column
+		        prop="gins"
+		        label="GINS"
+		        >
+		      </el-table-column>
 		    </el-table>
 		    <div class="Pagination" style="text-align: left;margin-top: 10px;">
-                <el-pagination
-                  @size-change="handleSizeChange"
-                  @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="20"
-                  layout="prev, pager, next"
-                  >
-                </el-pagination>
+                <el-row>
+                    <el-col span="2">
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="20"
+                        layout="prev, pager, next"
+                        >
+                        </el-pagination>
+                    </el-col>
+                    <el-col span="1">
+                        <el-tag style="margin-top:4px;margin-left:-15px;">{{currentPage}}</el-tag>
+                    </el-col>
+                </el-row>
             </div>
         </div>
     </div>
@@ -69,6 +81,7 @@
                 id: '',
                 email: '',
                 status: '',
+                gins: '',
                 tableData: [],
                 currentRow: null,
                 currentPage: 1,
@@ -88,6 +101,7 @@
                         id: this.id,
                         email: this.email,
                         status: this.status,
+                        gins: this.gins,
                         page: this.currentPage
 					}
                     const res = await listUser(params);
@@ -99,6 +113,7 @@
                                 id: item.id,
                                 email: item.email,
                                 status: item.status,
+                                gins: item.gins,
                             }
                     		this.tableData.push(tableItem)
                     	})
@@ -116,6 +131,7 @@
                     id: '',
                     email: '',
                     status: '',
+                    gins: '',
                     page: this.currentPage
                 };
                 listUser(params).then(res=>{
@@ -126,6 +142,7 @@
                             id: item.id,
                             email: item.email,
                             status: item.status,
+                            gins: item.gins,
                             page: item.currentPage
                         }
                         this.tableData.push(tableItem)
@@ -138,6 +155,7 @@
                     id: this.id,
                     email: this.email,
                     status: this.status,
+                    gins: this.gins,
                     page: this.currentPage
                 };
                 listUser(params).then(res=>{
@@ -148,6 +166,7 @@
                             id: item.id,
                             email: item.email,
                             status: item.status,
+                            gins: item.gins,
                             page: item.currentPage
                         }
                         this.tableData.push(tableItem)
@@ -161,6 +180,7 @@
                     id: this.id,
                     email: this.email,
                     status: this.status,
+                    gins: this.gins,
                     page: val
                 };
                 listUser(params).then(res=>{
@@ -170,6 +190,7 @@
                             autoid: this.autoid,
                             id: this.id,
                             email: this.email,
+                            gins: this.gins,
                             status: this.status,
                         }
                         this.tableData.push(tableItem)

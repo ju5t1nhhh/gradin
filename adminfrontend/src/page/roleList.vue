@@ -1,6 +1,7 @@
 <template>
     <div class="fillcontain">
         <head-top></head-top>
+        <el-button round @click="flash" style="margin-left: 20px; margin-top: 20px">刷新</el-button>
         <div class="table_container">
             <el-table
 		      :data="tableData"
@@ -64,7 +65,7 @@
                     	res.data.forEach(item => {
                     		const tableItem = {
                     			id: item.id,
-						              role: item.name,
+						        role: item.name,
                     		}
                     		this.tableData.push(tableItem)
                     	})
@@ -74,6 +75,18 @@
                 }catch(err){
                     console.log('获取数据失败', err);
                 }
+            },
+            flash(){
+                listRoles().then(res=>{
+                    this.tableData = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            id: item.id,
+						    role: item.name,
+                        }
+                        this.tableData.push(tableItem)
+                    });
+                });
             },
             // handleSizeChange(val) {
             //     console.log(`每页 ${val} 条`);
