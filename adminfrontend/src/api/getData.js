@@ -64,11 +64,13 @@ export const delPost = data => fetch('/post/del/'+data, {}, 'POST');
 
 export const listComplaintPost = data => fetch('/complaint/list', data, 'POST');
 
-export const listComplaint = data => fetch('/complaint/post', data, 'POST');
+export const listComplaint = data => fetch('/complaint/list/post', data, 'POST');
 
 export const listSection = data => fetch('/section/list', data, 'POST');
 
 export const listSW = data => fetch('/sw/list', data, 'POST');
+
+export const modComplaint = data => fetch('/complaint/deal', data, 'POST');
 
 /**
  * api请求量

@@ -101,9 +101,9 @@
                 <el-row>
                     <el-col span="2">
                         <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page="currentPage"
+                        @size-change="handleSizeChange2"
+                        @current-change="handleCurrentChange2"
+                        :current-page="currentPage2"
                         :page-size="20"
                         layout="prev, pager, next"
                         >
@@ -131,6 +131,9 @@
                 status: '',
                 currentRow: null,
                 currentPage: 1,
+                currentPage2: 1,
+                temppost: '',
+                tempcmtid: '',
             }
         },
     	components: {
@@ -188,13 +191,14 @@
                 });
             },
             showDetail(index, rows) {
+                this.temppost = rows[index].post;
+                this.tempcmtid = rows[index].cmtid;
                 var params = {
                     post: rows[index].post,
                     cmtid: rows[index].cmtid
                 };
                 listComplaint(params).then(res=>{
                     this.tableData2 = [];
-                    console.log(res.data);
                     res.data.forEach(item => {
                         const tableItem = {
                             cpost: item.post,
@@ -217,6 +221,7 @@
                 };
                 listComplaintPost(params).then(res=>{
                     this.tableData = [];
+                    this.tableData2 = [];
                     res.data.forEach(item => {
                         const tableItem = {
                             post: item.post,
@@ -246,6 +251,27 @@
                             times: item.times,
                         }
                         this.tableData.push(tableItem)
+                    });
+                });
+            },
+            handleCurrentChange2(val) {
+                this.currentPage2 = val;
+                var params = {
+                    post: this.temppost,
+                    cmtid: this.tempcmtid,
+                    page: val
+                };
+                listComplaint(params).then(res=>{
+                    this.tableData2 = [];
+                    res.data.forEach(item => {
+                        const tableItem = {
+                            cpost: item.post,
+                            ccmtid: item.cmtid,
+                            cuser: item.user,
+                            ccreatime: item.creatime,
+                            cmsg: item.msg,
+                        }
+                        this.tableData2.push(tableItem)
                     });
                 });
             },
