@@ -72,6 +72,10 @@ export const listSW = data => fetch('/sw/list', data, 'POST');
 
 export const modComplaint = data => fetch('/complaint/deal', data, 'POST');
 
+export const addSW = data => fetch('/sw/add', data, 'POST');
+
+export const delSW = data => fetch('/sw/del', data, 'POST');
+
 /**
  * api请求量
  */
