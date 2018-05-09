@@ -1,15 +1,13 @@
 package edu.qd.adminbackend.controller;
 
 import edu.qd.adminbackend.domain.User;
+import edu.qd.adminbackend.dto.UserDTO;
 import edu.qd.adminbackend.service.UserService;
 import edu.qd.adminbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -23,29 +21,39 @@ public class UserController {
     @PostMapping("/add")
     @RequiresPermissions("user:add")
     @ApiOperation("新增用户")
-    public RestResponse addUser(@Valid User user) {
+    public RestResponse addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     @PostMapping("/del")
     @RequiresPermissions("user:del")
     @ApiOperation("删除用户")
-    public RestResponse delUser(User user) {
+    public RestResponse delUser(@RequestBody User user) {
         return userService.delUser(user);
     }
 
     @PostMapping("/mod")
     @RequiresPermissions("user:mod")
     @ApiOperation("修改用户")
-    public RestResponse modUser(@Valid User user) {
+    public RestResponse modUser(@RequestBody User user) {
         return userService.modifyUser(user);
     }
 
     @PostMapping("/list")
     @RequiresPermissions("user:list")
     @ApiOperation("查看用户列表")
-    public RestResponse listUser(User user, @RequestParam(defaultValue = "1") int page) {
+    public RestResponse listUser(@RequestBody UserDTO userDTO) {
+        System.out.println(userDTO);
+        User user = userDTO;
+        int page = userDTO.getPage();
         return userService.listUser(user, page);
+    }
+
+    @PostMapping("/get")
+    @RequiresPermissions("user:list")
+    @ApiOperation("查看用户")
+    public RestResponse getUser(@RequestBody UserDTO userDTO) {
+        return userService.getUser(userDTO);
     }
 
 }

@@ -29,16 +29,13 @@
                 <if test="domain.cmtid != null and domain.cmtid > 0">
                     AND `cp_cmtid`=#{domain.cmtid}
                 </if>
-                <if test="domain.times != null and domain.times > 0">
-                    AND `cp_times`=#{domain.times}
-                </if>
-                <if test="domain.status != null and domain.status > 0">
+                <if test="domain.status != -1">
                     AND `cp_status`=#{domain.status}
                 </if>
             </trim>
         </if>
         ORDER BY `cp_times`
-        <if test="offset != 0 and length != -1">
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
     </select>

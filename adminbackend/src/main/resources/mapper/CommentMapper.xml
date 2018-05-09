@@ -39,8 +39,11 @@
                 <if test="domain.cmtid != null and domain.cmtid > 0">
                     AND `cmt_cmtid`=#{domain.cmtid}
                 </if>
+                <if test="domain.cmtor != null and domain.cmtor > 0">
+                    AND `cmt_cmtor`=#{domain.cmtor}
+                </if>
                 <if test="domain.cmtorid != null and domain.cmtorid.length() > 0">
-                    AND `cmt_comtorid`=#{domain.cmtorid}
+                    AND `cmt_cmtorid`=#{domain.cmtorid}
                 </if>
                 <if test="domain.creatime != null">
                     AND `cmt_creatime` > #{domain.creatime}
@@ -48,7 +51,7 @@
             </trim>
         </if>
         ORDER BY `cmt_creatime`
-        <if test="offset != 0 and length != -1">
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
     </select>

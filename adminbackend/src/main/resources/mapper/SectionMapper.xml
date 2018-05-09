@@ -45,9 +45,13 @@
                 </if>
             </trim>
         </if>
-        <if test="offset != 0 and length != -1">
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
+    </select>
+
+    <select id="selectExists" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM `section` WHERE `sec_id`=#{id}
     </select>
 
 </mapper>

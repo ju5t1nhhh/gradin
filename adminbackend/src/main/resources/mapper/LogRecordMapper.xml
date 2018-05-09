@@ -24,8 +24,8 @@
                 </if>
             </trim>
         </if>
-        ORDER BY `lr_creatime`
-        <if test="offset != 0 and length != -1">
+        ORDER BY `lr_creatime` DESC
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
     </select>

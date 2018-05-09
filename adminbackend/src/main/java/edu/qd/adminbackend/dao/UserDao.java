@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 public interface UserDao extends BaseDao<User> {
 
+    int deleteById(String id);
+
 }

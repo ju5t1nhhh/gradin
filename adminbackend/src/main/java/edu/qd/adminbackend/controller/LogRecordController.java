@@ -5,10 +5,7 @@ import edu.qd.adminbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/logrecord")
@@ -17,10 +14,10 @@ public class LogRecordController {
     @Autowired
     private LogRecordService logRecordService;
 
-    @PostMapping("/list")
+    @PostMapping("/list/{page}")
     @RequiresPermissions("logrecord:list")
     @ApiOperation("查看日志板")
-    public RestResponse listLogRecord(@RequestParam(defaultValue = "1") int page) {
+    public RestResponse listLogRecord(@PathVariable int page) {
         return logRecordService.listLogRecord(page);
     }
 

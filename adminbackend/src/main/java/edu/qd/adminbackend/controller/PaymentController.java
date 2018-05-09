@@ -19,7 +19,7 @@ public class PaymentController {
     @PostMapping("/add")
     @RequiresPermissions("payment:add")
     @ApiOperation("新增支付订单")
-    public RestResponse addPayment(Payment payment) {
+    public RestResponse addPayment(@RequestBody Payment payment) {
         return paymentService.addPayment(payment);
     }
 
@@ -27,6 +27,7 @@ public class PaymentController {
     @RequiresPermissions("payment:list")
     @ApiOperation("查看支付订单")
     public RestResponse listPayment(@RequestBody PaymentDTO paymentDTO) {
+        paymentDTO.setWechat(null);
         if ( paymentDTO.getPage() == 0 )
             paymentDTO.setPage(1);
         return paymentService.listPayment(paymentDTO);

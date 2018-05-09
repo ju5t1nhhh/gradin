@@ -20,13 +20,13 @@
     </update>
 
     <delete id="deleteByDTO" parameterType="edu.qd.adminbackend.domain.Role">
-        DELETE FROM `role` WHERE `role_id`=#{id}
+        DELETE FROM `role` WHERE `role_name`=#{name}
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
         SELECT * FROM `role`
         ORDER BY `role_id`
-        <if test="offset != 0 and length != -1">
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
     </select>

@@ -1,6 +1,7 @@
 package edu.qd.adminbackend.controller;
 
 import edu.qd.adminbackend.domain.Post;
+import edu.qd.adminbackend.dto.PostDTO;
 import edu.qd.adminbackend.service.PostService;
 import edu.qd.adminbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +19,9 @@ public class PostController {
     @PostMapping("/list")
     @RequiresPermissions("post:list")
     @ApiOperation("查看作品列表")
-    public RestResponse listPost(Post post, @RequestParam(defaultValue = "1") int page) {
+    public RestResponse listPost(@RequestBody PostDTO postDTO) {
+        Post post = postDTO;
+        int page = postDTO.getPage() == 0 ? 1 : postDTO.getPage();
         return postService.listPost(post, page);
     }
 

@@ -2,7 +2,9 @@ package edu.qd.adminbackend.service.impl;
 
 import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.UserDao;
+import edu.qd.adminbackend.dao.UserDetailDao;
 import edu.qd.adminbackend.domain.User;
+import edu.qd.adminbackend.dto.UserDTO;
 import edu.qd.adminbackend.service.UserService;
 import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.util.PasswordUtil;
@@ -18,6 +20,9 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Autowired
+    private UserDetailDao userDetailDao;
+
+    @Autowired
     private LogRecordDao logRecordDao;
 
     @Override
@@ -25,6 +30,7 @@ public class UserServiceImpl implements UserService {
         user.setPwd(PasswordUtil.encryptPassword("salt",user.getPwd()));
         int rows = userDao.insertOne(user);
         if ( rows > 0 ) {
+            userDetailDao.insert(user.getAutoid());
             LogRecordDaoUtil.insertLogRecord(logRecordDao,"新增用户:"+user.getAutoid()+":"+user.getId());
             return RestResponse.successWithMsg("新增用户成功");
         } else
@@ -33,14 +39,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RestResponse delUser(User user) {
-        User[] users = userDao.selectByDTO(user,0,-1);
-        int rows = userDao.deleteByDTO(user);
+        int rows = userDao.deleteById(user.getId());
         if ( rows > 0 ) {
-            StringBuilder sb = new StringBuilder();
-            for ( User u : users )
-                sb.append(u.getId() + ' ');
-            LogRecordDaoUtil.insertLogRecord(logRecordDao, "删除用户:"+user.getAutoid()+":"+user.getId());
-            return RestResponse.successWithMsg("删除用户"+sb);
+            LogRecordDaoUtil.insertLogRecord(logRecordDao, "删除用户:"+user.getId());
+            return RestResponse.successWithMsg("删除用户"+user.getId());
         } else {
             return RestResponse.errorWithMsg(1101,"删除用户失败");
         }
@@ -66,5 +68,16 @@ public class UserServiceImpl implements UserService {
             return RestResponse.successWithMsg("找不到符合条件用户");
         else
             return RestResponse.successWithData("查看成功",users);
+    }
+
+    @Override
+    public RestResponse getUser(UserDTO userDTO) {
+        User user = userDTO;
+        User[] users = userDao.selectByDTO(user,0,1);
+        if ( users.length == 0 ) {
+            return RestResponse.errorWithMsg(1901, "用户不存在");
+        } else {
+            return RestResponse.successWithData("查看成功", users[0]);
+        }
     }
 }

@@ -11,16 +11,17 @@
         <result column="user_gins" property="gins" />
     </resultMap>
 
-    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.User">
+    <delete id="deleteById" parameterType="string">
+        DELETE FROM `user` WHERE `user_id`=#{id}
+    </delete>
+
+    <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.User" useGeneratedKeys="true" keyProperty="autoid">
         INSERT INTO `user` VALUES (#{autoid},#{id},#{email},#{status},#{pwd},#{gins})
     </insert>
 
     <update id="updateOne" parameterType="edu.qd.adminbackend.domain.User">
         UPDATE `user`
         <set>
-            <if test="id != null and id.length() > 0">
-                `user_id`=#{id},
-            </if>
             <if test="email != null and email.length() > 0">
                 `user_email`=#{email},
             </if>
@@ -38,19 +39,25 @@
     </delete>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
-        SELECT `admin_loginid`,`admin_role` FROM `admin`
+        SELECT * FROM `user`
         <if test="domain != null">
             <trim prefix="WHERE" prefixOverrides="AND">
-                <if test="domain.loginId != null and domain.loginId.length() > 0">
-                    AND `admin_loginid`=#{domain.loginId}
+                <if test="domain.id != null and domain.id.length() > 0">
+                    AND `user_id`=#{domain.id}
                 </if>
-                <if test="domain.role != null and domain.role > 0">
-                    AND `admin_role`=#{domain.role}
+                <if test="domain.autoid != null and domain.autoid > 0">
+                    AND `user_autoid`=#{domain.autoid}
+                </if>
+                <if test="domain.email != null and domain.email.length() > 0">
+                    AND `user_email`=#{domain.email}
+                </if>
+                <if test="domain.status != null and domain.status > 0">
+                    AND `user_status`=#{domain.status}
                 </if>
             </trim>
         </if>
-        ORDER BY `admin_role`
-        <if test="offset != 0 and length != -1">
+        ORDER BY `user_autoid`
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
     </select>

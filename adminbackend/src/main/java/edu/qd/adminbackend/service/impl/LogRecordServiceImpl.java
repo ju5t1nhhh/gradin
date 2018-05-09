@@ -15,8 +15,8 @@ public class LogRecordServiceImpl implements LogRecordService {
 
     @Override
     public RestResponse listLogRecord(int page) {
-        int offset = ( page - 1 ) * 15;
-        LogRecord[] logRecords = logRecordDao.selectByDTO(null, offset, 15);
+        int offset = ( page - 1 ) * 10;
+        LogRecord[] logRecords = logRecordDao.selectByDTO(null, offset, 10);
         return RestResponse.successWithData("查看日志板成功", logRecords);
     }
 

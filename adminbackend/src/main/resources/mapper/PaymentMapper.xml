@@ -11,7 +11,7 @@
     </resultMap>
 
     <insert id="insertOne" parameterType="edu.qd.adminbackend.domain.Payment">
-        INSERT INTO `payment` VALUES (#{code},#{user},#{creatime},#{status},#{wechat})
+        INSERT INTO `payment` VALUES (#{code},#{user},#{creatime},#{status})
     </insert>
 
     <select id="selectByDTO" parameterType="map" resultMap="BaseResultMap">
@@ -36,7 +36,7 @@
             </trim>
         </if>
         ORDER BY `pay_creatime`
-        <if test="offset != 0 and length != -1">
+        <if test="length != -1">
             LIMIT #{offset},#{length}
         </if>
     </select>

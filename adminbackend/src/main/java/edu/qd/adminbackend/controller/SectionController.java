@@ -6,12 +6,7 @@ import edu.qd.adminbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/section")
@@ -23,7 +18,7 @@ public class SectionController {
     @PostMapping("/add")
     @RequiresPermissions("section:add")
     @ApiOperation("新增版区")
-    public RestResponse addSection(@Valid Section section) {
+    public RestResponse addSection(@RequestBody Section section) {
         return sectionService.addSection(section);
     }
 
@@ -37,7 +32,7 @@ public class SectionController {
     @PostMapping("/mod")
     @RequiresPermissions("section:mod")
     @ApiOperation("修改版区")
-    public RestResponse modSection(@Valid Section section) {
+    public RestResponse modSection(@RequestBody Section section) {
         return sectionService.modSection(section);
     }
 

@@ -1,6 +1,5 @@
 package edu.qd.adminbackend.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.RoleDao;
 import edu.qd.adminbackend.dao.RolePermissionDao;
@@ -14,8 +13,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -50,10 +47,9 @@ public class RoleServiceImpl implements RoleService {
     public RestResponse delRole(String role) {
         Role instants = new Role();
         instants.setName(role);
-        Role rm = roleDao.selectByDTO(instants,0,1)[0];
         int rows = roleDao.deleteByDTO(instants);
         if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord(logRecordDao,"删除角色:"+rm.getName());
+            LogRecordDaoUtil.insertLogRecord(logRecordDao,"删除角色:"+role);
             return RestResponse.successWithMsg("删除角色" + role + "成功");
         } else {
             return RestResponse.errorWithMsg(1007, "删除角色" + role + "失败");

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,21 +23,21 @@ public class SensitiveWordController {
     @PostMapping("/add")
     @RequiresPermissions("sw:add")
     @ApiOperation("新增敏感词")
-    public RestResponse addSensitiveWord(@Valid SensitiveWord sensitiveWord) {
+    public RestResponse addSensitiveWord(@RequestBody SensitiveWord sensitiveWord) {
         return sensitiveWordService.addSensitiveWord(sensitiveWord);
     }
 
     @PostMapping("/del")
     @RequiresPermissions("sw:del")
     @ApiOperation("删除敏感词")
-    public RestResponse delSensitiveWord(@Valid SensitiveWord sensitiveWord) {
+    public RestResponse delSensitiveWord(@RequestBody SensitiveWord sensitiveWord) {
         return sensitiveWordService.delSensitiveWord(sensitiveWord);
     }
 
     @PostMapping("/list")
     @RequiresPermissions("sw:list")
     @ApiOperation("查看敏感词列表")
-    public RestResponse listSensitiveWord(SensitiveWord sensitiveWord) {
+    public RestResponse listSensitiveWord(@RequestBody SensitiveWord sensitiveWord) {
         return sensitiveWordService.listSensitiveWord(sensitiveWord);
     }
 

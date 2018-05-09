@@ -8,13 +8,10 @@ public class Admin implements Serializable {
 
     private static final long serialVersionUID = -5930623744900066729L;
 
-    @NotBlank(message = "id不能空")
     private String loginId;
 
-    @NotBlank(message = "密码不能空")
     private String pwd;
 
-    @Positive
     private int role;
 
     public Admin(){}

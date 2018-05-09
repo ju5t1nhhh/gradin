@@ -22,11 +22,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public RestResponse addAdmin(Admin admin) {
         admin.setPwd(PasswordUtil.encryptPassword(admin.getLoginId(),admin.getPwd()));
-        int rows = adminDao.insertOne(admin);
-        if ( rows > 0 ) {
-            LogRecordDaoUtil.insertLogRecord(logRecordDao,"新增管理员"+admin.getLoginId());
-            return RestResponse.successWithMsg("新增管理员成功");
-        } else {
+        try {
+            int rows = adminDao.insertOne(admin);
+            if (rows > 0) {
+                LogRecordDaoUtil.insertLogRecord(logRecordDao, "新增管理员" + admin.getLoginId());
+                return RestResponse.successWithMsg("新增管理员成功");
+            } else {
+                return RestResponse.errorWithMsg(1001, "新增管理员失败，检查用户名");
+            }
+        } catch (Exception e) {
             return RestResponse.errorWithMsg(1001, "新增管理员失败，检查用户名");
         }
     }

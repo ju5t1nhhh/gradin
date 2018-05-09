@@ -24,6 +24,9 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public RestResponse addSection(Section section) {
+        int exists = sectionDao.selectExists(section.getId());
+        if ( exists > 0 )
+            return RestResponse.errorWithMsg(1902,"已存在该版区ID");
         int rows = sectionDao.insertOne(section);
         if ( rows > 0 ) {
             Thread thread = new Thread( () -> {

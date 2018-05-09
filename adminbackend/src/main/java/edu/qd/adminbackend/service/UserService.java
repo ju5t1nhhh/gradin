@@ -1,6 +1,7 @@
 package edu.qd.adminbackend.service;
 
 import edu.qd.adminbackend.domain.User;
+import edu.qd.adminbackend.dto.UserDTO;
 import edu.qd.adminbackend.vo.RestResponse;
 
 public interface UserService {
@@ -12,5 +13,7 @@ public interface UserService {
     RestResponse modifyUser(User user);
 
     RestResponse listUser(User user, int page);
+
+    RestResponse getUser(UserDTO userDTO);
 
 }

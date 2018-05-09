@@ -10,6 +10,7 @@ import edu.qd.adminbackend.service.PaymentService;
 import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -31,13 +32,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public RestResponse addPayment(Payment payment) {
         payment.setCreatime(new Timestamp(new Date().getTime()));
-        User user = new User();
-        user.setAutoid(payment.getUser());
-        user = userDao.selectByDTO(user,0,1)[0];
-        user.setGins(user.getGins()+10);
-        int rowsA = paymentDao.insertOne(payment);
-        int rowsB = userDao.updateOne(user);
-        if ( rowsA > 0 && rowsB > 0 ) {
+        int rows = paymentDao.insertOne(payment);
+        if ( rows > 0 ) {
             LogRecordDaoUtil.insertLogRecord(logRecordDao, "新增支付信息:"+payment);
             return RestResponse.successWithMsg("新增支付信息成功");
         } else

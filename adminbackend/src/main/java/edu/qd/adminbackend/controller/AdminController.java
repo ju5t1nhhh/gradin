@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -35,7 +32,7 @@ public class AdminController {
     @PostMapping("/add")
     @RequiresPermissions("admin:add")
     @ApiOperation("添加管理员")
-    public RestResponse addAdmin(@Valid Admin admin) {
+    public RestResponse addAdmin(@RequestBody @Valid Admin admin) {
         return adminService.addAdmin(admin);
     }
 
@@ -49,7 +46,8 @@ public class AdminController {
     @PostMapping("/mod")
     @RequiresPermissions("admin:mod")
     @ApiOperation("修改管理员")
-    public RestResponse modifyAdmin(@Valid Admin admin) {
+    public RestResponse modifyAdmin(@RequestBody Admin admin) {
+        System.out.println(admin);
         return adminService.modifyAdmin(admin);
     }
 
