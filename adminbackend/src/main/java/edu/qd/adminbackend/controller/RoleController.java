@@ -1,14 +1,17 @@
 package edu.qd.adminbackend.controller;
 
+import edu.qd.adminbackend.dao.RolePermissionDao;
 import edu.qd.adminbackend.service.RoleService;
 import edu.qd.adminbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/role")
@@ -16,6 +19,9 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private RolePermissionDao rolePermissionDao;
 
     @PostMapping("/add/{role}")
     @RequiresPermissions("role:add")
@@ -38,11 +44,20 @@ public class RoleController {
         return roleService.listRoles();
     }
 
-    @PostMapping("/perm/{role://d+}")
+    @PostMapping("/perm/{role}")
     @RequiresPermissions("role:mod")
     @ApiOperation("修改角色权限列表")
-    public RestResponse modRoleToPerm(@PathVariable int role, int[] perms) {
-        return roleService.modRoleToPerm(role, perms);
+    public RestResponse modRoleToPerm(@PathVariable int role, @RequestBody String[] perms) {
+        int[] permsNum = new int[]{1,5,6,9,11,15,16,18,19,21,22,23,24,26,27,29,30,34,35,38,39,43};
+        List<Integer> permsNumList = new ArrayList<>();
+        for ( String permName : perms ) {
+            permsNumList.add(rolePermissionDao.getId(permName));
+        }
+        for ( int num : permsNum ) {
+            permsNumList.add(num);
+        }
+        System.out.println(permsNumList);
+        return roleService.modRoleToPerm( role, permsNumList );
     }
 
 

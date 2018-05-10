@@ -14,4 +14,8 @@
         SELECT `rp_permission` FROM `role_permission` WHERE `rp_role`=#{role}
     </select>
 
+    <select id="getId" parameterType="string" resultType="int">
+        SELECT `pmsn_id` FROM `permission` WHERE `pmsn_name`=#{name}
+    </select>
+
 </mapper>

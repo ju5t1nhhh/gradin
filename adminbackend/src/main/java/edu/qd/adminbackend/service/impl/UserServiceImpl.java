@@ -10,7 +10,6 @@ import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.util.PasswordUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service

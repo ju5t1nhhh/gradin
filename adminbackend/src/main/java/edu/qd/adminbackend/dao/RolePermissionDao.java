@@ -11,4 +11,6 @@ public interface RolePermissionDao {
     int insertOne(@Param("role") int role, @Param("permission") int permission);
 
     int deleteOne(@Param("role") int role, @Param("permission") int permission);
+
+    int getId(String name);
 }

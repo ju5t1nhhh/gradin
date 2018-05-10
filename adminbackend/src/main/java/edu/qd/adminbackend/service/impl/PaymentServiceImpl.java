@@ -4,15 +4,12 @@ import edu.qd.adminbackend.dao.LogRecordDao;
 import edu.qd.adminbackend.dao.PaymentDao;
 import edu.qd.adminbackend.dao.UserDao;
 import edu.qd.adminbackend.domain.Payment;
-import edu.qd.adminbackend.domain.User;
 import edu.qd.adminbackend.dto.PaymentDTO;
 import edu.qd.adminbackend.service.PaymentService;
 import edu.qd.adminbackend.util.LogRecordDaoUtil;
 import edu.qd.adminbackend.vo.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.Timestamp;
 import java.util.Date;

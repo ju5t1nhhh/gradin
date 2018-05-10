@@ -3,7 +3,6 @@ package edu.qd.adminbackend.service.impl;
 import edu.qd.adminbackend.dao.AdminDao;
 import edu.qd.adminbackend.dao.PermissionDao;
 import edu.qd.adminbackend.dao.RolePermissionDao;
-import edu.qd.adminbackend.domain.Admin;
 import edu.qd.adminbackend.domain.Permission;
 import edu.qd.adminbackend.service.PermissionService;
 import edu.qd.adminbackend.shiro.UserInfo;

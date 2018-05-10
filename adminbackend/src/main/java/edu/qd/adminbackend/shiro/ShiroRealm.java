@@ -6,7 +6,6 @@ import edu.qd.adminbackend.dao.RolePermissionDao;
 import edu.qd.adminbackend.domain.Admin;
 import edu.qd.adminbackend.domain.Permission;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;

@@ -46,7 +46,7 @@ public class PermissionController {
         return permissionService.listPerm(permission);
     }
 
-    @PostMapping("/role/{id://d+}")
+    @PostMapping("/{id}")
     @RequiresPermissions("perm:list")
     @ApiOperation("查看角色权限列表")
     public RestResponse listPermByRole(@PathVariable int id) {
