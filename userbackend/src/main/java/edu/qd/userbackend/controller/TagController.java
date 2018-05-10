@@ -19,9 +19,9 @@ public class TagController {
         return tagService.search(word);
     }
 
-    @GetMapping("/post/{word}")
+    @GetMapping("/post/{word}/{page}")
     @ApiOperation("获取标签文章")
-    public RestResponse getPost(@PathVariable String word, @RequestParam(defaultValue = "1") int page) {
+    public RestResponse getPost(@PathVariable String word, @PathVariable int page) {
         return tagService.getPosts(word, page);
     }
 

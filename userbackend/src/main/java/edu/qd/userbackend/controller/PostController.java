@@ -16,7 +16,7 @@ public class PostController {
 
     @PostMapping("/add")
     @ApiOperation("发表作品")
-    public RestResponse addPost(Post post) {
+    public RestResponse addPost(@RequestBody Post post) {
         return postService.addPost(post);
     }
 

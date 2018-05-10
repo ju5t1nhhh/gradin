@@ -16,7 +16,7 @@ public class GainController {
 
     @PostMapping("/add")
     @ApiOperation("打赏作品")
-    public RestResponse addGain(Gain gain) {
+    public RestResponse addGain(@RequestBody Gain gain) {
         return gainService.addGain(gain);
     }
 
