@@ -7,23 +7,6 @@
 					<el-form-item label="待删除作品ID" prop="id">
 						<el-input v-model="formData.id"></el-input>
 					</el-form-item>
-					<!-- <el-form-item label="密码" prop="pwd">
-						<el-input v-model="formData.pwd" maxLength="11" type="password"></el-input>
-					</el-form-item>
-					<el-form-item label="角色" prop="role">
-						<el-input v-model.number="formData.role"></el-input>
-					</el-form-item> -->
-					<!-- <el-form-item label="上传店铺头像">
-						<el-upload
-						  class="avatar-uploader"
-						  :action="baseUrl + '/v1/addimg/shop'"
-						  :show-file-list="false"
-						  :on-success="handleShopAvatarScucess"
-						  :before-upload="beforeAvatarUpload">
-						  <img v-if="formData.image_path" :src="baseImgPath + formData.image_path" class="avatar">
-						  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-						</el-upload>
-					</el-form-item> -->
 					<el-form-item class="button_submit">
 						<el-button type="primary" @click="submitForm('formData')">立即删除</el-button>
 					</el-form-item>
@@ -36,7 +19,6 @@
 <script>
     import headTop from '@/components/headTop'
     import {delPost} from '@/api/getData'
-    // import {baseUrl, baseImgPath} from '@/config/env'
     export default {
     	data(){
     		return {
@@ -48,8 +30,6 @@
 						{ required: true, message: '请输入待删除作品ID' },
 					],
 				},
-			    // baseUrl,
-			    // baseImgPath,
     		}
     	},
     	components: {

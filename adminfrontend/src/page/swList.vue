@@ -70,147 +70,132 @@
 </template>
 
 <script>
-    import headTop from '../components/headTop'
-    import {listSection, listSW} from '@/api/getData'
-    export default {
-        data(){
-            return {
-                isShow: true,
-                id: '',
-                name: '',
-                intro: '',
-                url: '',
-                tableData: [],
-                currentRow: null,
-                currentPage: 1,
-            }
-        },
-    	components: {
-    		headTop,
-    	},
-        created(){
-            this.initData();
-        },
-        methods: {
-            async initData(){
-                try{
-                    const params = {
-                        id: this.id,
-                        name: this.name,
-                        intro: this.intro,
-                        url: this.url,
-                        page: this.currentPage
-					          }
-                    const res = await listSection(params);
-                    if (res.code == 200) {
-                        this.tableData = [];
-                    	res.data.forEach(item => {
-                    		const tableItem = {
-                                id: item.id,
-                                name: item.name,
-                                intro: item.intro,
-                                url: item.url,
-                            }
-                    		this.tableData.push(tableItem)
-                    	})
-                    }else{
-                    	throw new Error(res.message)
-                    }
-                }catch(err){
-                    console.log('获取数据失败', err);
-                }
-            },
-            flash(){
-              this.isShow = true;
-              this.currentPage = 1;
-              var params = {
-                  id: '',
-                  name: '',
-                  intro: '',
-                  url: '',
-                  page: this.currentPage
-              };
-              listSection(params).then(res=>{
-                  this.tableData = [];
-                  res.data.forEach(item => {
-                      const tableItem = {
-                          id: item.id,
-                          name: item.name,
-                          intro: item.intro,
-                          url: item.url,
-                          page: item.currentPage
-                      }
-                      this.tableData.push(tableItem)
-                  });
-              });
-            },
-            showSW(index, rows) {
-              this.isShow = false;
-              let params = {
-                id: '',
-                name: '',
-                intro: '',
-                url: '',
-              };
-              let section = rows[index].id;
-              listSW(params).then(res=>{
-                this.tableData = [];
-                res.data.forEach(item => {
-                  const tableItem = {
-                    section: item.section,
-                    word: item.word,
-                    replace: item.replace,
-                  }
-                  if(tableItem.section === section) {
-                    this.tableData.push(tableItem)
-                  }
-                })
-              })
-              // this.tableData = [];
-              // var data = this.tableDataCpy;
-              // let id = rows[index].id
-              // for( var i = 0; i < data.length; i++) {
-              //   var item = data[i];
-              //   if(item.parent === id) {
-              //   let ti = {
-              //           id: item.id,
-              //           name: item.name,
-              //           url: item.url,
-              //           type: item.type,
-              //           parent: item.parent,
-              //         }
-              //   this.tableData.push(ti)
-              //   }
-              },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                var params = {
-                    id: this.id,
-                    name: this.name,
-                    intro: this.intro,
-                    url: this.url,
-                    page: val
-                };
-                listSection(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            id: item.id,
-                            name: item.name,
-                            intro: item.intro,
-                            url: item.url,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-        },
+import headTop from "../components/headTop";
+import { listSection, listSW } from "@/api/getData";
+export default {
+  data() {
+    return {
+      isShow: true,
+      id: "",
+      name: "",
+      intro: "",
+      url: "",
+      tableData: [],
+      currentRow: null,
+      currentPage: 1
+    };
+  },
+  components: {
+    headTop
+  },
+  created() {
+    this.initData();
+  },
+  methods: {
+    async initData() {
+      try {
+        const params = {
+          id: this.id,
+          name: this.name,
+          intro: this.intro,
+          url: this.url,
+          page: this.currentPage
+        };
+        const res = await listSection(params);
+        if (res.code == 200) {
+          this.tableData = [];
+          res.data.forEach(item => {
+            const tableItem = {
+              id: item.id,
+              name: item.name,
+              intro: item.intro,
+              url: item.url
+            };
+            this.tableData.push(tableItem);
+          });
+        } else {
+          throw new Error(res.message);
+        }
+      } catch (err) {
+        console.log("获取数据失败", err);
+      }
+    },
+    flash() {
+      this.isShow = true;
+      this.currentPage = 1;
+      var params = {
+        id: "",
+        name: "",
+        intro: "",
+        url: "",
+        page: this.currentPage
+      };
+      listSection(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            id: item.id,
+            name: item.name,
+            intro: item.intro,
+            url: item.url,
+            page: item.currentPage
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    showSW(index, rows) {
+      this.isShow = false;
+      let params = {
+        id: "",
+        name: "",
+        intro: "",
+        url: ""
+      };
+      let section = rows[index].id;
+      listSW(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            section: item.section,
+            word: item.word,
+            replace: item.replace
+          };
+          if (tableItem.section === section) {
+            this.tableData.push(tableItem);
+          }
+        });
+      });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      var params = {
+        id: this.id,
+        name: this.name,
+        intro: this.intro,
+        url: this.url,
+        page: val
+      };
+      listSection(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            id: item.id,
+            name: item.name,
+            intro: item.intro,
+            url: item.url
+          };
+          this.tableData.push(tableItem);
+        });
+      });
     }
+  }
+};
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-    .table_container{
-        padding: 20px;
-    }
+@import "../style/mixin";
+.table_container {
+  padding: 20px;
+}
 </style>

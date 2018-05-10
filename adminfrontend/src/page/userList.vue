@@ -72,138 +72,138 @@
 </template>
 
 <script>
-    import headTop from '../components/headTop'
-    import {listUser} from '@/api/getData'
-    export default {
-        data(){
-            return {
-                autoid: '',
-                id: '',
-                email: '',
-                status: '',
-                gins: '',
-                tableData: [],
-                currentRow: null,
-                currentPage: 1,
-            }
-        },
-    	components: {
-    		headTop,
-    	},
-        created(){
-            this.initData();
-        },
-        methods: {
-            async initData(){
-                try{
-                    const params = {
-                        autoid: this.autoid,
-                        id: this.id,
-                        email: this.email,
-                        status: this.status,
-                        gins: this.gins,
-                        page: this.currentPage
-					}
-                    const res = await listUser(params);
-                    if (res.code == 200) {
-                        this.tableData = [];
-                    	res.data.forEach(item => {
-                    		const tableItem = {
-                                autoid: item.autoid,
-                                id: item.id,
-                                email: item.email,
-                                status: item.status,
-                                gins: item.gins,
-                            }
-                    		this.tableData.push(tableItem)
-                    	})
-                    }else{
-                    	throw new Error(res.message)
-                    }
-                }catch(err){
-                    console.log('获取数据失败', err);
-                }
-            },
-            flash(){
-                this.currentPage = 1;
-                var params = {
-                    autoid: '',
-                    id: '',
-                    email: '',
-                    status: '',
-                    gins: '',
-                    page: this.currentPage
-                };
-                listUser(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            autoid: item.autoid,
-                            id: item.id,
-                            email: item.email,
-                            status: item.status,
-                            gins: item.gins,
-                            page: item.currentPage
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            search() {
-                var params = {
-                    autoid: this.autoid,
-                    id: this.id,
-                    email: this.email,
-                    status: this.status,
-                    gins: this.gins,
-                    page: this.currentPage
-                };
-                listUser(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            autoid: item.autoid,
-                            id: item.id,
-                            email: item.email,
-                            status: item.status,
-                            gins: item.gins,
-                            page: item.currentPage
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                var params = {
-                    autoid: this.autoid,
-                    id: this.id,
-                    email: this.email,
-                    status: this.status,
-                    gins: this.gins,
-                    page: val
-                };
-                listUser(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            autoid: this.autoid,
-                            id: this.id,
-                            email: this.email,
-                            gins: this.gins,
-                            status: this.status,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-        },
+import headTop from "../components/headTop";
+import { listUser } from "@/api/getData";
+export default {
+  data() {
+    return {
+      autoid: "",
+      id: "",
+      email: "",
+      status: "",
+      gins: "",
+      tableData: [],
+      currentRow: null,
+      currentPage: 1
+    };
+  },
+  components: {
+    headTop
+  },
+  created() {
+    this.initData();
+  },
+  methods: {
+    async initData() {
+      try {
+        const params = {
+          autoid: this.autoid,
+          id: this.id,
+          email: this.email,
+          status: this.status,
+          gins: this.gins,
+          page: this.currentPage
+        };
+        const res = await listUser(params);
+        if (res.code == 200) {
+          this.tableData = [];
+          res.data.forEach(item => {
+            const tableItem = {
+              autoid: item.autoid,
+              id: item.id,
+              email: item.email,
+              status: item.status,
+              gins: item.gins
+            };
+            this.tableData.push(tableItem);
+          });
+        } else {
+          throw new Error(res.message);
+        }
+      } catch (err) {
+        console.log("获取数据失败", err);
+      }
+    },
+    flash() {
+      this.currentPage = 1;
+      var params = {
+        autoid: "",
+        id: "",
+        email: "",
+        status: "",
+        gins: "",
+        page: this.currentPage
+      };
+      listUser(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            autoid: item.autoid,
+            id: item.id,
+            email: item.email,
+            status: item.status,
+            gins: item.gins,
+            page: item.currentPage
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    search() {
+      var params = {
+        autoid: this.autoid,
+        id: this.id,
+        email: this.email,
+        status: this.status,
+        gins: this.gins,
+        page: this.currentPage
+      };
+      listUser(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            autoid: item.autoid,
+            id: item.id,
+            email: item.email,
+            status: item.status,
+            gins: item.gins,
+            page: item.currentPage
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      var params = {
+        autoid: this.autoid,
+        id: this.id,
+        email: this.email,
+        status: this.status,
+        gins: this.gins,
+        page: val
+      };
+      listUser(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            autoid: this.autoid,
+            id: this.id,
+            email: this.email,
+            gins: this.gins,
+            status: this.status
+          };
+          this.tableData.push(tableItem);
+        });
+      });
     }
+  }
+};
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-    .table_container{
-        padding: 20px;
-    }
+@import "../style/mixin";
+.table_container {
+  padding: 20px;
+}
 </style>

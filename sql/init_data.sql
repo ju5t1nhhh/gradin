@@ -13,7 +13,7 @@ INSERT INTO `permission` VALUES
 (7,'添加角色','role:add',2,6),
 (8,'删除角色','role:del',2,6),
 (9,'查看角色','role:list',2,6),
-(10,'修改角色权限','role:mod',2,6),
+(10,'角色权限管理','role:mod',2,6),
 (11,'权限管理',NULL,1,0),
 (12,'添加权限','perm:add',2,11),
 (13,'删除权限','perm:del',2,11),

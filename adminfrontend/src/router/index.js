@@ -6,20 +6,7 @@ Vue.use(Router)
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
 const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
-const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
-const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
-const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
-const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
-const foodList = r => require.ensure([], () => r(require('@/page/foodList')), 'foodList');
-const orderList = r => require.ensure([], () => r(require('@/page/orderList')), 'orderList');
 const adminList = r => require.ensure([], () => r(require('@/page/adminList')), 'adminList');
-const visitor = r => require.ensure([], () => r(require('@/page/visitor')), 'visitor');
-const newMember = r => require.ensure([], () => r(require('@/page/newMember')), 'newMember');
-const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 'uploadImg');
-const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vueEdit');
-const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
-const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
-const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
 
 const adminMod = r => require.ensure([], () => r(require('@/page/adminMod')), 'adminMod');
 const adminAdd = r => require.ensure([], () => r(require('@/page/adminAdd')), 'adminAdd');
@@ -32,7 +19,7 @@ const roleMod = r => require.ensure([], () => r(require('@/page/roleMod')), 'rol
 
 const permissionList = r => require.ensure([], () => r(require('@/page/permissionList')), 'permissionList');
 
-// const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
+const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
 const userMod = r => require.ensure([], () => r(require('@/page/userMod')), 'userMod');
 const userAdd = r => require.ensure([], () => r(require('@/page/userAdd')), 'userAdd');
 const userDelete = r => require.ensure([], () => r(require('@/page/userDelete')), 'userDelete');
@@ -42,8 +29,6 @@ const commentDelete = r => require.ensure([], () => r(require('@/page/commentDel
 
 const complaintList = r => require.ensure([], () => r(require('@/page/complaintList')), 'complaintList');
 const complaintMod = r => require.ensure([], () => r(require('@/page/complaintMod')), 'complaintMod');
-
-const logrecordList = r => require.ensure([], () => r(require('@/page/logrecordList')), 'logrecordList');
 
 const paymentList = r => require.ensure([], () => r(require('@/page/paymentList')), 'paymentList');
 const paymentAdd = r => require.ensure([], () => r(require('@/page/paymentAdd')), 'paymentAdd');
@@ -141,10 +126,6 @@ const routes = [
 			path: '/complaintMod',
 			component: complaintMod,
 			meta: ['举报管理','处理举报'],
-		},{
-			path: '/logrecordList',
-			component: logrecordList,
-			meta: ['日志管理','查看日志'],
 		},{
 			path: '/paymentList',
 			component: paymentList,

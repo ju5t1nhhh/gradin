@@ -81,167 +81,111 @@
 </template>
 
 <script>
-    import headTop from '../components/headTop'
-    import {listPost} from '@/api/getData'
-    export default {
-        data(){
-            return {
-                tableData: [],
-                section: '',
-                id: '',
-                author: '',
-                multmedia: '',
-                text: '',
-                creatime: '',
-                currentRow: null,
-                currentPage: 1,
-            }
-        },
-    	components: {
-    		headTop,
-    	},
-        created(){
-            // this.initData();
-        },
-        methods: {
-            // async initData(){
-            //     try{
-            //         const params = {
-            //             section: this.section,
-            //             id: this.id,
-            //             author: this.author,
-            //             multmedia: this.multmedia,
-            //             text: this.text,
-            //             creatime: this.creatime,
-            //             page: this.currentPage
-					  //         }
-            //         const res = await listPost(params);
-            //         if (res.code == 200) {
-            //         	this.tableData = [];
-            //         	res.data.forEach(item => {
-            //         		const tableItem = {
-            //                     id: item.id,
-            //                     author: item.author,
-            //                     multmedia: item.multmedia,
-            //                     text: item.text,
-            //                     creatime: item.creatime,
-            //                     section: item.section,
-            //         		}
-            //         		this.tableData.push(tableItem)
-            //         	})
-            //         }else{
-            //         	throw new Error(res.message)
-            //         }
-            //     }catch(err){
-            //         console.log('获取数据失败', err);
-            //     }
-            // },
-            flash(){
-                var params = {
-                    section: this.section,
-                    id: this.id,
-                    author: this.author,
-                    multmedia: this.multmedia,
-                    text: this.text,
-                    creatime: this.creatime,
-                    page: this.currentPage
-                };
-                listPost(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            id: item.id,
-                            author: item.author,
-                            multmedia: item.multmedia,
-                            text: item.text,
-                            creatime: item.creatime,
-                            section: item.section,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            search() {
-                var params = {
-                    section: this.section,
-                    id: this.id,
-                    author: this.author,
-                    multmedia: this.multmedia,
-                    text: this.text,
-                    creatime: this.creatime,
-                    page: this.currentPage
-                };
-                listPost(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            id: item.id,
-                            author: item.author,
-                            multmedia: item.multmedia,
-                            text: item.text,
-                            creatime: item.creatime,
-                            section: item.section,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                var params = {
-                    section: this.section,
-                    id: this.id,
-                    author: this.author,
-                    multmedia: this.multmedia,
-                    text: this.text,
-                    creatime: this.creatime,
-                    page: val
-                };
-                listPost(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            id: item.id,
-                            author: item.author,
-                            multmedia: item.multmedia,
-                            text: item.text,
-                            creatime: item.creatime,
-                            section: item.section,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            // async getAdmin(){
-            //     try{
-            //         const res = await adminList({offset: this.offset, limit: this.limit});
-            //         if (res.status == 1) {
-            //         	this.tableData = [];
-            //         	res.data.forEach(item => {
-            //         		const tableItem = {
-            //         			create_time: item.create_time,
-			// 			        user_name: item.user_name,
-			// 			        admin: item.admin,
-            //                     city: item.city,
-            //         		}
-            //         		this.tableData.push(tableItem)
-            //         	})
-            //         }else{
-            //         	throw new Error(res.message)
-            //         }
-            //     }catch(err){
-            //         console.log('获取数据失败', err);
-            //     }
-            // }
-        },
+import headTop from "../components/headTop";
+import { listPost } from "@/api/getData";
+export default {
+  data() {
+    return {
+      tableData: [],
+      section: "",
+      id: "",
+      author: "",
+      multmedia: "",
+      text: "",
+      creatime: "",
+      currentRow: null,
+      currentPage: 1
+    };
+  },
+  components: {
+    headTop
+  },
+  methods: {
+    flash() {
+      var params = {
+        section: this.section,
+        id: this.id,
+        author: this.author,
+        multmedia: this.multmedia,
+        text: this.text,
+        creatime: this.creatime,
+        page: this.currentPage
+      };
+      listPost(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            id: item.id,
+            author: item.author,
+            multmedia: item.multmedia,
+            text: item.text,
+            creatime: item.creatime,
+            section: item.section
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    search() {
+      var params = {
+        section: this.section,
+        id: this.id,
+        author: this.author,
+        multmedia: this.multmedia,
+        text: this.text,
+        creatime: this.creatime,
+        page: this.currentPage
+      };
+      listPost(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            id: item.id,
+            author: item.author,
+            multmedia: item.multmedia,
+            text: item.text,
+            creatime: item.creatime,
+            section: item.section
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      var params = {
+        section: this.section,
+        id: this.id,
+        author: this.author,
+        multmedia: this.multmedia,
+        text: this.text,
+        creatime: this.creatime,
+        page: val
+      };
+      listPost(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            id: item.id,
+            author: item.author,
+            multmedia: item.multmedia,
+            text: item.text,
+            creatime: item.creatime,
+            section: item.section
+          };
+          this.tableData.push(tableItem);
+        });
+      });
     }
+  }
+};
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-    .table_container{
-        padding: 20px;
-    }
+@import "../style/mixin";
+.table_container {
+  padding: 20px;
+}
 </style>
 
 

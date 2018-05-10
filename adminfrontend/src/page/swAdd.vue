@@ -13,17 +13,6 @@
                     <el-form-item label="替换词" prop="replace">
                         <el-input v-model="formData.replace"></el-input>
                     </el-form-item>
-                    <!-- <el-form-item label="上传店铺头像">
-                        <el-upload
-                          class="avatar-uploader"
-                          :action="baseUrl + '/v1/addimg/shop'"
-                          :show-file-list="false"
-                          :on-success="handleShopAvatarScucess"
-                          :before-upload="beforeAvatarUpload">
-                          <img v-if="formData.image_path" :src="baseImgPath + formData.image_path" class="avatar">
-                          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                        </el-upload>
-                    </el-form-item> -->
                     <el-form-item class="button_submit">
                         <el-button type="primary" @click="submitForm('formData')">新增</el-button>
                     </el-form-item>
@@ -36,7 +25,6 @@
 <script>
 import headTop from "@/components/headTop";
 import { addSW } from "@/api/getData";
-// import {baseUrl, baseImgPath} from '@/config/env'
 export default {
   data() {
     return {
@@ -46,12 +34,14 @@ export default {
         replace: ""
       },
       rules: {
-        section: [{ required: true, message: "请输入新敏感词的板块", trigger: "blur" }],
+        section: [
+          { required: true, message: "请输入新敏感词的板块", trigger: "blur" }
+        ],
         word: [{ required: true, message: "请输入新敏感词", trigger: "blur" }],
-        replace: [{ required: true, message: "请输入新敏感词的替换词", trigger: "blur" }],
+        replace: [
+          { required: true, message: "请输入新敏感词的替换词", trigger: "blur" }
+        ]
       }
-      // baseUrl,
-      // baseImgPath,
     };
   },
   components: {
@@ -68,7 +58,7 @@ export default {
               this.$message({
                 type: "success",
                 message: "添加成功"
-              });  
+              });
               this.formData = {
                 section: "",
                 word: "",

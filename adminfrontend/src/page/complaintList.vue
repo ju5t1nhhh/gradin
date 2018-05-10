@@ -119,192 +119,171 @@
 </template>
 
 <script>
-    import headTop from '../components/headTop'
-    import {listComplaintPost, listComplaint} from '@/api/getData'
-    export default {
-        data(){
-            return {
-                tableData2: [],
-                tableData: [],
-                post: '',                
-                cmtid: '',
-                status: '',
-                currentRow: null,
-                currentPage: 1,
-                currentPage2: 1,
-                temppost: '',
-                tempcmtid: '',
-            }
-        },
-    	components: {
-    		headTop,
-    	},
-        created(){
-            this.initData();
-        },
-        methods: {
-            async initData(){
-                try{
-                    const params = {
-                        post: this.post,
-                        cmtid: this.cmtid,
-                        status: this.status,
-                        page: this.currentPage
-					}
-                    const res = await listComplaintPost(params);
-                    if (res.code == 200) {
-                    	this.tableData = [];
-                    	res.data.forEach(item => {
-                    		const tableItem = {
-                                post: item.post,
-                                cmtid: item.cmtid,
-                                status: item.status,
-                                times: item.times,
-                    		}
-                    		this.tableData.push(tableItem)
-                    	})
-                    }else{
-                    	throw new Error(res.message)
-                    }
-                }catch(err){
-                    console.log('获取数据失败', err);
-                }
-            },
-            search() {
-                var params = {
-                    post: this.post,
-                    cmtid: this.cmtid,
-                    status: this.status,
-                    page: this.currentPage
-                };
-                listComplaintPost(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            post: item.post,
-                            cmtid: item.cmtid,
-                            status: item.status,
-                            times: item.times,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            showDetail(index, rows) {
-                this.temppost = rows[index].post;
-                this.tempcmtid = rows[index].cmtid;
-                var params = {
-                    post: rows[index].post,
-                    cmtid: rows[index].cmtid
-                };
-                listComplaint(params).then(res=>{
-                    this.tableData2 = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            cpost: item.post,
-                            ccmtid: item.cmtid,
-                            cuser: item.user,
-                            ccreatime: item.creatime,
-                            cmsg: item.msg,
-                        }
-                        this.tableData2.push(tableItem)
-                    });
-                });
-            },
-            flash(){
-                this.currentPage = 1;
-                var params = {
-                    post: '',
-                    cmtid: '',
-                    status: '',
-                    page: this.currentPage
-                };
-                listComplaintPost(params).then(res=>{
-                    this.tableData = [];
-                    this.tableData2 = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            post: item.post,
-                            cmtid: item.cmtid,
-                            status: item.status,
-                            times: item.times,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            handleCurrentChange(val) {
-                this.currentPage = val;
-                var params = {
-                    post: this.post,
-                    cmtid: this.cmtid,
-                    status: this.status,
-                    page: val
-                };
-                listComplaintPost(params).then(res=>{
-                    this.tableData = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            post: item.post,
-                            cmtid: item.cmtid,
-                            status: item.status,
-                            times: item.times,
-                        }
-                        this.tableData.push(tableItem)
-                    });
-                });
-            },
-            handleCurrentChange2(val) {
-                this.currentPage2 = val;
-                var params = {
-                    post: this.temppost,
-                    cmtid: this.tempcmtid,
-                    page: val
-                };
-                listComplaint(params).then(res=>{
-                    this.tableData2 = [];
-                    res.data.forEach(item => {
-                        const tableItem = {
-                            cpost: item.post,
-                            ccmtid: item.cmtid,
-                            cuser: item.user,
-                            ccreatime: item.creatime,
-                            cmsg: item.msg,
-                        }
-                        this.tableData2.push(tableItem)
-                    });
-                });
-            },
-            // async getAdmin(){
-            //     try{
-            //         const res = await adminList({offset: this.offset, limit: this.limit});
-            //         if (res.status == 1) {
-            //         	this.tableData = [];
-            //         	res.data.forEach(item => {
-            //         		const tableItem = {
-            //         			create_time: item.create_time,
-			// 			        user_name: item.user_name,
-			// 			        admin: item.admin,
-            //                     city: item.city,
-            //         		}
-            //         		this.tableData.push(tableItem)
-            //         	})
-            //         }else{
-            //         	throw new Error(res.message)
-            //         }
-            //     }catch(err){
-            //         console.log('获取数据失败', err);
-            //     }
-            // }
-        },
+import headTop from "../components/headTop";
+import { listComplaintPost, listComplaint } from "@/api/getData";
+export default {
+  data() {
+    return {
+      tableData2: [],
+      tableData: [],
+      post: "",
+      cmtid: "",
+      status: "",
+      currentRow: null,
+      currentPage: 1,
+      currentPage2: 1,
+      temppost: "",
+      tempcmtid: ""
+    };
+  },
+  components: {
+    headTop
+  },
+  created() {
+    this.initData();
+  },
+  methods: {
+    async initData() {
+      try {
+        const params = {
+          post: this.post,
+          cmtid: this.cmtid,
+          status: this.status,
+          page: this.currentPage
+        };
+        const res = await listComplaintPost(params);
+        if (res.code == 200) {
+          this.tableData = [];
+          res.data.forEach(item => {
+            const tableItem = {
+              post: item.post,
+              cmtid: item.cmtid,
+              status: item.status,
+              times: item.times
+            };
+            this.tableData.push(tableItem);
+          });
+        } else {
+          throw new Error(res.message);
+        }
+      } catch (err) {
+        console.log("获取数据失败", err);
+      }
+    },
+    search() {
+      var params = {
+        post: this.post,
+        cmtid: this.cmtid,
+        status: this.status,
+        page: this.currentPage
+      };
+      listComplaintPost(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            post: item.post,
+            cmtid: item.cmtid,
+            status: item.status,
+            times: item.times
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    showDetail(index, rows) {
+      this.temppost = rows[index].post;
+      this.tempcmtid = rows[index].cmtid;
+      var params = {
+        post: rows[index].post,
+        cmtid: rows[index].cmtid
+      };
+      listComplaint(params).then(res => {
+        this.tableData2 = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            cpost: item.post,
+            ccmtid: item.cmtid,
+            cuser: item.user,
+            ccreatime: item.creatime,
+            cmsg: item.msg
+          };
+          this.tableData2.push(tableItem);
+        });
+      });
+    },
+    flash() {
+      this.currentPage = 1;
+      var params = {
+        post: "",
+        cmtid: "",
+        status: "",
+        page: this.currentPage
+      };
+      listComplaintPost(params).then(res => {
+        this.tableData = [];
+        this.tableData2 = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            post: item.post,
+            cmtid: item.cmtid,
+            status: item.status,
+            times: item.times
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      var params = {
+        post: this.post,
+        cmtid: this.cmtid,
+        status: this.status,
+        page: val
+      };
+      listComplaintPost(params).then(res => {
+        this.tableData = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            post: item.post,
+            cmtid: item.cmtid,
+            status: item.status,
+            times: item.times
+          };
+          this.tableData.push(tableItem);
+        });
+      });
+    },
+    handleCurrentChange2(val) {
+      this.currentPage2 = val;
+      var params = {
+        post: this.temppost,
+        cmtid: this.tempcmtid,
+        page: val
+      };
+      listComplaint(params).then(res => {
+        this.tableData2 = [];
+        res.data.forEach(item => {
+          const tableItem = {
+            cpost: item.post,
+            ccmtid: item.cmtid,
+            cuser: item.user,
+            ccreatime: item.creatime,
+            cmsg: item.msg
+          };
+          this.tableData2.push(tableItem);
+        });
+      });
     }
+  }
+};
 </script>
 
 <style lang="less">
-	@import '../style/mixin';
-    .table_container{
-        padding: 20px;
-    }
+@import "../style/mixin";
+.table_container {
+  padding: 20px;
+}
 </style>
 
 
