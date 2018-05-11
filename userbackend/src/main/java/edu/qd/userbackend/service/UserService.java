@@ -17,4 +17,6 @@ public interface UserService {
 
     RestResponse detailPerson(long id);
 
+    RestResponse checkId(String id);
+
 }

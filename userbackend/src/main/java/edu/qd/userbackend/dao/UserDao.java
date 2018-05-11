@@ -15,4 +15,6 @@ public interface UserDao extends BaseDao<User> {
 
     String selectId(long id);
 
+    int emailExists(String email);
+
 }

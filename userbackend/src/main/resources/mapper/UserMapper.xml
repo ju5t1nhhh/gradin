@@ -18,12 +18,6 @@
             (#{autoId},#{id},#{email},#{status},#{pwd},#{gins})
     </insert>
 
-    <delete id="deleteByDTO" parameterType="edu.qd.userbackend.domain.User">
-        DELETE FROM
-            `user`
-        WHERE
-    </delete>
-
     <select id="selectById" parameterType="string" resultMap="BaseResultMap">
         SELECT * FROM
             `user`
@@ -36,6 +30,10 @@
         `user`
         WHERE
         `user_email`=#{email}
+    </select>
+
+    <select id="emailExists" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM `user` WHERE `user_email`=#{email}
     </select>
 
     <update id="updateOne" parameterType="edu.qd.userbackend.domain.User">

@@ -27,11 +27,13 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 
     @Override
     public RestResponse getEmailCode(String email) {
-        User user = userDao.selectByEmail(email);
-        if ( user != null )
+        int count = userDao.emailExists(email);
+        System.out.println("count:"+count);
+        if ( count > 0 )
             return RestResponse.errorWithMsg(1400, "邮箱已被注册");
         Subject subject = SecurityUtils.getSubject();
         String ecode = String.valueOf((int)((Math.random()*9+1)*1000));
+        System.out.println(email+":"+ecode);
         Thread thread = new Thread(() -> {
             mailService.sendSimpleEmail(email,ecode);
         });

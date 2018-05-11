@@ -17,6 +17,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("/checkid/{id}")
+    @ApiOperation("检查用户名")
+    public RestResponse checkid(@PathVariable String id) {
+        return userService.checkId(id);
+    }
+
     @PostMapping("/register")
     @ApiOperation("注册")
     public RestResponse register(@RequestBody RegisterDTO registerDTO) {

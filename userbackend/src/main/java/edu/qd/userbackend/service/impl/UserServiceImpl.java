@@ -194,4 +194,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public RestResponse checkId(String id) {
+        User user = userDao.selectById(id);
+        if ( user == null )
+            return RestResponse.successWithMsg("ID ok");
+        else
+            return RestResponse.errorWithMsg(1010, "ID已被占用");
+    }
+
 }
