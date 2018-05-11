@@ -22,4 +22,8 @@
         WHERE
     </delete>
 
+    <select id="getAllSectionId" resultType="int">
+        SELECT `sec_id` FROM `section`
+    </select>
+
 </mapper>
