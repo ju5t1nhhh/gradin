@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    cursor: pointer;
+}
+@font-face {
+    font-family: 'iconfont';  /* project id 648030 */
+    src: url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.eot');
+    src: url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.eot?#iefix') format('embedded-opentype'),
+    url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.woff') format('woff'),
+    url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.ttf') format('truetype'),
+    url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family: iconfont;
+    font-size: 40px;
+    font-style: normal;
+    line-height: 75px;
+}
+.iconfont1{
+    font-family: iconfont;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 75px;
+}
+.iconfont2{
+    font-family: iconfont;
+    font-size: 30px;
+    font-style: normal;
+    color: #bd2c00;
+    font-weight: bold;
+    line-height: 75px;
+}
+.iconfont3{
+    font-family: iconfont;
+    font-size: 30px;
+    font-style: normal;
+    line-height: 75px;
+    color: navy;
+}
+.iconfont4{
+    font-family: iconfont;
+    font-size: 20px;
+    font-style: normal;
+}
+.iconfont5{
+    font-family: iconfont;
+    font-size: 20px;
+    font-style: normal;
+    color: white;
+}
+.iconfont6{
+    font-family: iconfont;
+    font-size: 23px;
+    font-style: normal;
+    color: white;
+}
+.line{
+    font-size: 20px;
+    font-style: normal;
+    position: relative;
+    top: -7px;
+}
+.logo{
+    position: relative;
+    top: 6px;
+}
+.nav-header{
+    width: 100%;
+    height: 75px;
+    border-bottom: 1px solid silver;
+    background-color: white;
+    position: fixed;
+    z-index: 9;
+}
+.header-wrap{
+    width: 1000px;
+    margin: 0 auto;
+    background-color: antiquewhite;
+    position: relative;
+}
+.explore-wrap{
+    width: 150px;
+    height: 20px;
+    float: left;
+    margin-left: 100px;
+    margin-right: 10px;
+    margin-top: 28px;
+}
+.input-box{
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid silver;
+    outline: none;
+}
+.nav-wrap{
+    height: 75px;
+    width: 300px;
+    float: left;
+    margin-left: 40px;
+}
+.list-wrap{
+    height: 75px;
+    width: 300px;
+    float: left;
+    margin-left: 100px;
+}
+.list-wrap a{
+    display: inline-block;
+    margin-left: 45px;
+}
+.main-box{
+    width: 100%;
+    height:2150px;
+    background-color: ghostwhite;
+}
+.body-box{
+    width: 940px;
+    height: 2150px;
+    margin:0 auto;
+    position: relative;
+    top:75px;
+    background-color: ghostwhite;
+}
+.explore-nav{
+    width: 900px;
+    height: 20px;
+    font-size: 15px;
+    position: relative;
+    top:90px;
+    left: 30px;
+}
+.body-box a{
+    color: navy;
+    cursor: pointer;
+}
+.explore-users{
+    width: 1000px;
+}
+
+.user{
+    margin-top: 100px;
+    float: left;
+    width: 280px;
+    height: 250px;
+    background: white;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.head-shot{
+    position: relative;
+    left: 50%;
+    margin-top: 20px;
+    margin-left: -50px;
+}
+.user-id{
+    margin-top: 5px;
+    text-align: center;
+}
+.user-name{
+    margin-top: 5px;
+    text-align: center;
+}
+.user button{
+    width: 80px;
+    height: 26px;
+    background-color: darkblue;
+    font-family: 黑体;
+    font-size: 16px;
+    color: white;
+    border-radius: 8px;
+    border: 0px;
+    position: relative;
+    left: 50%;
+    margin-top: 20px;
+    margin-left: -40px;
+    cursor: pointer;
+}
+.user img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+.explore-new{
+    width: 940px;
+    height: 900px;
+    position: relative;
+    top:460px;
+    left: -5px;
+}
+.explore-information{/*探索*/
+    width: 60px;
+    height: 20px;
+    font-size: 15px;
+    position: relative;
+    left: 35px;
+    bottom: 360px;
+    z-index: 2;
+}
+.line-item{
+    width: 100%;
+    height: 300px;
+}
+.line-item .infor-show{
+    float: left;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    position: relative;
+    top: -330px;
+    left: -6px;
+}
+.infor-show img{
+    width: 280px;
+    height: 300px;
+}
+.layer{
+    position: absolute;
+    top:-1px;
+    background-color: black;
+    opacity:0.3;
+    width: 280px;
+    height: 300px;
+    z-index: 1;
+    display: none;
+}
+.description{
+    position: absolute;
+    z-index: 2;
+    top: 130px;
+    left: 60px;
+    display: none;
+}
+.description i span{
+    font-size: 15px;
+}

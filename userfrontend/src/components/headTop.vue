@@ -1,90 +1,84 @@
 <template>
-    <div class="header_container">
-		<el-breadcrumb separator="/">
-			<el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
-			<el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item>
-		</el-breadcrumb>
-		<el-dropdown @command="handleCommand" menu-align='start' style="position:absolute;right:140px;">
-				<img :src="images.sample" class="avator">
-			<el-dropdown-menu slot="dropdown">
-				<el-dropdown-item command="home">首页</el-dropdown-item>
-				<el-dropdown-item command="singout">退出</el-dropdown-item>
-			</el-dropdown-menu>
-		</el-dropdown>
-		<div style="margin-right:10px;">
-			<el-tag type="warning">{{adminInfo.loginId}}</el-tag>
-			<el-tag>{{adminInfo.rolename}}</el-tag>
-		</div>
-    </div>
+    <header class="nav-header">
+        <div class="header-wrap">
+            <div class="nav-wrap">
+                <a>
+                    <i class="iconfont">&#xe663;</i>&nbsp;&nbsp;
+                </a >
+                <span class="line">|</span>&nbsp;
+                <a>
+                    <img class="logo" src="../style/pics/logo.png">
+                </a>
+            </div>
+            <div class="explore-wrap">
+                <span>
+                    <input type="text" align="center" placeholder="搜索" class="input-box">
+                </span>
+            </div>
+            <div class="list-wrap">
+                <a><i class="iconfont1">&#xe746;</i></a>
+                <a><i class="iconfont2">&#xe623;</i></a>
+                <a><i class="iconfont3">&#xe609;</i></a>
+            </div>
+        </div>
+    </header>
 </template>
 
 <script>
-import { signout } from "@/api/getData";
-import { baseImgPath } from "@/config/env";
-import { mapActions, mapState } from "vuex";
+export default{
 
-export default {
-  data() {
-    return {
-      images: {
-        sample: require("../assets/img/avator.png")
-      }
-    };
-  },
-  mounted() {
-    if (!this.adminInfo.loginId) {
-      this.$message({
-        type: "error",
-        message: "请先登录"
-      });
-      this.$router.push("/");
-    }
-  },
-  computed: {
-    ...mapState(["adminInfo"])
-  },
-  methods: {
-    ...mapActions(["getAdminData", "clearAdminData"]),
-    async handleCommand(command) {
-      if (command == "home") {
-        this.$router.push("/manage");
-      } else if (command == "singout") {
-        const res = await signout();
-        console.log("logout:" + res.code);
-        if (res.code == 999) {
-          this.$message({
-            type: "success",
-            message: "退出成功"
-          });
-          this.clearAdminData();
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
-        }
-        this.$router.push("/");
-      }
-    }
-  }
-};
+}
+// import { signout } from "@/api/getData";
+// import { baseImgPath } from "@/config/env";
+// import { mapActions, mapState } from "vuex";
+
+// export default {
+//   data() {
+//     return {
+//       images: {
+//         sample: require("../assets/img/avator.png")
+//       }
+//     };
+//   },
+//   mounted() {
+//     if (!this.adminInfo.loginId) {
+//       this.$message({
+//         type: "error",
+//         message: "请先登录"
+//       });
+//       this.$router.push("/");
+//     }
+//   },
+//   computed: {
+//     ...mapState(["adminInfo"])
+//   },
+//   methods: {
+//     ...mapActions(["getAdminData", "clearAdminData"]),
+//     async handleCommand(command) {
+//       if (command == "home") {
+//         this.$router.push("/manage");
+//       } else if (command == "singout") {
+//         const res = await signout();
+//         console.log("logout:" + res.code);
+//         if (res.code == 999) {
+//           this.$message({
+//             type: "success",
+//             message: "退出成功"
+//           });
+//           this.clearAdminData();
+//         } else {
+//           this.$message({
+//             type: "error",
+//             message: res.msg
+//           });
+//         }
+//         this.$router.push("/");
+//       }
+//     }
+//   }
+// };
 </script>
 
-<style lang="less">
-@import "../style/mixin";
-.header_container {
-  background-color: #eff2f7;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 20px;
-}
-.avator {
-  .wh(36px, 36px);
-  border-radius: 50%;
-}
-.el-dropdown-menu__item {
-  text-align: center;
-}
+<style>
+@import "../style/explore.css";
 </style>

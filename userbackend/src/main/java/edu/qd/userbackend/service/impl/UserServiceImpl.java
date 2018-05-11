@@ -40,22 +40,18 @@ public class UserServiceImpl implements UserService {
     private StringRedisTemplate redisTemplate;
 
     @Override
-    public RestResponse register(String id, String pwd, String email, String ecode) {
-        if ( validateCodeService.checkEmailCode(ecode) ) {
-            pwd = PasswordUtil.encryptPassword(null,pwd);
-            User user = new User(id, email, 1, pwd, 100);
-            int rows = userDao.insertOne(user);
-            if ( rows > 0 ) {
-                addRedisUser(user);
-                UserDetail userDetail = new UserDetail();
-                userDetail.setUser(user.getAutoId());
-                userDetailDao.insertOne(userDetail);
-                return RestResponse.successWithMsg("注册成功");
-            } else {
-                return RestResponse.errorWithMsg(1301, "注册失败");
-            }
+    public RestResponse register(String id, String pwd, String email) {
+        pwd = PasswordUtil.encryptPassword(null,pwd);
+        User user = new User(id, email, 1, pwd, 100);
+        int rows = userDao.insertOne(user);
+        if ( rows > 0 ) {
+            addRedisUser(user);
+            UserDetail userDetail = new UserDetail();
+            userDetail.setUser(user.getAutoId());
+            userDetailDao.insertOne(userDetail);
+            return RestResponse.successWithMsg("注册成功");
         } else {
-            return RestResponse.errorWithMsg(1302, "验证码错误");
+            return RestResponse.errorWithMsg(1301, "注册失败，请重试");
         }
     }
 
@@ -201,6 +197,15 @@ public class UserServiceImpl implements UserService {
             return RestResponse.successWithMsg("ID ok");
         else
             return RestResponse.errorWithMsg(1010, "ID已被占用");
+    }
+
+    @Override
+    public RestResponse checkEmail(String email) {
+        User user = userDao.selectByEmail(email);
+        if ( user == null )
+            return RestResponse.successWithMsg("Email ok");
+        else
+            return RestResponse.errorWithMsg(1010, "Email已被占用");
     }
 
 }

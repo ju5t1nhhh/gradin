@@ -1,5 +1,6 @@
 package edu.qd.userbackend.controller;
 
+import edu.qd.userbackend.domain.User;
 import edu.qd.userbackend.domain.UserDetail;
 import edu.qd.userbackend.dto.ModEmailDTO;
 import edu.qd.userbackend.dto.ModPwdDTO;
@@ -7,6 +8,7 @@ import edu.qd.userbackend.dto.RegisterDTO;
 import edu.qd.userbackend.service.UserService;
 import edu.qd.userbackend.vo.RestResponse;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +25,19 @@ public class UserController {
         return userService.checkId(id);
     }
 
+    @PostMapping("/checkemail")
+    @ApiOperation("检查邮箱")
+    public RestResponse checkemail(@RequestBody String email) {
+        return userService.checkEmail(email);
+    }
+
     @PostMapping("/register")
     @ApiOperation("注册")
     public RestResponse register(@RequestBody RegisterDTO registerDTO) {
         String id = registerDTO.getId();
         String pwd = registerDTO.getPwd();
         String email = registerDTO.getEmail();
-        String ecode = registerDTO.getEcode();
-        return userService.register(id, pwd, email, ecode);
+        return userService.register(id, pwd, email);
     }
 
     @PostMapping("/modemail")
@@ -65,6 +72,13 @@ public class UserController {
     @ApiOperation("查看个人详页")
     public RestResponse detailPerson(@PathVariable long id) {
         return userService.detailPerson(id);
+    }
+
+    @PostMapping("/my")
+    @ApiOperation("查看我的信息")
+    public RestResponse my() {
+        User user = (User) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+        return RestResponse.successWithData("查看成功", user);
     }
 
 }

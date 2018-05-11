@@ -34,10 +34,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         Subject subject = SecurityUtils.getSubject();
         String ecode = String.valueOf((int)((Math.random()*9+1)*1000));
         System.out.println(email+":"+ecode);
-        Thread thread = new Thread(() -> {
-            mailService.sendSimpleEmail(email,ecode);
-        });
-        thread.start();
+        mailService.sendSimpleEmail(email,ecode);
         redisTemplate.opsForValue().set("ecode:"+subject.getSession().getId(),ecode,1, TimeUnit.HOURS);
         return RestResponse.successWithMsg("发送邮箱验证码成功");
     }

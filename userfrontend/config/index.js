@@ -23,10 +23,10 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8088,
+    port: 8002,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/register',
+    assetsPublicPath: '/',
     proxyTable: {},
     context: [ //代理路径
         '/shopping',

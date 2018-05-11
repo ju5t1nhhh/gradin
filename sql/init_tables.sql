@@ -123,6 +123,7 @@ CREATE TABLE `user`(
 	`user_pwd` VARCHAR(200),
 	`user_gins` INT,
 	PRIMARY KEY (`user_autoid`),
+	INDEX (`user_email`),
 	INDEX (`user_id`,`user_pwd`),
 	INDEX (`user_email`,`user_pwd`)
 )ENGINE=INNODB CHARSET utf8;

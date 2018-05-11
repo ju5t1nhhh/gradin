@@ -1,35 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {getAdminInfo} from '@/api/getData'
+import {getMyInfo} from '@/api/getData'
 
 Vue.use(Vuex)
 
 const state = {
-	adminInfo: {
-		avatar: 'default.jpg',
-		loginId: null,
-		rolename: null
+	myInfo: {
+		id: null,
 	},
 }
 
 const mutations = {
-	saveAdminInfo(state, adminInfo){
-		// state.adminInfo.loginId = adminInfo.loginId;
-		// state.adminInfo.rolename = adminInfo.rolename;
-		state.adminInfo = adminInfo;
+	saveMyInfo(state, myInfo){
+		state.myInfo = myInfo;
 	},
-	clearAdminInfo(state){
-		state.adminInfo = null;
+	clearMyInfo(state){
+		state.myInfo = null;
 	}
 }
 
 const actions = {
-	async getAdminData({commit}){
+	async getMyData({commit}){
 		try{
-			const res = await getAdminInfo()
+			const res = await getMyInfo()
 			if (res.code == 200) {
 				console.log("commit200:"+res)
-				commit('saveAdminInfo', res.data);
+				commit('saveMyInfo', res.data);
 			}else{
 				throw new Error(res)
 			}
@@ -37,8 +33,8 @@ const actions = {
 			console.log('您尚未登陆或者session失效')
 		}
 	},
-	async clearAdminData({commit}){
-		commit('clearAdminIndo');
+	async clearMyData({commit}){
+		commit('clearMyIndo');
 	}
 }
 

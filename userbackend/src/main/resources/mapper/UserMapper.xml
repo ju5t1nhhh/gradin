@@ -25,7 +25,7 @@
             `user_id`=#{id}
     </select>
 
-    <select id="selectByEmail" parameterType="string" resultMap="BaseResultMap">
+    <select id="selectByEmail" resultMap="BaseResultMap">
         SELECT * FROM
         `user`
         WHERE

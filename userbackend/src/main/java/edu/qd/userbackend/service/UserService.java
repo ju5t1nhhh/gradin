@@ -5,7 +5,7 @@ import edu.qd.userbackend.vo.RestResponse;
 
 public interface UserService {
 
-    RestResponse register(String id, String pwd, String email, String ecode);
+    RestResponse register(String id, String pwd, String email);
 
     RestResponse modifyEmail(String newEmail, String emailCode);
 
@@ -18,5 +18,7 @@ public interface UserService {
     RestResponse detailPerson(long id);
 
     RestResponse checkId(String id);
+
+    RestResponse checkEmail(String email);
 
 }

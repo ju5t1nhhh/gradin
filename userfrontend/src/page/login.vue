@@ -1,134 +1,205 @@
 <template>
-  	<!-- <div class="login_page fillcontain">
-	  	<transition name="form-fade" mode="in-out">
-	  		<section class="form_contianer" v-show="showLogin">
-		  		<div class="manage_tip">
-		  			<p>Gradin后台管理系统</p>
-		  		</div>
-		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
-					<el-form-item prop="username">
-						<el-input v-model="loginForm.username" placeholder="用户名"><span>dsfsf</span></el-input>
-					</el-form-item>
-					<el-form-item prop="password">
-						<el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
-					</el-form-item>
-					<el-form-item>
-				    	<el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
-				  	</el-form-item>
-				</el-form>
-	  		</section>
-	  	</transition>
-  	</div> -->
-    <div class="box">
-      <div class="box1">
-          <div class="banner" id="banner">
-              <div class="banner-slide slide1 slide-active"></div>
-              <div class="banner-slide slide2"></div>
-              <div class="banner-slide slide3"></div>
-              <div class="banner-slide slide4"></div>
-          </div>
-      </div>
-      <div class="box2">
+  	<div class="box">
+    <div class="box1">
+        <div class="banner" id="banner">
+            <!--哪一个显示就给哪一个加一个active的类-->
+            <div class="banner-slide slide1 slide-active"></div>
+            <div class="banner-slide slide2"></div>
+            <div class="banner-slide slide3"></div>
+            <div class="banner-slide slide4"></div>
+        </div>
+    </div>
+    <div class="box2" v-if="showbox">
           <div class="table1">
               <div class="logo"></div>
               <div class="in1">
-                  <input type="text" placeholder="手机号、账号、邮箱">
+                  <input type="text" placeholder="ID、邮箱" v-model="lid">
+                  <span id="prompt">{{lidmsg}}</span>
               </div>
               <div class="in2">
-                  <input type="text" placeholder="密码">
+                  <input type="password" placeholder="密码" v-model="lpwd">
+                  <span id="prompt">{{lpwdmsg}}</span>
               </div>
-              <button>登录</button>
+              <button @click="glogin">登录</button>
           </div>
           <div class="table2">
               <span>
-                  没有账户？<a href="Register.html">注册</a>
+                  没有账户？<a href="#" @click="changeShowbox">注册</a>
               </span>
           </div>
       </div>
+    <div class="box2" v-else>
+        <div class="table1">
+            <div class="logo"></div>
+            <div class="in1">
+                <input type="text" placeholder="ID" id="loginId" v-model="rid">
+                <span id="prompt">{{idmsg}}</span>
+            </div>
+            <div class="in2">
+                <input type="text" placeholder="邮箱" v-model="remail">
+                <span id="prompt">{{emailmsg}}</span>
+            </div>
+            <div class="in4" v-bind:style="{ 'margin-bottom' : in4px + 'px', 'height' :  '60px'}">
+                <input type="password" placeholder="密码 不少于6位" id="pwd" maxlength="16" v-model="rpwd">
+                <span id="prompt">{{pwdmsg}}</span>
+                    <div class="pwd-strength" id="pwd-strength" v-if="pwdstrength">
+                        <em class="font">密码强度</em>
+                        <div id="strength-level" v-bind:class="strlvl"></div>
+                    </div>
+            </div>
+            <button @click="check">注册</button>
+        </div>
+        <div class="table2">
+            <span>
+                有账户了？<a href="#" @click="changeShowbox">请登录</a>
+            </span>
+        </div>
     </div>
+</div>
 </template>
 
 <script>
 import {slideImg} from '../style/banner.js'
-import { login, getAdminInfo } from "@/api/getData";
+import {getLel} from '../style/pwd.js'
+import {checkId,checkEmail,register,login} from '@/api/getData'
 import { mapActions, mapState } from "vuex";
-
 export default {
-  mounted() {
+    data(){
+        return{
+            lid: '',
+            lpwd: '',
+            lidmsg: '',
+            lpwdmsg: '',
+            in4px: 0,
+            in4px2: 50,
+            idmsg:'',
+            emailmsg:'',
+            pwdmsg: '',
+            rid:'',
+            remail:'',
+            remailcode:'',
+            rpwd: '',
+            strlvl: 'strength-level0',
+            pwdstrength: false,
+            showbox: true,
+        }
+    },
+    computed: {
+        ...mapState(["myInfo"])
+    },
+    watch: {
+        myInfo: function (val) {
+            if (val.id) {
+                this.$router.push("")
+            }
+        },
+        lid: function (val) {
+            this.lidmsg = ''
+        },
+        lpwd: function (val) {
+            this.lpwdmsg = ''
+        },
+        rid: function (val) {
+            if ( val == '' ) {
+                this.idmsg = 'ID不能空'
+            } else {
+                this.idmsg = ''
+            }
+        },
+        rpwd: function (val) {
+            this.pwdmsg = '';
+            if ( val == '' ) {
+                this.pwdstrength=false;
+                this.in4px=0;
+                this.in4px2=40;
+            } else {
+                this.pwdstrength=true;
+                this.in4px=10;
+                this.in4px2=60;
+            }
+            var level = getLel(val);
+            this.strlvl = 'strength-level'+level;
+        },
+        remail: function (val) {
+            if ( val == '' ) {
+                this.emailmsg = '邮箱不能为空';
+                return false;
+            }
+            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if( myreg.test(val) ) {
+                this.emailmsg = ''
+            } else {
+                this.emailmsg = '邮箱格式错误'
+            }
+        }
+    },
+    mounted() {
         slideImg();
-  },
-  // data() {
-  //   return {
-  //     loginForm: {
-  //       username: "",
-  //       password: ""
-  //     },
-  //     rules: {
-  //       username: [
-  //         { required: true, message: "请输入用户名", trigger: "blur" }
-  //       ],
-  //       password: [{ required: true, message: "请输入密码", trigger: "blur" }]
-  //     },
-  //     showLogin: false
-  //   };
-  // },
-  // mounted() {
-  //   this.showLogin = true;
-  //   if (!this.adminInfo.loginId) {
-  //     this.getAdminData();
-  //   }
-  // },
-  // computed: {
-  //   ...mapState(["adminInfo"])
-  // },
-  // methods: {
-  //   ...mapActions(["getAdminData"]),
-  //   async submitForm(formName) {
-  //     this.$refs[formName].validate(async valid => {
-  //       if (valid) {
-  //         const res = await login({
-  //           loginId: this.loginForm.username,
-  //           pwd: this.loginForm.password
-  //         });
-  //         if (res.code == 200) {
-  //           this.$message({
-  //             type: "success",
-  //             message: "登录成功"
-  //           });
-  //           this.getAdminData();
-  //           this.$router.push("manage");
-  //         } else {
-  //           this.$message({
-  //             type: "error",
-  //             message: res.msg
-  //           });
-  //         }
-  //       } else {
-  //         this.$notify.error({
-  //           title: "错误",
-  //           message: "请输入正确的用户名密码",
-  //           offset: 100
-  //         });
-  //         return false;
-  //       }
-  //     });
-  //   }
-  // },
-  // watch: {
-  //   adminInfo: function(newValue) {
-  //     console.log("newvalue:" + newValue.loginId);
-  //     if (newValue.loginId) {
-  //       this.$message({
-  //         type: "success",
-  //         message: "检测到您之前登录过，将自动登录"
-  //       });
-  //       this.$router.push("manage");
-  //     }
-  //   }
-  // }
-};
+    },
+    methods: {
+        ...mapActions(["getMyData"]),
+        glogin(){
+            if ( this.lid == '' ) {
+                this.lidmsg = '请输入ID或邮箱'
+                return false
+            }
+            if ( this.lpwd == '' ) {
+                this.lpwdmsg = '请输入密码'
+                return false
+            }
+            login({id:this.lid,password:this.lpwd}).then(res=>{
+                if ( res.code == 200 ) {
+                    console.log(res.msg)
+                } else {
+                    this.lpwd = '密码错误'
+                    console.log(res.msg)
+                }
+            });
+        },
+        changeShowbox(){
+            this.showbox = !this.showbox;
+        },
+        check(){
+            if ( this.rid == '' ) {
+                this.idmsg = 'ID不能空'
+                return false
+            }
+            if ( this.remail == '' ) {
+                this.emailmsg = '邮箱不能空'
+                return false
+            }
+            checkId(this.rid).then(res=>{
+                if ( res.code == 200 ) {
+                    this.idmsg = 'ID ok'
+                } else {
+                    this.idmsg = res.msg
+                    return false
+                }
+            });
+            checkEmail({email:this.remail}).then(res=>{
+                if ( res.code == 200 ) {
+                    this.emailmsg = 'Email ok'
+                } else {
+                    this.emailmsg = res.msg
+                    return false
+                }
+            });
+            if ( this.rpwd.length < 6 ) {
+                this.pwdmsg = '密码须多于6位'
+                return false
+            }
+            register({id:this.rid,pwd:this.rpwd,email:this.remail}).then(res=>{
+                if ( res.code == 200 ) {
+                    console.log("注册成功")
+                } else {
+                    console.log(res.msg)
+                }
+            });
+        },
+    }
+}
 </script>
 
 <style>
-@import "../style/login.css";
+@import "../style/register.css";
 </style>
