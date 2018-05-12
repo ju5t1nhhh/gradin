@@ -71,7 +71,7 @@
     background-color: white;
     line-height: 100px;
 }
-a{
+.register-a{
     color: navy;
     cursor: pointer;
     background-color: white;
@@ -83,7 +83,7 @@ a{
     background: url("pics/logo3.png") no-repeat;
     margin: 20px auto 0;
 }
-input{
+.register-input{
     background-color: ghostwhite;
     width: 250px;
     height: 30px;
@@ -142,7 +142,7 @@ input{
     border: 1px silver solid;
     padding: 2px;
 }
-button{
+.register-button{
     width:250px;
     height: 30px;
     margin-left: 50px;
@@ -152,10 +152,4 @@ button{
     font-size: 12px;
     color: white;
     cursor: pointer;
-}
-footer{
-    width: 800px;
-    height: 20px;
-    background-color: white;
-    margin: 0 auto;
 }

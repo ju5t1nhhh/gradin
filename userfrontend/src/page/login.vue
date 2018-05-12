@@ -135,6 +135,9 @@ export default {
     },
     mounted() {
         slideImg();
+        if ( this.myInfo.id ) {
+            this.$router.push("/")
+        }
     },
     methods: {
         ...mapActions(["getMyData"]),
@@ -150,8 +153,10 @@ export default {
             login({id:this.lid,password:this.lpwd}).then(res=>{
                 if ( res.code == 200 ) {
                     console.log(res.msg)
+                    this.getMyData()
+                    this.$router.replace("/")
                 } else {
-                    this.lpwd = '密码错误'
+                    this.lpwdmsg = '密码错误'
                     console.log(res.msg)
                 }
             });
@@ -191,6 +196,7 @@ export default {
             register({id:this.rid,pwd:this.rpwd,email:this.remail}).then(res=>{
                 if ( res.code == 200 ) {
                     console.log("注册成功")
+                    this.$router.push("/")
                 } else {
                     console.log(res.msg)
                 }
@@ -200,6 +206,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import "../style/register.css";
 </style>

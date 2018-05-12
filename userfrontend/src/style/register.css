@@ -1,7 +1,9 @@
 *{
     margin: 0;
     padding: 0;
-    background-color: ghostwhite;
+}
+body{
+    background-color: ghostwhite;   
 }
 .box{
     height: 800px;
@@ -71,19 +73,19 @@
     background-color: white;
     line-height: 100px;
 }
-a{
+.table2 a{
     color: navy;
     cursor: pointer;
     background-color: white;
     text-decoration: none;
 }
-.logo{
+.table1 .logo{
     width: 200px;
     height: 70px;
     background: url("pics/logo3.png") no-repeat;
     margin: 20px auto 0;
 }
-input{
+.in1 input,.in2 input,.in4 input{
     background-color: ghostwhite;
     width: 250px;
     height: 30px;
@@ -100,7 +102,6 @@ input{
     background-color: white;
     font-size: 12px;
     color: firebrick;
-    /* display: none; */
 }
 .in4{
     background-color: white;
@@ -110,7 +111,6 @@ input{
 }
 .pwd-strength{
     background-color: white;
-    /* display: none; */
 }
 .font{
     font-size: 12px;
@@ -152,10 +152,4 @@ button{
     font-size: 12px;
     color: white;
     cursor: pointer;
-}
-footer{
-    width: 800px;
-    height: 20px;
-    background-color: white;
-    margin: 0 auto;
 }

@@ -1,36 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>explore</title>
-    <!-- <link rel="stylesheet" type="text/css" href="register.css"> -->
-    <link rel="stylesheet" type="text/css" href="explore.css">
-</head>
-<body>
-    <!--logo导航-->
-    <header class="nav-header">
-        <div class="header-wrap">
-            <div class="nav-wrap">
-                <a>
-                    <i class="iconfont">&#xe663;</i>&nbsp;&nbsp;
-                </a >
-                <span class="line">|</span>&nbsp;
-                <a>
-                    <img class="logo" src="pics/logo.png">
-                </a>
-            </div>
-            <div class="explore-wrap">
-                <span>
-                    <input type="text" align="center" placeholder="搜索" class="input-box">
-                </span>
-            </div>
-            <div class="list-wrap">
-                <a><i class="iconfont1">&#xe746;</i></a>
-                <a><i class="iconfont2">&#xe623;</i></a>
-                <a><i class="iconfont3">&#xe609;</i></a>
-            </div>
-        </div>
-    </header>
+<template>
+  <div>
+    <headTop></headTop>
     <div class="main-box">
         <div class="body-box">
             <h2 class="explore-nav">
@@ -42,7 +12,7 @@
             <div class="explore-users">
                 <div class="user">
                     <div class="head-shot">
-                        <a><img src="pics/2.jpg"></a>
+                        <a><img src="../style/pics/2.jpg"></a>
                     </div>
                     <div class="user-id"><a>Justin123</a></div>
                     <div class="user-name">Justin</div>
@@ -50,7 +20,7 @@
                 </div>
                 <div class="user">
                     <div class="head-shot">
-                        <a><img src="pics/1.jpg"></a>
+                        <a><img src="../style/pics/1.jpg"></a>
                     </div>
                     <div class="user-id"><a>Judy123</a></div>
                     <div class="user-name">Judy</div>
@@ -58,7 +28,7 @@
                 </div>
                 <div class="user">
                     <div class="head-shot">
-                        <a><img src="pics/3.jpg"></a>
+                        <a><img src="../style/pics/3.jpg"></a>
                     </div>
                     <div class="user-id"><a>Banana123</a></div>
                     <div class="user-name">Banana</div>
@@ -70,10 +40,10 @@
                 <div class="line-item">
                     <div class="infor-show">
                         <a>
-                            <img src="pics/instagram/1.jpg">
-                            <div class="layer">
+                            <img src="../style/pics/instagram/1.jpg">
+                            <div class="layer" v-bind:style="{display:ph1}" >
                             </div>
-                            <div class="description">
+                            <div class="description" v-bind:style="{display:ph1}">
                                 <i class="iconfont6">&#xe608; <span>6666</span></i>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <i class="iconfont5">&#xea5a; <span>6666</span></i>
                             </div>
@@ -82,7 +52,7 @@
                     </div>
                     <div class="infor-show">
                         <a>
-                            <img src="pics/instagram/2.jpg">
+                            <img src="../style/pics/instagram/2.jpg">
                             <div class="layer">
                             </div>
                             <div class="description">
@@ -93,7 +63,7 @@
                     </div>
                     <div class="infor-show">
                         <a>
-                            <img src="pics/instagram/3.jpg">
+                            <img src="../style/pics/instagram/3.jpg">
                             <div class="layer">
                             </div>
                             <div class="description">
@@ -106,12 +76,22 @@
             </div>
         </div>
     </div>
-    <footer>
-        <a>
-        <span></span>
-        </a>
-    </footer>
-    <script src="jquery-1.12.4.js"></script>
-    <script src="shadow.js"></script>
-</body>
-</html>
+  </div>    
+</template>
+
+<script>
+import headTop from "../components/headTop";
+// import jquery from "../style/jquery-1.12.4.min.js"
+export default {
+  data() {
+    return {
+		ph1: 'block',
+	};
+  },
+  components: {
+    headTop,
+  },
+  mounted() {
+  }
+};
+</script>

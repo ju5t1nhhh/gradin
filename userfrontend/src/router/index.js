@@ -4,25 +4,22 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
-const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
+const explore = r => require.ensure([], () => r(require('@/page/explore')), 'explore');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 
 const routes = [
 	{
 		path: '/',
-		component: login
+		component: home
 	},
 	{
-		path: '/home',
-		component: home,
-		name: '',
-		children: [{
-			path: '/manage',
-			component: manage,
-			meta: [],
-		}
-		]
-	}
+		path: '/login',
+		component: login,
+	},
+	{
+		path: '/explore',
+		component: explore
+	},
 ]
 
 export default new Router({

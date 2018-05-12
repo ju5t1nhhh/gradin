@@ -11,10 +11,10 @@ let routerMode = 'hash';
 let baseImgPath;
 
 if (process.env.NODE_ENV == 'development') {
-	baseUrl = 'http://192.168.1.111:8081';
+	baseUrl = 'http://192.168.1.111:8082';
     baseImgPath = '/img/';
 }else{
-	baseUrl = 'http://192.168.1.111:8081';
+	baseUrl = 'http://192.168.1.111:8082';
     baseImgPath = '//elm.cangdu.org/img/';
 }
 

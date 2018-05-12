@@ -6,7 +6,7 @@
                     <i class="iconfont">&#xe663;</i>&nbsp;&nbsp;
                 </a >
                 <span class="line">|</span>&nbsp;
-                <a>
+                <a @click="toHome">
                     <img class="logo" src="../style/pics/logo.png">
                 </a>
             </div>
@@ -16,68 +16,47 @@
                 </span>
             </div>
             <div class="list-wrap">
-                <a><i class="iconfont1">&#xe746;</i></a>
-                <a><i class="iconfont2">&#xe623;</i></a>
-                <a><i class="iconfont3">&#xe609;</i></a>
+                <a @click="toExplore"><i class="iconfont1">&#xe746;</i></a>
+                <a style="height:70px;"><i class="iconfont2" v-bind:style="{color: heartColor}">&#xe623;</i></a>
+                <a @click="myPage" style="height:70px;"><i class="iconfont3">&#xe609;</i></a>
             </div>
         </div>
     </header>
 </template>
 
 <script>
-export default{
-
-}
-// import { signout } from "@/api/getData";
-// import { baseImgPath } from "@/config/env";
-// import { mapActions, mapState } from "vuex";
-
-// export default {
-//   data() {
-//     return {
-//       images: {
-//         sample: require("../assets/img/avator.png")
-//       }
-//     };
-//   },
-//   mounted() {
-//     if (!this.adminInfo.loginId) {
-//       this.$message({
-//         type: "error",
-//         message: "请先登录"
-//       });
-//       this.$router.push("/");
-//     }
-//   },
-//   computed: {
-//     ...mapState(["adminInfo"])
-//   },
-//   methods: {
-//     ...mapActions(["getAdminData", "clearAdminData"]),
-//     async handleCommand(command) {
-//       if (command == "home") {
-//         this.$router.push("/manage");
-//       } else if (command == "singout") {
-//         const res = await signout();
-//         console.log("logout:" + res.code);
-//         if (res.code == 999) {
-//           this.$message({
-//             type: "success",
-//             message: "退出成功"
-//           });
-//           this.clearAdminData();
-//         } else {
-//           this.$message({
-//             type: "error",
-//             message: res.msg
-//           });
-//         }
-//         this.$router.push("/");
-//       }
-//     }
-//   }
-// };
+import { mapActions, mapState } from "vuex";
+export default {
+    data() {
+        return{
+            heartColor: 'black',
+        }
+    },
+    computed: {
+        ...mapState(["myInfo"])
+    },
+    mounted() {
+    },
+    methods: {
+        ...mapActions(["getMyInfo"]),
+        toExplore() {
+            this.$router.push("/explore")
+        },
+        toHome() {
+            this.$router.push("/")
+        },
+        myPage() {
+            console.log("mounted:"+this.myInfo);
+            if ( !this.myInfo.id ) {
+                this.$router.push("/login")
+            } else {
+                console.log("success la")
+            }
+        }
+    }
+};
 </script>
+
 
 <style>
 @import "../style/explore.css";

@@ -15,8 +15,8 @@ function slideImg() {
 }
 function changeImg(index, pics) {
     var temp = index == 0 ? 3 : index - 1;
-    pics[index].classList.toggle("slide-active");
-    pics[temp].classList.toggle("slide-active");
+    if ( pics[index] != null ) pics[index].classList.toggle("slide-active");
+    if ( pics[temp] != null ) pics[temp].classList.toggle("slide-active");
 }
 export {
     slideImg
