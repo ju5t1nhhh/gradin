@@ -5,7 +5,7 @@
     </div>
     <div class="show-details" v-bind:style="{display: phk}">
         <div class="show-pics">
-            <img style="width:550px;height:550px" src="../style/pics/Instagram/1.jpg">
+            <img style="width:550px;height:550px" src="../style/pics/instagram/1.jpg">
         </div>
         <div class="comment">
             <div class="user-infor" style="margin-left:10%;">

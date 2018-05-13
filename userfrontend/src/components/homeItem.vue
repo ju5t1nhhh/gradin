@@ -6,7 +6,7 @@
                     <a><span>judy123</span></a>
                 </div>
                 <div>
-                        <img src="../style/pics/Instagram/1.jpg" style="width: 100%;height: 100%;position: relative;top:25px;border-radius: 0;">
+                        <img src="../style/pics/instagram/1.jpg" style="width: 100%;height: 100%;position: relative;top:25px;border-radius: 0;">
                 </div>
                 <div style="position: relative;width: 600px;height: 80px;top:30px;left: 20px;">
                         <i class="iconfont7 like">&#xe623;</i>&nbsp;&nbsp;
