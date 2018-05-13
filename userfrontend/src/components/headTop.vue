@@ -26,6 +26,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import {getMyInfo} from "@/api/getData"
 export default {
     data() {
         return{
@@ -36,6 +37,11 @@ export default {
         ...mapState(["myInfo"])
     },
     mounted() {
+        getMyInfo().then(res=>{
+            if ( res.code == 200 ) {
+                this.heartColor = res.data.msgstatus == 0 ? 'black' : 'red';
+            }
+        });
     },
     methods: {
         ...mapActions(["getMyInfo"]),
@@ -50,7 +56,7 @@ export default {
             if ( !this.myInfo.id ) {
                 this.$router.push("/login")
             } else {
-                console.log("success la")
+                this.$router.push("/mypage")
             }
         }
     }

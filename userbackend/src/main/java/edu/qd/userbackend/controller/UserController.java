@@ -78,7 +78,7 @@ public class UserController {
     @ApiOperation("查看我的信息")
     public RestResponse my() {
         User user = (User) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
-        return RestResponse.successWithData("查看成功", user);
+        return userService.showPerson(user.getId());
     }
 
 }

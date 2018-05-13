@@ -8,7 +8,7 @@ body{
 }
 a{
     cursor: pointer;
-    height: 
+    text-decoration: none;
 }
 @font-face {
     font-family: 'iconfont';  /* project id 648030 */
@@ -35,7 +35,7 @@ a{
     font-family: iconfont;
     font-size: 30px;
     font-style: normal;
-    color: #bd2c00;
+    /* color: #bd2c00; */
     font-weight: bold;
     line-height: 75px;
 }
@@ -44,7 +44,7 @@ a{
     font-size: 30px;
     font-style: normal;
     line-height: 75px;
-    color: navy;
+    /* color: navy; */
 }
 .iconfont4{
     font-family: iconfont;
@@ -62,6 +62,25 @@ a{
     font-size: 23px;
     font-style: normal;
     color: white;
+}
+.iconfont7{
+    font-family: iconfont;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(72,72,72);
+    cursor: pointer;
+}
+.iconfont8{
+    font-family: iconfont;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(72,72,72);
+    cursor: pointer;
+}
+.red{
+    color: crimson;
 }
 .line{
     font-size: 20px;
@@ -241,4 +260,146 @@ a{
 }
 .description i span{
     font-size: 15px;
+}
+.cover{
+    width: 100%;
+    height: 2250px;
+    position: absolute;
+    top:0;
+    left: 0;
+    background-color: black;
+    opacity: 0.8;
+    overflow:-moz-hidde-unscrollable;
+    z-index: 9;
+    /* display: none; */
+}
+.report-information{
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    top:100px;
+    left: 200px;
+    background-color: rgba(255,255,255,1);
+    opacity: initial;
+}
+.cover .close{
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-report{
+    position: fixed;
+    top: 0;
+    right: 30px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.show-details{
+    position: fixed;
+    top: 20px;
+    left: 280px;
+    width: 800px;
+    height: 600px;
+    background-color: white;
+    z-index: 10;
+    /* display: none; */
+}
+.show-pics img{
+    width: 450px;
+    height: 600px;
+}
+.user-infor{
+    position: absolute;
+    left: 470px;
+    top: 10px;
+    width: 300px;
+    height: 70px;
+    background-color: white;
+    border-bottom: lavender 1px solid;
+}
+.user-infor .user-head img{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+.user-head .u-name{
+    position: relative;
+    bottom: 15px;
+    font-size: 14px;
+}
+.user-head .focus{
+    position: relative;
+    bottom: 15px;
+    font-size: 14px;
+    color: dodgerblue;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.h-focus::before{
+    content: "已";
+    cursor: pointer;
+}
+.user-head .report{
+    position: relative;
+    bottom: 15px;
+    font-size: 14px;
+    color: gray;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.comment-message{
+    position: absolute;
+    left: 470px;
+    top: 90px;
+    width: 300px;
+    height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom: lavender solid 1px;
+}
+.comment-message ul{
+    list-style: none;
+    position: relative;
+    left: 5px;
+}
+.comment-message ul .more{
+    color: silver;
+    font-size: 15px;
+}
+.comment-message ul a{
+    font-size: 14px;
+    color: navy;
+}
+.comment-message ul span{
+    font-size: 13px;
+    font-weight: 400;
+}
+.thumbs-up{
+    position: absolute;
+    left: 470px;
+    top: 450px;
+    width: 300px;
+    height: 80px;
+}
+.thumbs-up p{
+    line-height: 2.0;
+    font-size: 13px;
+}
+.make-comment{
+    position: absolute;
+    left: 470px;
+    top: 530px;
+    width: 300px;
+    height: 50px;
+    border-top: lavender 1px solid;
+}
+.make-comment textarea{
+    border: none;
+    font-size: 14px;
 }
