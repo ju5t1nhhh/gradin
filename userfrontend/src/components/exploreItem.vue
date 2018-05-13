@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="infor-show" @mouseover="moph" @mouseout="moph" @click="changePhk" v-loading="loading">
+    <div class="infor-show"  v-loading="loading" @mouseover="moph" @mouseout="moph" @click="changePhk">
         <a>
             <img v-bind:src="fphoto">
             <div class="layer" v-bind:style="{display:ph}" >

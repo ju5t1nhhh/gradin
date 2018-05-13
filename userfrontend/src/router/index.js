@@ -8,6 +8,7 @@ const explore = r => require.ensure([], () => r(require('@/page/explore')), 'exp
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const mypage = r => require.ensure([], () => r(require('@/page/mypage')), 'mypage');
 const editMe = r => require.ensure([], () => r(require('@/page/editMe')), 'editMe');
+const user = r => require.ensure([], () => r(require('@/page/user')), 'user');
 
 const routes = [
 	{
@@ -29,6 +30,10 @@ const routes = [
 	{
 		path: '/editMe',
 		component: editMe
+	},
+	{
+		path: '/user/*',
+		component: user
 	},
 ]
 

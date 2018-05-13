@@ -7,8 +7,8 @@
                 <a style="color:grey;" v-for="item in textList" @click="chooseSection(item,$event)" >{{item}} </a>
             </div>
             <div style="position:absolute;top:50px;right:22px;">
-                <a @click="changeSortType" v-bind:style="{'color':sortType == 'hot' ? 'black' : 'grey', 'font-weight':sortType == 'hot' ? 'bold' : 'normal'}">热度 </a>
-                <a @click="changeSortType" v-bind:style="{'color':sortType == 'hot' ? 'grey' : 'black', 'font-weight':sortType == 'hot' ? 'normal' : 'bold'}">时间 </a>
+                <a @click="changeSortType" v-bind:style="hotStyle">热度 </a>
+                <a @click="changeSortType" v-bind:style="timeStyle">时间 </a>
             </div>
             <div class="explore-new">
                 <h2 class="explore-information">
@@ -25,63 +25,26 @@
             </div>
         </div>
     </div>
-    <div class="cover" id="cover" v-bind:style="{display: phk}">
-        <div class="close" id="close" @click="closeCover">×</div>
-    </div>
-    <div class="show-details" v-bind:style="{display: phk}">
-        <div class="show-pics">
-            <img src="pics/Instagram/1.jpg">
-        </div>
-        <div class="comment">
-            <div class="user-infor">
-                <div class="user-head">
-                    <a><img src="pics/2.jpg"></a>&nbsp;&nbsp;&nbsp;
-                    <span class="u-name"><a>judy123</a></span>&nbsp;&nbsp;&nbsp;
-                    <span class="focus">关注</span>&nbsp;&nbsp;&nbsp;
-                    <span class="report">举报</span>
-                </div>
-            </div>
-            <div class="comment-message">
-                <ul>
-                    <li>
-                        <a>judy123</a>&nbsp;&nbsp;
-                        <span>我是猪娣</span>
-                    </li>
-                    <li class="more">
-                        <a>全部25条评论</a>
-                    </li>
-                    <li>
-                        <a>justin123</a>&nbsp;&nbsp;
-                        <span>justin好帅啊</span>
-                    </li>
-                    <li>
-                        <a>banana123</a>&nbsp;&nbsp;
-                        <span>我喜欢吃香蕉</span>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-        <div class="thumbs-up">
-            <i class="iconfont7 like">&#xe623;</i>&nbsp;&nbsp;
-            <i class="iconfont8 comment">&#xe69b;</i>
-            <p><a>6666 次赞</a></p>
-            <p>8小时前</p>
-        </div>
-        <div class="make-comment">
-            <textarea class="make-comments" cols="40" rows="4" placeholder="添加评论..."></textarea>
-        </div>
-    </div>
+    <exploreDetail :phk="phk"></exploreDetail>
   </div>    
 </template>
 
 <script>
 import headTop from "../components/headTop";
 import exploreItem from "../components/exploreItem";
+import exploreDetail from "../components/exploreDetail";
 export default {
   data() {
     return {
-        sortType: 'hot',
+        hotStyle: {
+            color: "black",
+            fontWeight: "bold",
+        },
+        timeStyle: {
+            color: "grey",
+            fontWeight: "normal",
+        },
+        sort: 1,
         loading: false,
         choSection: [],
         phk: 'none',
@@ -92,6 +55,7 @@ export default {
   components: {
     headTop,
     exploreItem,
+    exploreDetail,
   },
   mounted() {
   },
@@ -99,9 +63,6 @@ export default {
       showCover(val) {
           console.log("hello")
           this.phk = val;
-      },
-      closeCover() {
-          this.phk = 'none'
       },
       chooseSection(val, event) {
           var el = event.currentTarget
@@ -116,8 +77,11 @@ export default {
           console.log(this.choSection)
       },
       changeSortType() {
-          this.sortType = this.sortType == 'hot' ? 'time' : 'hot';
-      }
+          this.sort = -this.sort;
+          var temp = this.hotStyle;
+          this.hotStyle = this.timeStyle;
+          this.timeStyle = temp;
+      },
   },
 };
 </script>
