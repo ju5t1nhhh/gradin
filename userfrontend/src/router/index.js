@@ -7,7 +7,7 @@ const login = r => require.ensure([], () => r(require('@/page/login')), 'login')
 const explore = r => require.ensure([], () => r(require('@/page/explore')), 'explore');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const mypage = r => require.ensure([], () => r(require('@/page/mypage')), 'mypage');
-// const editeMe = r => require.ensure([], () => r(require('@/page/editeMe')), 'editeMe');
+const editMe = r => require.ensure([], () => r(require('@/page/editMe')), 'editMe');
 
 const routes = [
 	{
@@ -26,10 +26,10 @@ const routes = [
 		path: '/mypage',
 		component: mypage
 	},
-	// {
-	// 	path: '/editeMe',
-	// 	component: editeMe
-	// },
+	{
+		path: '/editMe',
+		component: editMe
+	},
 ]
 
 export default new Router({

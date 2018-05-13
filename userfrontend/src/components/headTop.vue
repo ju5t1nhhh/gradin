@@ -2,7 +2,7 @@
     <header class="nav-header">
         <div class="header-wrap">
             <div class="nav-wrap">
-                <a>
+                <a @click="toMakePost">
                     <i class="iconfont">&#xe663;</i>&nbsp;&nbsp;
                 </a >
                 <span class="line">|</span>&nbsp;
@@ -45,6 +45,9 @@ export default {
     },
     methods: {
         ...mapActions(["getMyInfo"]),
+        toMakePost() {
+            
+        },
         toExplore() {
             this.$router.push("/explore")
         },
