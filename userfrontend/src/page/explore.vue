@@ -15,17 +15,18 @@
                     探索
                 </h2>
                 <div class="line-item">
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
                 </div>
             </div>
         </div>
     </div>
-    <exploreDetail :phk="phk"></exploreDetail>
+    <exploreDetail v-show="cover" @ccclose="closectl"></exploreDetail>
   </div>    
 </template>
 
@@ -44,10 +45,10 @@ export default {
             color: "grey",
             fontWeight: "normal",
         },
+        cover: false,
         sort: 1,
         loading: false,
         choSection: [],
-        phk: 'none',
         textList: ['摄影版区','体育版区','生活版区'],
         photourl: 'http://www.embeddedlinux.org.cn/uploads/allimg/161125/101RA2C-5.jpg',
 	};
@@ -60,9 +61,12 @@ export default {
   mounted() {
   },
   methods: {
-      showCover(val) {
+      openCover() {
           console.log("hello")
-          this.phk = val;
+          this.cover = true;
+      },
+      closectl() {
+          this.cover = false;
       },
       chooseSection(val, event) {
           var el = event.currentTarget

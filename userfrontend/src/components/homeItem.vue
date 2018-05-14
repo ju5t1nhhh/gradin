@@ -13,18 +13,14 @@
                         <p style="line-height: 2.0;font-size: 13px;"><a>6666 人参与评分</a></p>
                         <a v-bind:style="{'font-weight': collect > 0 ? 'bold' : 'normal','color': collect > 0 ? 'black' : 'grey'}" class="collect" @click="collectThis">收藏</a>
                 </div>
-                <div>
-                    <ul style="list-style: none;position: relative;left: 20px;">
-                        <li>
-                            <a style="font-size: 14px;font-weight:bold">judy123</a>&nbsp;&nbsp;
-                            <span style="font-size: 13px;">hello everyone</span>
-                        </li>
-                        <li style="color: silver;font-size: 15px;">
-                            <a style="font-size: 14px;color: grey;">加载更多评论</a>
-                        </li>
+                <div style="position: relative;left: 20px;">
+                    <a style="font-size: 14px;font-weight:bold;">judy123</a>&nbsp;&nbsp;
+                    <span style="font-size: 13px;">hello everyone</span>
+                    <p style="font-size: 14px;color: silver;font-weight: bold;">6小时前</p>
+                    <a style="font-size: 14px;color: grey;">加载更多评论</a>
+                    <ul style="list-style: none;">
                         <commentItem v-for="cmt in comments" :cmtuser="cmt.user" :cmttext="cmt.text"></commentItem>
                     </ul>
-                    <p style="font-size: 14px;color: silver;font-weight: bold;position: relative;left: 20px;">6小时前</p>
                 </div>
                 <div style="position: relative;left: 20px;top:20px;width: 560px;height: 50px;border-top: lavender 1px solid;">
                     <input style="border: none;font-size: 14px;resize:none;width:100%" rows="2" placeholder="添加评论..."></input>

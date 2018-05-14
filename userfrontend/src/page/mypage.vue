@@ -19,8 +19,8 @@
             </div>
             <div class="box2-2" style="margin: 10px 0 10px 0;">
               <span style="font-weight:bold;">14</span>贴子
-              <span style="font-weight:bold;">15</span><a>关注者</a>
-              <span style="font-weight:bold;">18</span><a>正在关注</a>
+              <span style="font-weight:bold;">15</span><a @click="focuscover=true">关注者</a>
+              <span style="font-weight:bold;">18</span><a @click="folincover=true">正在关注</a>
             </div>
             <div class="box2-3" style="position:relative;top:10px;">
               <span style="font-weight:bold;">胡斯庭</span>
@@ -38,17 +38,19 @@
           <div class="body-box" style="position:absolute;top:-130px;height:0px;">
               <div class="explore-new" style="top:500px">
                   <div class="line-item">
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" @phk="showCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
                   </div>
               </div>
           </div>
-        </div></div></div>
-    <exploreDetail :phk="phk"></exploreDetail>
+        </div></div></div>      
+    <exploreDetail v-show="cover" @ccclose="closectl"></exploreDetail>
+    <focusList v-show="focuscover" @cclose="closectl2"></focusList>
+    <focusList v-show="folincover" @cclose="closectl3"></focusList>
   </div>    
 </template>
 
@@ -57,28 +59,38 @@
 import headTop from "../components/headTop";
 import exploreItem from "../components/exploreItem";
 import exploreDetail from "../components/exploreDetail";
+import focusList from "../components/focusList";
 export default {
   data() {
     return {
       cho: 0,
       loading: false,
-      phk: "none",
-      photourl: "https://i.loli.net/2018/05/13/5af838855b18a.jpg"
+      cover: false,
+      focuscover: false,
+      folincover: false,
+      photourl: "https://i.loli.net/2018/05/13/5af838855b18a.jpg",
     };
   },
   components: {
     headTop,
     exploreItem,
     exploreDetail,
+    focusList,
   },
   mounted() {},
   methods: {
-    showCover(val) {
-      console.log("hello");
-      this.phk = val;
+    openCover() {
+      console.log("hello")
+      this.cover = true;
     },
-    closeCover() {
-      this.phk = "none";
+    closectl() {
+      this.cover = false;
+    },
+    closectl2() {
+      this.focuscover = false;
+    },
+    closectl3() {
+      this.folincover = false;
     },
     changeCho() {
       this.cho = this.cho == 0 ? 1 : 0;

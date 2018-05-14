@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="infor-show"  v-loading="loading" @mouseover="moph" @mouseout="moph" @click="changePhk">
+    <div class="infor-show"  v-loading="loading" @mouseover="moph" @mouseout="moph">
         <a>
             <img v-bind:src="fphoto">
             <div class="layer" v-bind:style="{display:ph}" >
@@ -18,18 +18,16 @@
 export default {
   data() {
     return {
-      ph: "none"
+      ph: "none",
     };
+  },
+  components: {
   },
   props: ["fphoto", "likes", "comments","phk",'loading'],
   methods: {
     moph() {
       this.ph = this.ph == "none" ? "block" : "none";
     },
-    changePhk() {
-        this.phk = this.phk == "none" ? "block" : "none";
-        this.$emit('phk',this.phk)
-    }
   },
   mounted() {}
 };
