@@ -23,7 +23,7 @@
               <span style="font-weight:bold;">18</span><a>正在关注</a>
             </div>
             <div class="box2-3" style="position:relative;top:10px;">
-              <span style="font-weight:bold;">alksjdlkajsdlkjalskdj</span>
+              <span style="font-weight:bold;">胡斯庭</span>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default {
       cho: 0,
       loading: false,
       phk: "none",
-      photourl: "http://www.embeddedlinux.org.cn/uploads/allimg/161125/101RA2C-5.jpg"
+      photourl: "https://i.loli.net/2018/05/13/5af838855b18a.jpg"
     };
   },
   components: {

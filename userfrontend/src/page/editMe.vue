@@ -6,6 +6,7 @@
         <div class="editiii" v-bind:style="aobject" @click="changeA"><a>编缉主页</a></div>
         <div class="editiii" v-bind:style="bobject" @click="changeB"><a>更改密码</a></div>
         <div class="editiii" v-bind:style="cobject" @click="changeC"><a>GINS码兑换</a></div>
+        <div class="editiii" v-bind:style="dobject" @click="changeD"><a>退出登录</a></div>
       </div>
       <div style="position:absolute;top:0px;right:0px;width:70%;height:100%;border-left:1px solid #dbdbdb;" v-if="aobject!=null">
         <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%">
@@ -59,6 +60,11 @@
           <el-button style="margin-left:26%;width:150px">提交</el-button>
         </el-form>
       </div>
+      <div style="position:absolute;top:0px;right:0px;width:70%;height:100%;border-left:1px solid #dbdbdb;" v-if="dobject!=null">
+        <el-form :model="formData4" :rules="rules" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
+          <el-button style="margin-left:26%;width:150px">确认退出</el-button>
+        </el-form>
+      </div>
     </div>
   </div>    
 </template>
@@ -75,6 +81,7 @@ export default {
       aobject: null,
       bobject: null,
       cobject: null,
+      dobject: null,
       formData: {
         avatar: '',
         gender: '',
@@ -96,17 +103,26 @@ export default {
       this.aobject = this.oobject;
       this.bobject = null;
       this.cobject = null;
+      this.dobject = null;
     },
     changeB() {
       this.aobject = null;
       this.bobject = this.oobject;
       this.cobject = null;
+      this.dobject = null;
     },
     changeC() {
       this.aobject = null;
       this.bobject = null;
       this.cobject = this.oobject;
+      this.dobject = null;
     },
+    changeD() {
+      this.aobject = null;
+      this.bobject = null;
+      this.cobject = null;
+      this.dobject = this.oobject;
+    }
   }
 };
 </script>

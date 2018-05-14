@@ -20,51 +20,12 @@
                     content="">
                     <!-- <el-button slot="reference">click 激活</el-button> -->
                     <div class="explore-list">
-                        <a class="explore-item" href="">
-                            <div>
-                                <img src="https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg" alt="">
-                                <div>
-                                    <div>peiqi</div>
-                                    <span>xiaozhu</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="explore-item" href="">
-                            <div>
-                                <img src="https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg" alt="">
-                                <div>
-                                    <div>peiqi</div>
-                                    <span>xiaozhu</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="explore-item" href="">
-                            <div>
-                                <img src="https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg" alt="">
-                                <div>
-                                    <div>peiqi</div>
-                                    <span>xiaozhu</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="explore-item" href="">
-                            <div>
-                                <img src="https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg" alt="">
-                                <div>
-                                    <div>peiqi</div>
-                                    <span>xiaozhu</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="explore-item" href="">
-                            <div>
-                                <img src="https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg" alt="">
-                                <div>
-                                    <div>peiqi</div>
-                                    <span>xiaozhu</span>
-                                </div>
-                            </div>
-                        </a>
+                        <searchItem :img="'https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg'" 
+                        :name="'piggy'" :tagcount="0"></searchItem>
+                        <searchItem :img="'https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg'" 
+                        :name="'piggy'" :tagcount="0"></searchItem>
+                        <searchItem :img="'https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg'" 
+                        :name="'piggy'" :tagcount="2"></searchItem>
                     </div>
                     <input @blur="closeExplorePop" @focus="isShowExplorePop" slot="reference" v-model="searchVal" type="text" align="center" placeholder="搜索" class="input-box">
                 </el-popover>
@@ -132,12 +93,16 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import { getMyInfo } from "@/api/getData";
+import searchItem from "../components/searchItem"
 export default {
   data() {
     return {
       searchVal: "",
       heartColor: "black"
     };
+  },
+  components: {
+      searchItem,
   },
   computed: {
     ...mapState(["myInfo"])
@@ -151,7 +116,9 @@ export default {
   },
   methods: {
     ...mapActions(["getMyInfo"]),
-    toMakePost() {},
+    toMakePost() {
+        this.$router.push("/makepost");
+    },
     toExplore() {
       this.$router.push("/explore");
     },
@@ -160,11 +127,12 @@ export default {
     },
     myPage() {
       console.log("mounted:" + this.myInfo);
-      if (!this.myInfo.id) {
-        this.$router.push("/login");
-      } else {
-        this.$router.push("/mypage");
-      }
+      this.$router.push("/mypage")
+    //   if (!this.myInfo.id) {
+    //     this.$router.push("/login");
+    //   } else {
+    //     this.$router.push("/mypage");
+    //   }
     },
     isShowExplorePop() {
         if(this.searchVal) {
