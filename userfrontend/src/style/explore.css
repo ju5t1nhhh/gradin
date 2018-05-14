@@ -12,11 +12,11 @@ a{
 }
 @font-face {
     font-family: 'iconfont';  /* project id 648030 */
-    src: url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.eot');
-    src: url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.eot?#iefix') format('embedded-opentype'),
-    url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.woff') format('woff'),
-    url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.ttf') format('truetype'),
-    url('http://at.alicdn.com/t/font_648030_6x5fohyo39639pb9.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_648030_vi2w29qr6piltyb9.eot');
+    src: url('//at.alicdn.com/t/font_648030_vi2w29qr6piltyb9.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_648030_vi2w29qr6piltyb9.woff') format('woff'),
+    url('//at.alicdn.com/t/font_648030_vi2w29qr6piltyb9.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_648030_vi2w29qr6piltyb9.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family: iconfont;

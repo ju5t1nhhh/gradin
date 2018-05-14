@@ -6,7 +6,7 @@
             <div class="layer" v-bind:style="{display:ph}" >
             </div>
             <div class="description" v-bind:style="{display:ph}">
-                <i class="iconfont6">&#xe608; <span>{{likes}}</span></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="iconfont6" style="color:white;">&#xe6b0; <span>{{likes}}</span></i>&nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="iconfont5">&#xea5a; <span>{{comments}}</span></i>
             </div>
         </a>
