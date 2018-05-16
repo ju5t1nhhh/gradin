@@ -18,4 +18,10 @@ export const checkEmail = data => fetch('/user/checkemail', data, 'POST');
 
 export const register = data => fetch('/user/register', data, 'POST');
 
-export const getMyInfo = data => fetch('/user/my', {}, 'POST');
+export const getMyInfo = () => fetch('/user/my', {}, 'POST');
+
+export const getMyDetail = () => fetch('/user/detail', {}, 'POST');
+
+export const changePwd = data => fetch('/user/modpwd', data, 'POST');
+
+export const chargeCode = data => fetch('/payment/code', data, 'POST');

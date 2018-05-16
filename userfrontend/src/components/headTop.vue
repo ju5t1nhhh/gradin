@@ -97,6 +97,7 @@ import searchItem from "../components/searchItem"
 export default {
   data() {
     return {
+      id: "",
       searchVal: "",
       heartColor: "black"
     };
@@ -111,6 +112,7 @@ export default {
     getMyInfo().then(res => {
       if (res.code == 200) {
         this.heartColor = res.data.msgstatus == 0 ? "black" : "red";
+        this.id = res.data.id;
       }
     });
   },
@@ -126,13 +128,13 @@ export default {
       this.$router.push("/");
     },
     myPage() {
-      console.log("mounted:" + this.myInfo);
-      this.$router.push("/mypage")
-    //   if (!this.myInfo.id) {
-    //     this.$router.push("/login");
-    //   } else {
-    //     this.$router.push("/mypage");
-    //   }
+    //   console.log("mounted:" + this.myInfo);
+    //   this.$router.push("/mypage")
+      if (!this.id) {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/mypage");
+      }
     },
     isShowExplorePop() {
         if(this.searchVal) {

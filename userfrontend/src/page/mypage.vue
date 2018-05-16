@@ -77,7 +77,8 @@ export default {
     exploreDetail,
     focusList,
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     openCover() {
       console.log("hello")

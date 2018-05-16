@@ -13,57 +13,57 @@
 		</el-dropdown>
 		<div style="margin-right:10px;">
 			<el-tag type="warning">{{adminInfo.loginId}}</el-tag>
-			<el-tag>{{adminInfo.rolename}}</el-tag>
+			<el-tag>{{adminInfo.rolename}}{{user.loginId}}</el-tag>
 		</div>
     </div>
 </template>
 
 <script>
-import { signout } from "@/api/getData";
+import { signout,getAdminInfo } from "@/api/getData";
 import { baseImgPath } from "@/config/env";
-import { mapActions, mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import {USER_SIGNOUT} from "../store/user";
 
 export default {
   data() {
     return {
+      adminInfo : null,
       images: {
         sample: require("../assets/img/avator.png")
       }
     };
   },
-  mounted() {
-    if (!this.adminInfo.loginId) {
-      this.$message({
-        type: "error",
-        message: "请先登录"
-      });
-      this.$router.push("/");
-    }
-  },
   computed: {
-    ...mapState(["adminInfo"])
+    ...mapState({user: state => state.user}),
+  },
+  mounted() {
+    getAdminInfo().then(res=>{
+      if( res.code == 200 )
+        this.adminInfo = res.data;
+    });
   },
   methods: {
-    ...mapActions(["getAdminData", "clearAdminData"]),
-    async handleCommand(command) {
+    ...mapActions([USER_SIGNOUT]),
+    handleCommand(command) {
       if (command == "home") {
         this.$router.push("/manage");
       } else if (command == "singout") {
-        const res = await signout();
-        console.log("logout:" + res.code);
-        if (res.code == 999) {
-          this.$message({
-            type: "success",
-            message: "退出成功"
-          });
-          this.clearAdminData();
-        } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
-        }
-        this.$router.push("/");
+        signout().then(res=>{
+          console.log("logout:"+res)
+          if (res.code == 999) {
+            this.USER_SIGNOUT()
+            this.$message({
+              type: "success",
+              message: "退出成功"
+            });
+            this.$router.push("/");
+          } else {
+            this.$message({
+              type: "error",
+              message: res.msg
+            });
+          }
+        });
       }
     }
   }

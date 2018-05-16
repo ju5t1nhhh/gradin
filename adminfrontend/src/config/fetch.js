@@ -1,6 +1,6 @@
 import { baseUrl } from './env'
 
-export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
+export default async(url = '', data = {}, type = 'GET', method = 'fetch', mode = 'no-cors') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
 
