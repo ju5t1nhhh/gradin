@@ -28,11 +28,11 @@ public class PaymentServiceImpl implements PaymentService {
     public RestResponse getGins(String code) {
         Payment payment = new Payment();
         payment.setCode(code);
-        Payment[] payments = paymentDao.selectByDTO(payment,0,1);
-        if ( payments.length == 0 ) {
-            return RestResponse.errorWithMsg(1801, "无效码，请关注Gradin公众号获取");
-        } else {
-            payment = payments[0];
+//        Payment[] payments = paymentDao.selectByDTO(payment,0,1);
+//        if ( payments.length == 0 ) {
+//            return RestResponse.errorWithMsg(1801, "无效码，请关注Gradin公众号获取");
+//        } else {
+//            payment = payments[0];
             if ( payment.getStatus() == 0 ) {
                 User user = (User) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
                 user = userDao.selectById(user.getId());
@@ -47,6 +47,6 @@ public class PaymentServiceImpl implements PaymentService {
             } else {
                 return RestResponse.successWithMsg("码已被验证");
             }
-        }
+//        }
     }
 }

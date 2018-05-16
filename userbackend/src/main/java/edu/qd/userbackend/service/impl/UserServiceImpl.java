@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService {
                 redisTemplate.opsForHash().put(key, "follows", ""+String.valueOf(follows));
                 redisTemplate.opsForHash().put(key, "fans", ""+String.valueOf(fans));
                 redisTemplate.opsForHash().put(key, "posts", ""+String.valueOf(posts));
-                redisTemplate.opsForHash().put(key, "msgstatus", ""+String.valueOf(messageDao.getNewMessageNum(uid)));
+                redisTemplate.opsForHash().put(key, "msgstatus", ""+messageDao.getNewMessageNum(uid));
 
                 return RestResponse.successWithData("查看成功", userResponse);
             }
@@ -181,8 +181,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public RestResponse detailPerson(long id) {
-        UserDetail userDetail = userDetailDao.selectById(id);
+    public RestResponse detailPerson() {
+        User user = (User) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+        UserDetail userDetail = userDetailDao.selectById(user.getAutoId());
         if ( userDetail != null ) {
             return RestResponse.successWithData("查看成功", userDetail);
         } else {
