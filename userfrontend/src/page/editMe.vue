@@ -9,10 +9,10 @@
         <div class="editiii" v-bind:style="dobject" @click="changeD"><a>退出登录</a></div>
       </div>
       <div style="position:absolute;top:0px;right:0px;width:70%;height:100%;border-left:1px solid #dbdbdb;" v-if="aobject!=null">
-        <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%">
+        <el-form :model="formData" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%">
           <div style="margin:30px 0 20px 20%">
             <div style="display:inline;">
-              <img src="../style/pics/instagram/1.jpg" style="width:50px;height:50px;border-radius:100px;">
+              <img v-bind:src="formData.avatar" style="width:50px;height:50px;border-radius:100px;">
             </div>
             <div style="display:inline-block;line-height:30px;margin-left:20px;">
               <span>r4j_justin</span>
@@ -39,30 +39,30 @@
         </el-form>
       </div>
       <div style="position:absolute;top:0px;right:0px;width:70%;height:100%;border-left:1px solid #dbdbdb;" v-if="bobject!=null">
-        <el-form :model="formData2" :rules="rules" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
+        <el-form :model="formData2" ref="formData2" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
 					<el-form-item class="hiput" label="原密码" prop="oldPwd">
-						<el-input v-model="formData.oldPwd" style="width:50%;"></el-input>
+						<el-input v-model="formData2.oldPwd" type="password" style="width:50%;"></el-input>
 					</el-form-item>
           <el-form-item class="hiput" label="新密码" prop="newPwd">
-						<el-input v-model="formData.newPwd" style="width:50%;"></el-input>
+						<el-input v-model="formData2.newPwd" type="password" style="width:50%;"></el-input>
 					</el-form-item>
           <el-form-item class="hiput" label="再次输入新密码" prop="rnewPwd">
-						<el-input v-model="formData.rnewPwd" style="width:50%;"></el-input>
+						<el-input v-model="formData2.rnewPwd" type="password" style="width:50%;"></el-input>
 					</el-form-item>
-          <el-button style="margin-left:26%;width:150px">更改密码</el-button>
+          <el-button style="margin-left:26%;width:150px" @click="modpwd">更改密码</el-button>
         </el-form>
       </div>
       <div style="position:absolute;top:0px;right:0px;width:70%;height:100%;border-left:1px solid #dbdbdb;" v-if="cobject!=null">
-        <el-form :model="formData3" :rules="rules" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
+        <el-form :model="formData3" ref="formData3" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
 					<el-form-item class="hiput" label="GINS码" prop="ginscode">
-						<el-input v-model="formData.ginscode" style="width:50%;" placeholder="关注Gradin仔获GINS码"></el-input>
+						<el-input v-model="formData3.ginscode" style="width:50%;" placeholder="关注Gradin仔获GINS码"></el-input>
 					</el-form-item>
-          <el-button style="margin-left:26%;width:150px">提交</el-button>
+          <el-button style="margin-left:26%;width:150px" @click="chaCode">提交</el-button>
         </el-form>
       </div>
       <div style="position:absolute;top:0px;right:0px;width:70%;height:100%;border-left:1px solid #dbdbdb;" v-if="dobject!=null">
-        <el-form :model="formData4" :rules="rules" ref="formData" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
-          <el-button style="margin-left:26%;width:150px">确认退出</el-button>
+        <el-form :model="formData4" :rules="rules" label-width="110px" class="demo-formData" style="margin-left:15%;margin-top:10%;">
+          <el-button style="margin-left:26%;width:150px" @click="getout">确认退出</el-button>
         </el-form>
       </div>
     </div>
@@ -71,6 +71,7 @@
 
 <script>
 import headTop from "../components/headTop";
+import {getMyInfo,getMyDetail,changePwd,chargeCode,signout} from "@/api/getData"
 export default {
   data() {
     return {
@@ -90,6 +91,14 @@ export default {
         website: '',
         brief: '',
       },
+      formData2: {
+        oldPwd: '',
+        newPwd: '',
+        rnewPwd: '',
+      },
+      formData3: {
+        ginscode: '',
+      }
     };
   },
   components: {
@@ -97,8 +106,66 @@ export default {
   },
   mounted() {
     this.aobject = this.oobject;
+    getMyDetail().then(res=>{
+      if ( res.code == 200 ) {
+        var data = res.data;
+        console.log(data)
+        this.formData.avatar = data.avatar;
+        this.formData.gender = data.gender;
+        this.formData.wechat = data.wechat;
+        this.formData.phone = data.phone;
+        this.formData.website = data.website;
+        this.formData.brief = data.brief;
+      }
+    });
   },
   methods: {
+    getout(){
+      signout().then(res=>{
+        // if( res.code == 999 ) {
+          this.$router.push("/login")
+        // } else {
+
+        // }
+      });
+    },
+    chaCode(){
+      chargeCode(this.formData3.ginscode).then(res=>{
+        if ( res.code == 200 ) {
+          this.$message({
+            type: 'success',
+            message: '兑换成功',
+          });
+        } else {
+          this.$message({
+            type: 'error',
+            message: res.msg,
+          });
+        }
+      });
+    },
+    modpwd() {
+      if ( this.formData2.newPwd != this.formData2.rnewPwd ) {
+        this.$message({
+          type: 'error',
+          message: '两次新密码不一致',
+        });
+        return false;
+      }
+      changePwd(this.formData2).then(res=>{
+        if ( res.code == 200 ) {
+          this.$message({
+            type: 'success',
+            message: '修改密码成功',
+          });
+        } else {
+          this.$message({
+            type: 'error',
+            message: res.msg,
+          });
+        }
+      });
+    },
     changeA() {
       this.aobject = this.oobject;
       this.bobject = null;
