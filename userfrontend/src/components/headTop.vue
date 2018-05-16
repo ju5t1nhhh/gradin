@@ -22,10 +22,10 @@
                     <div class="explore-list">
                         <searchItem :img="'https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg'" 
                         :name="'piggy'" :tagcount="0"></searchItem>
+                        <searchItem :img="'http://localhost:8082/1.jpg'" 
+                        :name="'pigger'" :tagcount="0"></searchItem>
                         <searchItem :img="'https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg'" 
-                        :name="'piggy'" :tagcount="0"></searchItem>
-                        <searchItem :img="'https://scontent-hkg3-1.cdninstagram.com/vp/f8f59cab74ba87ed4871805d2b77c1cb/5B97F8C8/t51.2885-19/s150x150/27892221_1966350730297578_2927562134017540096_n.jpg'" 
-                        :name="'piggy'" :tagcount="2"></searchItem>
+                        :name="'piggy'" :tagcount="7"></searchItem>
                     </div>
                     <input @blur="closeExplorePop" @focus="isShowExplorePop" slot="reference" v-model="searchVal" type="text" align="center" placeholder="搜索" class="input-box">
                 </el-popover>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="btn-follow"><el-button type="primary" style="padding: 6px 12px;" >关注</el-button></div>
                         </li>
-                        <li class="pop-item">
+                        <!-- <li class="pop-item">
                             <div class="pop-avatar">
                                 <a href="" >
                                     <img style="height: 100%; width: 100%" src="https://scontent-nrt1-1.cdninstagram.com/vp/5daee8212f8ee191f918db692864f2aa/5B93A04A/t51.2885-19/s150x150/31738523_585891931809314_709610025584164864_n.jpg" alt="">
@@ -79,7 +79,7 @@
                                 <time>1天</time>
                             </div>
                             <div class="btn-follow"><el-button type="primary" style="padding: 6px 12px;" >关注</el-button></div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <a style="height:70px;" slot="reference"><i class="iconfont2" v-bind:style="{color: heartColor}">&#xe623;</i></a>
@@ -128,8 +128,6 @@ export default {
       this.$router.push("/");
     },
     myPage() {
-    //   console.log("mounted:" + this.myInfo);
-    //   this.$router.push("/mypage")
       if (!this.id) {
         this.$router.push("/login");
       } else {

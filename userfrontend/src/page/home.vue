@@ -3,10 +3,9 @@
     <headTop></headTop>
     <div style="background-color: ghostwhite;width: 100%;height: 5000px;">
             <!--box1-->
-            <homeItem></homeItem>
-            <homeItem></homeItem>
-            <homeItem></homeItem>
-            <homeItem></homeItem>
+            <homeItem :items="items1" :id="'r4j_justin'" :avatar="'http://localhost:8082/1526447659202.jpg'"></homeItem>
+            <homeItem :items="items2" :id="'cool_it'" :comments="comments" :avatar="'http://localhost:8082/1.jpg'"></homeItem>
+            <homeItem :items="items3" :id="'samsuil'" :avatar="'http://localhost:8082/4.jpg'"></homeItem>
         <!--box2-->
             <div style="width: 22.5%;height: 600px;position: fixed;left: 63%;top:150px;">
             <div style="width: 300px;height:80px;">
@@ -37,6 +36,18 @@ import homePreUser from "../components/homePreUser";
 export default {
   data() {
     return {
+      items1: ['http://localhost:8082/1526447209089.jpg',
+              'http://localhost:8082/1526447211200.jpg',
+              'http://localhost:8082/1526447213821.jpg'],
+      items2: ['http://localhost:8082/1526447842494.jpg',
+              'http://localhost:8082/1526447847320.jpg',
+              'http://localhost:8082/1526447851322.jpg'],
+      items3: ['http://localhost:8082/4.jpg','http://localhost:8082/5.jpg','http://localhost:8082/6.jpg',],
+      comments: [
+              {user:'justin123',text:'cool啊'},
+              {user:'banana123',text:'ya蕉啦'},
+              {user:'justin123',text:'@banana123 你ya'},
+          ],
       cho: 0,
       loading: false,
       phk: "none",

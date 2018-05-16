@@ -25,3 +25,5 @@ export const getMyDetail = () => fetch('/user/detail', {}, 'POST');
 export const changePwd = data => fetch('/user/modpwd', data, 'POST');
 
 export const chargeCode = data => fetch('/payment/code', data, 'POST');
+
+export const addPost = data => fetch('/post/add', data, 'POST');

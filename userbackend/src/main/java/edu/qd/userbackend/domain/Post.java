@@ -2,6 +2,7 @@ package edu.qd.userbackend.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class Post implements Serializable {
 
@@ -24,16 +25,14 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(long author, String multmedia, String text, int section, Timestamp creatime) {
+    public Post(long id, long author, String multmedia, String[] medias, String text, int section, Timestamp creatime) {
+        this.id = id;
         this.author = author;
         this.multmedia = multmedia;
+        this.medias = medias;
         this.text = text;
         this.section = section;
         this.creatime = creatime;
-    }
-
-    public void multToArrays() {
-        this.medias=multmedia.split(",");
     }
 
     @Override
@@ -42,6 +41,7 @@ public class Post implements Serializable {
                 "id=" + id +
                 ", author=" + author +
                 ", multmedia='" + multmedia + '\'' +
+                ", medias=" + Arrays.toString(medias) +
                 ", text='" + text + '\'' +
                 ", section=" + section +
                 ", creatime=" + creatime +
@@ -76,6 +76,14 @@ public class Post implements Serializable {
         this.multmedia = multmedia;
     }
 
+    public String[] getMedias() {
+        return medias;
+    }
+
+    public void setMedias(String[] medias) {
+        this.medias = medias;
+    }
+
     public String getText() {
         return text;
     }
@@ -99,7 +107,6 @@ public class Post implements Serializable {
     public void setCreatime(Timestamp creatime) {
         this.creatime = creatime;
     }
-
 }
 
 

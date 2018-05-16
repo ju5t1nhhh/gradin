@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,9 +50,14 @@ public class PostServiceImpl implements PostService {
         for ( String str : strings ) {
             SensitiveWord sw = new SensitiveWord();
             sw.setWord((String) redisTemplate.opsForHash().get(str, "word"));
-            sw.setReplace((String) redisTemplate.opsForHash().get(str, "replace"));;
+            sw.setReplace((String) redisTemplate.opsForHash().get(str, "replace"));
             sensitiveWords.add(sw);
         }
+        String media = "";
+        for ( String med : post.getMedias() ) {
+            media = media + med + ",";
+        }
+        post.setMultmedia(media);
 
         String newText = post.getText();
         for ( SensitiveWord sensitiveWord : sensitiveWords )

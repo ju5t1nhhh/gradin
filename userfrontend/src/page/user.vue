@@ -17,7 +17,7 @@
                     </button>
                     </div>
                     <div class="box2-2" style="margin: 10px 0 10px 0;">
-                    <span style="font-weight:bold;">14</span>贴子
+                    <span style="font-weight:bold;">6</span>贴子
                     <span style="font-weight:bold;padding-left:20px;">15</span><a @click="focuscover=true">关注者</a>
                     <span style="font-weight:bold;padding-left:20px;">18</span><a @click="folincover=true">正在关注</a>
                     </div>
@@ -32,12 +32,12 @@
                 <div class="body-box" style="position:absolute;top:-130px;height:0px;">
                     <div class="explore-new" style="top:500px">
                         <div class="line-item">
-                            <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                            <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                            <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                            <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                            <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                            <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                            <exploreItem :loading="loading" :fphoto="'http://localhost:8082/a.jpg'" :likes="10" :comments="2" v-on:click.native="openCover"></exploreItem>
+                            <exploreItem :loading="loading" :fphoto="'http://localhost:8082/b.jpg'" :likes="6" :comments="3" v-on:click.native="openCover"></exploreItem>
+                            <exploreItem :loading="loading" :fphoto="'http://localhost:8082/c.jpg'" :likes="12" :comments="5" v-on:click.native="openCover"></exploreItem>
+                            <exploreItem :loading="loading" :fphoto="'http://localhost:8082/d.jpg'" :likes="10" :comments="2" v-on:click.native="openCover"></exploreItem>
+                            <exploreItem :loading="loading" :fphoto="'http://localhost:8082/1.jpg'" :likes="0" :comments="3" v-on:click.native="openCover"></exploreItem>
+                            <exploreItem :loading="loading" :fphoto="'http://localhost:8082/5.jpg'" :likes="9" :comments="0" v-on:click.native="openCover"></exploreItem>
                         </div>
                     </div>
                 </div>

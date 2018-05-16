@@ -18,9 +18,9 @@
               </button>
             </div>
             <div class="box2-2" style="margin: 10px 0 10px 0;">
-              <span style="font-weight:bold;">14</span>贴子
-              <span style="font-weight:bold;">15</span><a @click="focuscover=true">关注者</a>
-              <span style="font-weight:bold;">18</span><a @click="folincover=true">正在关注</a>
+              <span style="font-weight:bold;">6</span>贴子
+              <span style="font-weight:bold;">3</span><a @click="focuscover=true">关注者</a>
+              <span style="font-weight:bold;">3</span><a @click="folincover=true">正在关注</a>
             </div>
             <div class="box2-3" style="position:relative;top:10px;">
               <span style="font-weight:bold;">胡斯庭</span>
@@ -38,12 +38,12 @@
           <div class="body-box" style="position:absolute;top:-130px;height:0px;">
               <div class="explore-new" style="top:500px">
                   <div class="line-item">
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                      <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo1" :likes="0" :comments="0" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo2" :likes="1" :comments="2" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo3" :likes="0" :comments="1" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo4" :likes="1" :comments="0" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo5" :likes="0" :comments="2" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo6" :likes="0" :comments="1" v-on:click.native="openCover"></exploreItem>
                   </div>
               </div>
           </div>
@@ -63,6 +63,12 @@ import focusList from "../components/focusList";
 export default {
   data() {
     return {
+      photo1: 'http://localhost:8082/1526447096674.jpg',
+      photo2: 'http://localhost:8082/bb.jpg',
+      photo3: 'http://localhost:8082/bbb.jpg',
+      photo4: 'http://localhost:8082/bbbb.jpg',
+      photo5: 'http://localhost:8082/bbbbb.jpg',
+      photo6: 'http://localhost:8082/bbbbbb.jpg',
       cho: 0,
       loading: false,
       cover: false,
@@ -95,6 +101,21 @@ export default {
     },
     changeCho() {
       this.cho = this.cho == 0 ? 1 : 0;
+      if ( this.cho != 0 ) {
+        this.photo1 = 'http://localhost:8082/cc.jpg';
+        this.photo2 = 'http://localhost:8082/ccc.jpg';
+        this.photo3 = 'http://localhost:8082/cccc.jpg';
+        this.photo4 = 'http://localhost:8082/ccccc.jpg';
+        this.photo5 = 'http://localhost:8082/cccccc.jpg';
+        this.photo6 = 'http://localhost:8082/ccccccc.jpg';
+      } else {
+        this.photo1 = 'http://localhost:8082/1526447096674.jpg';
+        this.photo2 = 'http://localhost:8082/bb.jpg';
+        this.photo3 = 'http://localhost:8082/bbb.jpg';
+        this.photo4 = 'http://localhost:8082/bbbb.jpg';
+        this.photo5 = 'http://localhost:8082/bbbbb.jpg';
+        this.photo6 = 'http://localhost:8082/bbbbbb.jpg';
+      }
     },
     toEditMe() {
       this.$router.push("/editMe");

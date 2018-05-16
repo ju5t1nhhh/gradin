@@ -5,18 +5,18 @@
             <!--文字部分-->
             <div style="width: 70%;height: 60px;position: relative;top:100px;left: 18%">
                 <h2>#{{tag}}</h2><br>
-                <span>共16,204,250 帖子</span>
+                <span>共 7 作品</span>
             </div>
             <!--帖子部分-->
             <div style="width: 70%;height: 1200px;position: relative;top:470px;left: 15%;margin-top: 30px;">
                 <div class="line-item">
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
-                    <exploreItem :loading="loading" :fphoto="photourl" :likes="100" :comments="200" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/aa.jpg'" :likes="0" :comments="2" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/aaa.jpg'" :likes="1" :comments="3" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/aaaa.jpg'" :likes="3" :comments="2" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/aaaaa.jpg'" :likes="4" :comments="1" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/aaaaaa.jpg'" :likes="1" :comments="4" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/aaaaaaa.jpg'" :likes="0" :comments="3" v-on:click.native="openCover"></exploreItem>
+                    <exploreItem :loading="loading" :fphoto="'http://localhost:8082/a.jpg'" :likes="2" :comments="2" v-on:click.native="openCover"></exploreItem>
                   </div>
             </div>
         </div>

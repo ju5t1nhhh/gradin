@@ -11,7 +11,7 @@
             <div class="user-infor" style="margin-left:10%;width:340px;">
                 <div class="user-head">
                     <a><img src="../style/pics/2.jpg"></a>&nbsp;&nbsp;&nbsp;
-                    <span class="u-name"><a>judy123</a></span>&nbsp;&nbsp;&nbsp;
+                    <span class="u-name"><a>r4j_justin</a></span>&nbsp;&nbsp;&nbsp;
                     <span class="focus">关注</span>&nbsp;&nbsp;&nbsp;
                     <a v-bind:style="{'font-weight': collect > 0 ? 'bold' : 'normal','color': collect > 0 ? 'black' : 'grey'}" class="focus" @click="collectThis">收藏</a>
                 </div>
@@ -20,7 +20,7 @@
                 <a style="font-size: 14px;font-weight:bold">judy123</a>&nbsp;&nbsp;
                 <span style="font-size: 13px;">hello everyone</span>
                 <br/>
-                <p style="font-size: 14px;color: silver;font-weight: bold;position: relative;">6小时前</p>
+                <p style="font-size: 14px;color: silver;font-weight: bold;position: relative;">刚刚</p>
                 <a style="font-size: 14px;color: grey;">加载更多评论</a>
                 <ul style="list-style: none;overflow:auto;height:300px;">
                     <commentItem v-for="cmt in comments" :cmtuser="cmt.user" :cmttext="cmt.text"></commentItem>
