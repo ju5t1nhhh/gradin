@@ -29,7 +29,7 @@
         </div>
         <div style="position:absolute;width: 600px;height: 80px;bottom:30px;left: 560px;">
                 <el-rate v-model="rate" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
-                <p style="line-height: 2.0;font-size: 13px;"><a>6666 人参与评分</a></p>
+                <p style="line-height: 2.0;font-size: 13px;"><a>1 人参与评分</a></p>
         </div>
         <div style="position: absolute;left: 560px;bottom:0px;width: 300px;height: 50px;border-top: lavender 1px solid;">
             <input style="border: none;font-size: 14px;resize:none;width:100%" placeholder="添加评论..."></input>

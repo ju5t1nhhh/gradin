@@ -38,7 +38,7 @@
           <div class="body-box" style="position:absolute;top:-130px;height:0px;">
               <div class="explore-new" style="top:500px">
                   <div class="line-item">
-                      <exploreItem :loading="loading" :fphoto="photo1" :likes="0" :comments="0" v-on:click.native="openCover"></exploreItem>
+                      <exploreItem :loading="loading" :fphoto="photo1" :likes="0" :comments="3" v-on:click.native="openCover"></exploreItem>
                       <exploreItem :loading="loading" :fphoto="photo2" :likes="1" :comments="2" v-on:click.native="openCover"></exploreItem>
                       <exploreItem :loading="loading" :fphoto="photo3" :likes="0" :comments="1" v-on:click.native="openCover"></exploreItem>
                       <exploreItem :loading="loading" :fphoto="photo4" :likes="1" :comments="0" v-on:click.native="openCover"></exploreItem>
